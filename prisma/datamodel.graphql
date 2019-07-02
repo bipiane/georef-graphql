@@ -3,6 +3,7 @@ type Pais @db(name: "pais") {
     codigo: String! @unique
     descripcion: String!
     activo: Boolean!
+    provincias: [Provincia]
 }
 
 type Provincia @db(name: "provincia") {

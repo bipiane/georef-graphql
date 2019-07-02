@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Tue Jul 02 2019 13:38:21 GMT-0300 (Argentina Standard Time)
+# timestamp: Tue Jul 02 2019 14:39:00 GMT-0300 (Argentina Standard Time)
 
 type AggregatePais {
   count: Int!
@@ -21,18 +21,18 @@ Long can represent values between -(2^63) and 2^63 - 1.
 scalar Long
 
 type Mutation {
-  createProvincia(data: ProvinciaCreateInput!): Provincia!
   createPais(data: PaisCreateInput!): Pais!
-  updateProvincia(data: ProvinciaUpdateInput!, where: ProvinciaWhereUniqueInput!): Provincia
+  createProvincia(data: ProvinciaCreateInput!): Provincia!
   updatePais(data: PaisUpdateInput!, where: PaisWhereUniqueInput!): Pais
-  deleteProvincia(where: ProvinciaWhereUniqueInput!): Provincia
+  updateProvincia(data: ProvinciaUpdateInput!, where: ProvinciaWhereUniqueInput!): Provincia
   deletePais(where: PaisWhereUniqueInput!): Pais
-  upsertProvincia(where: ProvinciaWhereUniqueInput!, create: ProvinciaCreateInput!, update: ProvinciaUpdateInput!): Provincia!
+  deleteProvincia(where: ProvinciaWhereUniqueInput!): Provincia
   upsertPais(where: PaisWhereUniqueInput!, create: PaisCreateInput!, update: PaisUpdateInput!): Pais!
-  updateManyProvincias(data: ProvinciaUpdateManyMutationInput!, where: ProvinciaWhereInput): BatchPayload!
+  upsertProvincia(where: ProvinciaWhereUniqueInput!, create: ProvinciaCreateInput!, update: ProvinciaUpdateInput!): Provincia!
   updateManyPaises(data: PaisUpdateManyMutationInput!, where: PaisWhereInput): BatchPayload!
-  deleteManyProvincias(where: ProvinciaWhereInput): BatchPayload!
+  updateManyProvincias(data: ProvinciaUpdateManyMutationInput!, where: ProvinciaWhereInput): BatchPayload!
   deleteManyPaises(where: PaisWhereInput): BatchPayload!
+  deleteManyProvincias(where: ProvinciaWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -67,6 +67,7 @@ type Pais {
   codigo: String!
   descripcion: String!
   activo: Boolean!
+  provincias(where: ProvinciaWhereInput, orderBy: ProvinciaOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Provincia!]
 }
 
 """A connection to a list of items."""
@@ -83,11 +84,18 @@ input PaisCreateInput {
   codigo: String!
   descripcion: String!
   activo: Boolean!
+  provincias: ProvinciaCreateManyWithoutPaisInput
 }
 
-input PaisCreateOneInput {
-  create: PaisCreateInput
+input PaisCreateOneWithoutProvinciasInput {
+  create: PaisCreateWithoutProvinciasInput
   connect: PaisWhereUniqueInput
+}
+
+input PaisCreateWithoutProvinciasInput {
+  codigo: String!
+  descripcion: String!
+  activo: Boolean!
 }
 
 """An edge in a connection."""
@@ -156,16 +164,11 @@ input PaisSubscriptionWhereInput {
   node: PaisWhereInput
 }
 
-input PaisUpdateDataInput {
-  codigo: String
-  descripcion: String
-  activo: Boolean
-}
-
 input PaisUpdateInput {
   codigo: String
   descripcion: String
   activo: Boolean
+  provincias: ProvinciaUpdateManyWithoutPaisInput
 }
 
 input PaisUpdateManyMutationInput {
@@ -174,16 +177,22 @@ input PaisUpdateManyMutationInput {
   activo: Boolean
 }
 
-input PaisUpdateOneRequiredInput {
-  create: PaisCreateInput
+input PaisUpdateOneRequiredWithoutProvinciasInput {
+  create: PaisCreateWithoutProvinciasInput
   connect: PaisWhereUniqueInput
-  update: PaisUpdateDataInput
-  upsert: PaisUpsertNestedInput
+  update: PaisUpdateWithoutProvinciasDataInput
+  upsert: PaisUpsertWithoutProvinciasInput
 }
 
-input PaisUpsertNestedInput {
-  update: PaisUpdateDataInput!
-  create: PaisCreateInput!
+input PaisUpdateWithoutProvinciasDataInput {
+  codigo: String
+  descripcion: String
+  activo: Boolean
+}
+
+input PaisUpsertWithoutProvinciasInput {
+  update: PaisUpdateWithoutProvinciasDataInput!
+  create: PaisCreateWithoutProvinciasInput!
 }
 
 input PaisWhereInput {
@@ -301,6 +310,9 @@ input PaisWhereInput {
 
   """All values that are not equal to given value."""
   activo_not: Boolean
+  provincias_every: ProvinciaWhereInput
+  provincias_some: ProvinciaWhereInput
+  provincias_none: ProvinciaWhereInput
 }
 
 input PaisWhereUniqueInput {
@@ -330,7 +342,18 @@ input ProvinciaCreateInput {
   codigo: String!
   descripcion: String!
   activo: Boolean!
-  pais: PaisCreateOneInput!
+  pais: PaisCreateOneWithoutProvinciasInput!
+}
+
+input ProvinciaCreateManyWithoutPaisInput {
+  create: [ProvinciaCreateWithoutPaisInput!]
+  connect: [ProvinciaWhereUniqueInput!]
+}
+
+input ProvinciaCreateWithoutPaisInput {
+  codigo: String!
+  descripcion: String!
+  activo: Boolean!
 }
 
 """An edge in a connection."""
@@ -358,6 +381,123 @@ type ProvinciaPreviousValues {
   codigo: String!
   descripcion: String!
   activo: Boolean!
+}
+
+input ProvinciaScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ProvinciaScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ProvinciaScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ProvinciaScalarWhereInput!]
+  id: Int
+
+  """All values that are not equal to given value."""
+  id_not: Int
+
+  """All values that are contained in given list."""
+  id_in: [Int!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [Int!]
+
+  """All values less than the given value."""
+  id_lt: Int
+
+  """All values less than or equal the given value."""
+  id_lte: Int
+
+  """All values greater than the given value."""
+  id_gt: Int
+
+  """All values greater than or equal the given value."""
+  id_gte: Int
+  codigo: String
+
+  """All values that are not equal to given value."""
+  codigo_not: String
+
+  """All values that are contained in given list."""
+  codigo_in: [String!]
+
+  """All values that are not contained in given list."""
+  codigo_not_in: [String!]
+
+  """All values less than the given value."""
+  codigo_lt: String
+
+  """All values less than or equal the given value."""
+  codigo_lte: String
+
+  """All values greater than the given value."""
+  codigo_gt: String
+
+  """All values greater than or equal the given value."""
+  codigo_gte: String
+
+  """All values containing the given string."""
+  codigo_contains: String
+
+  """All values not containing the given string."""
+  codigo_not_contains: String
+
+  """All values starting with the given string."""
+  codigo_starts_with: String
+
+  """All values not starting with the given string."""
+  codigo_not_starts_with: String
+
+  """All values ending with the given string."""
+  codigo_ends_with: String
+
+  """All values not ending with the given string."""
+  codigo_not_ends_with: String
+  descripcion: String
+
+  """All values that are not equal to given value."""
+  descripcion_not: String
+
+  """All values that are contained in given list."""
+  descripcion_in: [String!]
+
+  """All values that are not contained in given list."""
+  descripcion_not_in: [String!]
+
+  """All values less than the given value."""
+  descripcion_lt: String
+
+  """All values less than or equal the given value."""
+  descripcion_lte: String
+
+  """All values greater than the given value."""
+  descripcion_gt: String
+
+  """All values greater than or equal the given value."""
+  descripcion_gte: String
+
+  """All values containing the given string."""
+  descripcion_contains: String
+
+  """All values not containing the given string."""
+  descripcion_not_contains: String
+
+  """All values starting with the given string."""
+  descripcion_starts_with: String
+
+  """All values not starting with the given string."""
+  descripcion_not_starts_with: String
+
+  """All values ending with the given string."""
+  descripcion_ends_with: String
+
+  """All values not ending with the given string."""
+  descripcion_not_ends_with: String
+  activo: Boolean
+
+  """All values that are not equal to given value."""
+  activo_not: Boolean
 }
 
 type ProvinciaSubscriptionPayload {
@@ -403,13 +543,53 @@ input ProvinciaUpdateInput {
   codigo: String
   descripcion: String
   activo: Boolean
-  pais: PaisUpdateOneRequiredInput
+  pais: PaisUpdateOneRequiredWithoutProvinciasInput
+}
+
+input ProvinciaUpdateManyDataInput {
+  codigo: String
+  descripcion: String
+  activo: Boolean
 }
 
 input ProvinciaUpdateManyMutationInput {
   codigo: String
   descripcion: String
   activo: Boolean
+}
+
+input ProvinciaUpdateManyWithoutPaisInput {
+  create: [ProvinciaCreateWithoutPaisInput!]
+  connect: [ProvinciaWhereUniqueInput!]
+  set: [ProvinciaWhereUniqueInput!]
+  disconnect: [ProvinciaWhereUniqueInput!]
+  delete: [ProvinciaWhereUniqueInput!]
+  update: [ProvinciaUpdateWithWhereUniqueWithoutPaisInput!]
+  updateMany: [ProvinciaUpdateManyWithWhereNestedInput!]
+  deleteMany: [ProvinciaScalarWhereInput!]
+  upsert: [ProvinciaUpsertWithWhereUniqueWithoutPaisInput!]
+}
+
+input ProvinciaUpdateManyWithWhereNestedInput {
+  where: ProvinciaScalarWhereInput!
+  data: ProvinciaUpdateManyDataInput!
+}
+
+input ProvinciaUpdateWithoutPaisDataInput {
+  codigo: String
+  descripcion: String
+  activo: Boolean
+}
+
+input ProvinciaUpdateWithWhereUniqueWithoutPaisInput {
+  where: ProvinciaWhereUniqueInput!
+  data: ProvinciaUpdateWithoutPaisDataInput!
+}
+
+input ProvinciaUpsertWithWhereUniqueWithoutPaisInput {
+  where: ProvinciaWhereUniqueInput!
+  update: ProvinciaUpdateWithoutPaisDataInput!
+  create: ProvinciaCreateWithoutPaisInput!
 }
 
 input ProvinciaWhereInput {
@@ -536,12 +716,12 @@ input ProvinciaWhereUniqueInput {
 }
 
 type Query {
-  provincias(where: ProvinciaWhereInput, orderBy: ProvinciaOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Provincia]!
   paises(where: PaisWhereInput, orderBy: PaisOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Pais]!
-  provincia(where: ProvinciaWhereUniqueInput!): Provincia
+  provincias(where: ProvinciaWhereInput, orderBy: ProvinciaOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Provincia]!
   pais(where: PaisWhereUniqueInput!): Pais
-  provinciasConnection(where: ProvinciaWhereInput, orderBy: ProvinciaOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProvinciaConnection!
+  provincia(where: ProvinciaWhereUniqueInput!): Provincia
   paisesConnection(where: PaisWhereInput, orderBy: PaisOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PaisConnection!
+  provinciasConnection(where: ProvinciaWhereInput, orderBy: ProvinciaOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProvinciaConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -551,6 +731,6 @@ type Query {
 }
 
 type Subscription {
-  provincia(where: ProvinciaSubscriptionWhereInput): ProvinciaSubscriptionPayload
   pais(where: PaisSubscriptionWhereInput): PaisSubscriptionPayload
+  provincia(where: ProvinciaSubscriptionWhereInput): ProvinciaSubscriptionPayload
 }
