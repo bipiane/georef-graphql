@@ -1,0 +1,14 @@
+type Pais @db(name: "pais") {
+    id: Int! @id
+    codigo: String! @unique
+    descripcion: String!
+    activo: Boolean!
+}
+
+type Provincia @db(name: "provincia") {
+    id: Int! @id
+    pais: Pais! @db(name: "pais_id")
+    codigo: String! @unique
+    descripcion: String!
+    activo: Boolean!
+}
