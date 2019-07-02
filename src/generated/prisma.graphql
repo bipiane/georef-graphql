@@ -1,5 +1,9 @@
 # source: http://localhost:4466
-# timestamp: Tue Jul 02 2019 14:39:00 GMT-0300 (Argentina Standard Time)
+# timestamp: Tue Jul 02 2019 17:32:31 GMT-0300 (Argentina Standard Time)
+
+type AggregateLocalidad {
+  count: Int!
+}
 
 type AggregatePais {
   count: Int!
@@ -14,6 +18,418 @@ type BatchPayload {
   count: Long!
 }
 
+type Localidad {
+  id: Int!
+  descripcion: String!
+  provincia: Provincia!
+  lat: Float!
+  lon: Float!
+  activo: Boolean!
+}
+
+"""A connection to a list of items."""
+type LocalidadConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [LocalidadEdge]!
+  aggregate: AggregateLocalidad!
+}
+
+input LocalidadCreateInput {
+  descripcion: String!
+  lat: Float!
+  lon: Float!
+  activo: Boolean!
+  provincia: ProvinciaCreateOneWithoutLocalidadesInput!
+}
+
+input LocalidadCreateManyWithoutProvinciaInput {
+  create: [LocalidadCreateWithoutProvinciaInput!]
+  connect: [LocalidadWhereUniqueInput!]
+}
+
+input LocalidadCreateWithoutProvinciaInput {
+  descripcion: String!
+  lat: Float!
+  lon: Float!
+  activo: Boolean!
+}
+
+"""An edge in a connection."""
+type LocalidadEdge {
+  """The item at the end of the edge."""
+  node: Localidad!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum LocalidadOrderByInput {
+  id_ASC
+  id_DESC
+  descripcion_ASC
+  descripcion_DESC
+  lat_ASC
+  lat_DESC
+  lon_ASC
+  lon_DESC
+  activo_ASC
+  activo_DESC
+}
+
+type LocalidadPreviousValues {
+  id: Int!
+  descripcion: String!
+  lat: Float!
+  lon: Float!
+  activo: Boolean!
+}
+
+input LocalidadScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [LocalidadScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [LocalidadScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [LocalidadScalarWhereInput!]
+  id: Int
+
+  """All values that are not equal to given value."""
+  id_not: Int
+
+  """All values that are contained in given list."""
+  id_in: [Int!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [Int!]
+
+  """All values less than the given value."""
+  id_lt: Int
+
+  """All values less than or equal the given value."""
+  id_lte: Int
+
+  """All values greater than the given value."""
+  id_gt: Int
+
+  """All values greater than or equal the given value."""
+  id_gte: Int
+  descripcion: String
+
+  """All values that are not equal to given value."""
+  descripcion_not: String
+
+  """All values that are contained in given list."""
+  descripcion_in: [String!]
+
+  """All values that are not contained in given list."""
+  descripcion_not_in: [String!]
+
+  """All values less than the given value."""
+  descripcion_lt: String
+
+  """All values less than or equal the given value."""
+  descripcion_lte: String
+
+  """All values greater than the given value."""
+  descripcion_gt: String
+
+  """All values greater than or equal the given value."""
+  descripcion_gte: String
+
+  """All values containing the given string."""
+  descripcion_contains: String
+
+  """All values not containing the given string."""
+  descripcion_not_contains: String
+
+  """All values starting with the given string."""
+  descripcion_starts_with: String
+
+  """All values not starting with the given string."""
+  descripcion_not_starts_with: String
+
+  """All values ending with the given string."""
+  descripcion_ends_with: String
+
+  """All values not ending with the given string."""
+  descripcion_not_ends_with: String
+  lat: Float
+
+  """All values that are not equal to given value."""
+  lat_not: Float
+
+  """All values that are contained in given list."""
+  lat_in: [Float!]
+
+  """All values that are not contained in given list."""
+  lat_not_in: [Float!]
+
+  """All values less than the given value."""
+  lat_lt: Float
+
+  """All values less than or equal the given value."""
+  lat_lte: Float
+
+  """All values greater than the given value."""
+  lat_gt: Float
+
+  """All values greater than or equal the given value."""
+  lat_gte: Float
+  lon: Float
+
+  """All values that are not equal to given value."""
+  lon_not: Float
+
+  """All values that are contained in given list."""
+  lon_in: [Float!]
+
+  """All values that are not contained in given list."""
+  lon_not_in: [Float!]
+
+  """All values less than the given value."""
+  lon_lt: Float
+
+  """All values less than or equal the given value."""
+  lon_lte: Float
+
+  """All values greater than the given value."""
+  lon_gt: Float
+
+  """All values greater than or equal the given value."""
+  lon_gte: Float
+  activo: Boolean
+
+  """All values that are not equal to given value."""
+  activo_not: Boolean
+}
+
+type LocalidadSubscriptionPayload {
+  mutation: MutationType!
+  node: Localidad
+  updatedFields: [String!]
+  previousValues: LocalidadPreviousValues
+}
+
+input LocalidadSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [LocalidadSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [LocalidadSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [LocalidadSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: LocalidadWhereInput
+}
+
+input LocalidadUpdateInput {
+  descripcion: String
+  lat: Float
+  lon: Float
+  activo: Boolean
+  provincia: ProvinciaUpdateOneRequiredWithoutLocalidadesInput
+}
+
+input LocalidadUpdateManyDataInput {
+  descripcion: String
+  lat: Float
+  lon: Float
+  activo: Boolean
+}
+
+input LocalidadUpdateManyMutationInput {
+  descripcion: String
+  lat: Float
+  lon: Float
+  activo: Boolean
+}
+
+input LocalidadUpdateManyWithoutProvinciaInput {
+  create: [LocalidadCreateWithoutProvinciaInput!]
+  connect: [LocalidadWhereUniqueInput!]
+  set: [LocalidadWhereUniqueInput!]
+  disconnect: [LocalidadWhereUniqueInput!]
+  delete: [LocalidadWhereUniqueInput!]
+  update: [LocalidadUpdateWithWhereUniqueWithoutProvinciaInput!]
+  updateMany: [LocalidadUpdateManyWithWhereNestedInput!]
+  deleteMany: [LocalidadScalarWhereInput!]
+  upsert: [LocalidadUpsertWithWhereUniqueWithoutProvinciaInput!]
+}
+
+input LocalidadUpdateManyWithWhereNestedInput {
+  where: LocalidadScalarWhereInput!
+  data: LocalidadUpdateManyDataInput!
+}
+
+input LocalidadUpdateWithoutProvinciaDataInput {
+  descripcion: String
+  lat: Float
+  lon: Float
+  activo: Boolean
+}
+
+input LocalidadUpdateWithWhereUniqueWithoutProvinciaInput {
+  where: LocalidadWhereUniqueInput!
+  data: LocalidadUpdateWithoutProvinciaDataInput!
+}
+
+input LocalidadUpsertWithWhereUniqueWithoutProvinciaInput {
+  where: LocalidadWhereUniqueInput!
+  update: LocalidadUpdateWithoutProvinciaDataInput!
+  create: LocalidadCreateWithoutProvinciaInput!
+}
+
+input LocalidadWhereInput {
+  """Logical AND on all given filters."""
+  AND: [LocalidadWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [LocalidadWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [LocalidadWhereInput!]
+  id: Int
+
+  """All values that are not equal to given value."""
+  id_not: Int
+
+  """All values that are contained in given list."""
+  id_in: [Int!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [Int!]
+
+  """All values less than the given value."""
+  id_lt: Int
+
+  """All values less than or equal the given value."""
+  id_lte: Int
+
+  """All values greater than the given value."""
+  id_gt: Int
+
+  """All values greater than or equal the given value."""
+  id_gte: Int
+  descripcion: String
+
+  """All values that are not equal to given value."""
+  descripcion_not: String
+
+  """All values that are contained in given list."""
+  descripcion_in: [String!]
+
+  """All values that are not contained in given list."""
+  descripcion_not_in: [String!]
+
+  """All values less than the given value."""
+  descripcion_lt: String
+
+  """All values less than or equal the given value."""
+  descripcion_lte: String
+
+  """All values greater than the given value."""
+  descripcion_gt: String
+
+  """All values greater than or equal the given value."""
+  descripcion_gte: String
+
+  """All values containing the given string."""
+  descripcion_contains: String
+
+  """All values not containing the given string."""
+  descripcion_not_contains: String
+
+  """All values starting with the given string."""
+  descripcion_starts_with: String
+
+  """All values not starting with the given string."""
+  descripcion_not_starts_with: String
+
+  """All values ending with the given string."""
+  descripcion_ends_with: String
+
+  """All values not ending with the given string."""
+  descripcion_not_ends_with: String
+  lat: Float
+
+  """All values that are not equal to given value."""
+  lat_not: Float
+
+  """All values that are contained in given list."""
+  lat_in: [Float!]
+
+  """All values that are not contained in given list."""
+  lat_not_in: [Float!]
+
+  """All values less than the given value."""
+  lat_lt: Float
+
+  """All values less than or equal the given value."""
+  lat_lte: Float
+
+  """All values greater than the given value."""
+  lat_gt: Float
+
+  """All values greater than or equal the given value."""
+  lat_gte: Float
+  lon: Float
+
+  """All values that are not equal to given value."""
+  lon_not: Float
+
+  """All values that are contained in given list."""
+  lon_in: [Float!]
+
+  """All values that are not contained in given list."""
+  lon_not_in: [Float!]
+
+  """All values less than the given value."""
+  lon_lt: Float
+
+  """All values less than or equal the given value."""
+  lon_lte: Float
+
+  """All values greater than the given value."""
+  lon_gt: Float
+
+  """All values greater than or equal the given value."""
+  lon_gte: Float
+  activo: Boolean
+
+  """All values that are not equal to given value."""
+  activo_not: Boolean
+  provincia: ProvinciaWhereInput
+}
+
+input LocalidadWhereUniqueInput {
+  id: Int
+}
+
 """
 The `Long` scalar type represents non-fractional signed whole numeric values.
 Long can represent values between -(2^63) and 2^63 - 1.
@@ -23,16 +439,22 @@ scalar Long
 type Mutation {
   createPais(data: PaisCreateInput!): Pais!
   createProvincia(data: ProvinciaCreateInput!): Provincia!
+  createLocalidad(data: LocalidadCreateInput!): Localidad!
   updatePais(data: PaisUpdateInput!, where: PaisWhereUniqueInput!): Pais
   updateProvincia(data: ProvinciaUpdateInput!, where: ProvinciaWhereUniqueInput!): Provincia
+  updateLocalidad(data: LocalidadUpdateInput!, where: LocalidadWhereUniqueInput!): Localidad
   deletePais(where: PaisWhereUniqueInput!): Pais
   deleteProvincia(where: ProvinciaWhereUniqueInput!): Provincia
+  deleteLocalidad(where: LocalidadWhereUniqueInput!): Localidad
   upsertPais(where: PaisWhereUniqueInput!, create: PaisCreateInput!, update: PaisUpdateInput!): Pais!
   upsertProvincia(where: ProvinciaWhereUniqueInput!, create: ProvinciaCreateInput!, update: ProvinciaUpdateInput!): Provincia!
+  upsertLocalidad(where: LocalidadWhereUniqueInput!, create: LocalidadCreateInput!, update: LocalidadUpdateInput!): Localidad!
   updateManyPaises(data: PaisUpdateManyMutationInput!, where: PaisWhereInput): BatchPayload!
   updateManyProvincias(data: ProvinciaUpdateManyMutationInput!, where: ProvinciaWhereInput): BatchPayload!
+  updateManyLocalidads(data: LocalidadUpdateManyMutationInput!, where: LocalidadWhereInput): BatchPayload!
   deleteManyPaises(where: PaisWhereInput): BatchPayload!
   deleteManyProvincias(where: ProvinciaWhereInput): BatchPayload!
+  deleteManyLocalidads(where: LocalidadWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -326,6 +748,7 @@ type Provincia {
   codigo: String!
   descripcion: String!
   activo: Boolean!
+  localidades(where: LocalidadWhereInput, orderBy: LocalidadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Localidad!]
 }
 
 """A connection to a list of items."""
@@ -343,6 +766,7 @@ input ProvinciaCreateInput {
   descripcion: String!
   activo: Boolean!
   pais: PaisCreateOneWithoutProvinciasInput!
+  localidades: LocalidadCreateManyWithoutProvinciaInput
 }
 
 input ProvinciaCreateManyWithoutPaisInput {
@@ -350,10 +774,23 @@ input ProvinciaCreateManyWithoutPaisInput {
   connect: [ProvinciaWhereUniqueInput!]
 }
 
+input ProvinciaCreateOneWithoutLocalidadesInput {
+  create: ProvinciaCreateWithoutLocalidadesInput
+  connect: ProvinciaWhereUniqueInput
+}
+
+input ProvinciaCreateWithoutLocalidadesInput {
+  codigo: String!
+  descripcion: String!
+  activo: Boolean!
+  pais: PaisCreateOneWithoutProvinciasInput!
+}
+
 input ProvinciaCreateWithoutPaisInput {
   codigo: String!
   descripcion: String!
   activo: Boolean!
+  localidades: LocalidadCreateManyWithoutProvinciaInput
 }
 
 """An edge in a connection."""
@@ -544,6 +981,7 @@ input ProvinciaUpdateInput {
   descripcion: String
   activo: Boolean
   pais: PaisUpdateOneRequiredWithoutProvinciasInput
+  localidades: LocalidadUpdateManyWithoutProvinciaInput
 }
 
 input ProvinciaUpdateManyDataInput {
@@ -575,15 +1013,35 @@ input ProvinciaUpdateManyWithWhereNestedInput {
   data: ProvinciaUpdateManyDataInput!
 }
 
+input ProvinciaUpdateOneRequiredWithoutLocalidadesInput {
+  create: ProvinciaCreateWithoutLocalidadesInput
+  connect: ProvinciaWhereUniqueInput
+  update: ProvinciaUpdateWithoutLocalidadesDataInput
+  upsert: ProvinciaUpsertWithoutLocalidadesInput
+}
+
+input ProvinciaUpdateWithoutLocalidadesDataInput {
+  codigo: String
+  descripcion: String
+  activo: Boolean
+  pais: PaisUpdateOneRequiredWithoutProvinciasInput
+}
+
 input ProvinciaUpdateWithoutPaisDataInput {
   codigo: String
   descripcion: String
   activo: Boolean
+  localidades: LocalidadUpdateManyWithoutProvinciaInput
 }
 
 input ProvinciaUpdateWithWhereUniqueWithoutPaisInput {
   where: ProvinciaWhereUniqueInput!
   data: ProvinciaUpdateWithoutPaisDataInput!
+}
+
+input ProvinciaUpsertWithoutLocalidadesInput {
+  update: ProvinciaUpdateWithoutLocalidadesDataInput!
+  create: ProvinciaCreateWithoutLocalidadesInput!
 }
 
 input ProvinciaUpsertWithWhereUniqueWithoutPaisInput {
@@ -708,6 +1166,9 @@ input ProvinciaWhereInput {
   """All values that are not equal to given value."""
   activo_not: Boolean
   pais: PaisWhereInput
+  localidades_every: LocalidadWhereInput
+  localidades_some: LocalidadWhereInput
+  localidades_none: LocalidadWhereInput
 }
 
 input ProvinciaWhereUniqueInput {
@@ -718,10 +1179,13 @@ input ProvinciaWhereUniqueInput {
 type Query {
   paises(where: PaisWhereInput, orderBy: PaisOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Pais]!
   provincias(where: ProvinciaWhereInput, orderBy: ProvinciaOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Provincia]!
+  localidads(where: LocalidadWhereInput, orderBy: LocalidadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Localidad]!
   pais(where: PaisWhereUniqueInput!): Pais
   provincia(where: ProvinciaWhereUniqueInput!): Provincia
+  localidad(where: LocalidadWhereUniqueInput!): Localidad
   paisesConnection(where: PaisWhereInput, orderBy: PaisOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PaisConnection!
   provinciasConnection(where: ProvinciaWhereInput, orderBy: ProvinciaOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProvinciaConnection!
+  localidadsConnection(where: LocalidadWhereInput, orderBy: LocalidadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LocalidadConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -733,4 +1197,5 @@ type Query {
 type Subscription {
   pais(where: PaisSubscriptionWhereInput): PaisSubscriptionPayload
   provincia(where: ProvinciaSubscriptionWhereInput): ProvinciaSubscriptionPayload
+  localidad(where: LocalidadSubscriptionWhereInput): LocalidadSubscriptionPayload
 }
