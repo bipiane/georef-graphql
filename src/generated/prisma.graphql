@@ -1,0 +1,556 @@
+# source: http://localhost:4466
+# timestamp: Tue Jul 02 2019 13:38:21 GMT-0300 (Argentina Standard Time)
+
+type AggregatePais {
+  count: Int!
+}
+
+type AggregateProvincia {
+  count: Int!
+}
+
+type BatchPayload {
+  """The number of nodes that have been affected by the Batch operation."""
+  count: Long!
+}
+
+"""
+The `Long` scalar type represents non-fractional signed whole numeric values.
+Long can represent values between -(2^63) and 2^63 - 1.
+"""
+scalar Long
+
+type Mutation {
+  createProvincia(data: ProvinciaCreateInput!): Provincia!
+  createPais(data: PaisCreateInput!): Pais!
+  updateProvincia(data: ProvinciaUpdateInput!, where: ProvinciaWhereUniqueInput!): Provincia
+  updatePais(data: PaisUpdateInput!, where: PaisWhereUniqueInput!): Pais
+  deleteProvincia(where: ProvinciaWhereUniqueInput!): Provincia
+  deletePais(where: PaisWhereUniqueInput!): Pais
+  upsertProvincia(where: ProvinciaWhereUniqueInput!, create: ProvinciaCreateInput!, update: ProvinciaUpdateInput!): Provincia!
+  upsertPais(where: PaisWhereUniqueInput!, create: PaisCreateInput!, update: PaisUpdateInput!): Pais!
+  updateManyProvincias(data: ProvinciaUpdateManyMutationInput!, where: ProvinciaWhereInput): BatchPayload!
+  updateManyPaises(data: PaisUpdateManyMutationInput!, where: PaisWhereInput): BatchPayload!
+  deleteManyProvincias(where: ProvinciaWhereInput): BatchPayload!
+  deleteManyPaises(where: PaisWhereInput): BatchPayload!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+"""An object with an ID"""
+interface Node {
+  """The id of the object."""
+  id: ID!
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+type Pais {
+  id: Int!
+  codigo: String!
+  descripcion: String!
+  activo: Boolean!
+}
+
+"""A connection to a list of items."""
+type PaisConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [PaisEdge]!
+  aggregate: AggregatePais!
+}
+
+input PaisCreateInput {
+  codigo: String!
+  descripcion: String!
+  activo: Boolean!
+}
+
+input PaisCreateOneInput {
+  create: PaisCreateInput
+  connect: PaisWhereUniqueInput
+}
+
+"""An edge in a connection."""
+type PaisEdge {
+  """The item at the end of the edge."""
+  node: Pais!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum PaisOrderByInput {
+  id_ASC
+  id_DESC
+  codigo_ASC
+  codigo_DESC
+  descripcion_ASC
+  descripcion_DESC
+  activo_ASC
+  activo_DESC
+}
+
+type PaisPreviousValues {
+  id: Int!
+  codigo: String!
+  descripcion: String!
+  activo: Boolean!
+}
+
+type PaisSubscriptionPayload {
+  mutation: MutationType!
+  node: Pais
+  updatedFields: [String!]
+  previousValues: PaisPreviousValues
+}
+
+input PaisSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [PaisSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [PaisSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [PaisSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: PaisWhereInput
+}
+
+input PaisUpdateDataInput {
+  codigo: String
+  descripcion: String
+  activo: Boolean
+}
+
+input PaisUpdateInput {
+  codigo: String
+  descripcion: String
+  activo: Boolean
+}
+
+input PaisUpdateManyMutationInput {
+  codigo: String
+  descripcion: String
+  activo: Boolean
+}
+
+input PaisUpdateOneRequiredInput {
+  create: PaisCreateInput
+  connect: PaisWhereUniqueInput
+  update: PaisUpdateDataInput
+  upsert: PaisUpsertNestedInput
+}
+
+input PaisUpsertNestedInput {
+  update: PaisUpdateDataInput!
+  create: PaisCreateInput!
+}
+
+input PaisWhereInput {
+  """Logical AND on all given filters."""
+  AND: [PaisWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [PaisWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [PaisWhereInput!]
+  id: Int
+
+  """All values that are not equal to given value."""
+  id_not: Int
+
+  """All values that are contained in given list."""
+  id_in: [Int!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [Int!]
+
+  """All values less than the given value."""
+  id_lt: Int
+
+  """All values less than or equal the given value."""
+  id_lte: Int
+
+  """All values greater than the given value."""
+  id_gt: Int
+
+  """All values greater than or equal the given value."""
+  id_gte: Int
+  codigo: String
+
+  """All values that are not equal to given value."""
+  codigo_not: String
+
+  """All values that are contained in given list."""
+  codigo_in: [String!]
+
+  """All values that are not contained in given list."""
+  codigo_not_in: [String!]
+
+  """All values less than the given value."""
+  codigo_lt: String
+
+  """All values less than or equal the given value."""
+  codigo_lte: String
+
+  """All values greater than the given value."""
+  codigo_gt: String
+
+  """All values greater than or equal the given value."""
+  codigo_gte: String
+
+  """All values containing the given string."""
+  codigo_contains: String
+
+  """All values not containing the given string."""
+  codigo_not_contains: String
+
+  """All values starting with the given string."""
+  codigo_starts_with: String
+
+  """All values not starting with the given string."""
+  codigo_not_starts_with: String
+
+  """All values ending with the given string."""
+  codigo_ends_with: String
+
+  """All values not ending with the given string."""
+  codigo_not_ends_with: String
+  descripcion: String
+
+  """All values that are not equal to given value."""
+  descripcion_not: String
+
+  """All values that are contained in given list."""
+  descripcion_in: [String!]
+
+  """All values that are not contained in given list."""
+  descripcion_not_in: [String!]
+
+  """All values less than the given value."""
+  descripcion_lt: String
+
+  """All values less than or equal the given value."""
+  descripcion_lte: String
+
+  """All values greater than the given value."""
+  descripcion_gt: String
+
+  """All values greater than or equal the given value."""
+  descripcion_gte: String
+
+  """All values containing the given string."""
+  descripcion_contains: String
+
+  """All values not containing the given string."""
+  descripcion_not_contains: String
+
+  """All values starting with the given string."""
+  descripcion_starts_with: String
+
+  """All values not starting with the given string."""
+  descripcion_not_starts_with: String
+
+  """All values ending with the given string."""
+  descripcion_ends_with: String
+
+  """All values not ending with the given string."""
+  descripcion_not_ends_with: String
+  activo: Boolean
+
+  """All values that are not equal to given value."""
+  activo_not: Boolean
+}
+
+input PaisWhereUniqueInput {
+  id: Int
+  codigo: String
+}
+
+type Provincia {
+  id: Int!
+  pais: Pais!
+  codigo: String!
+  descripcion: String!
+  activo: Boolean!
+}
+
+"""A connection to a list of items."""
+type ProvinciaConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ProvinciaEdge]!
+  aggregate: AggregateProvincia!
+}
+
+input ProvinciaCreateInput {
+  codigo: String!
+  descripcion: String!
+  activo: Boolean!
+  pais: PaisCreateOneInput!
+}
+
+"""An edge in a connection."""
+type ProvinciaEdge {
+  """The item at the end of the edge."""
+  node: Provincia!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum ProvinciaOrderByInput {
+  id_ASC
+  id_DESC
+  codigo_ASC
+  codigo_DESC
+  descripcion_ASC
+  descripcion_DESC
+  activo_ASC
+  activo_DESC
+}
+
+type ProvinciaPreviousValues {
+  id: Int!
+  codigo: String!
+  descripcion: String!
+  activo: Boolean!
+}
+
+type ProvinciaSubscriptionPayload {
+  mutation: MutationType!
+  node: Provincia
+  updatedFields: [String!]
+  previousValues: ProvinciaPreviousValues
+}
+
+input ProvinciaSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ProvinciaSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ProvinciaSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ProvinciaSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ProvinciaWhereInput
+}
+
+input ProvinciaUpdateInput {
+  codigo: String
+  descripcion: String
+  activo: Boolean
+  pais: PaisUpdateOneRequiredInput
+}
+
+input ProvinciaUpdateManyMutationInput {
+  codigo: String
+  descripcion: String
+  activo: Boolean
+}
+
+input ProvinciaWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ProvinciaWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ProvinciaWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ProvinciaWhereInput!]
+  id: Int
+
+  """All values that are not equal to given value."""
+  id_not: Int
+
+  """All values that are contained in given list."""
+  id_in: [Int!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [Int!]
+
+  """All values less than the given value."""
+  id_lt: Int
+
+  """All values less than or equal the given value."""
+  id_lte: Int
+
+  """All values greater than the given value."""
+  id_gt: Int
+
+  """All values greater than or equal the given value."""
+  id_gte: Int
+  codigo: String
+
+  """All values that are not equal to given value."""
+  codigo_not: String
+
+  """All values that are contained in given list."""
+  codigo_in: [String!]
+
+  """All values that are not contained in given list."""
+  codigo_not_in: [String!]
+
+  """All values less than the given value."""
+  codigo_lt: String
+
+  """All values less than or equal the given value."""
+  codigo_lte: String
+
+  """All values greater than the given value."""
+  codigo_gt: String
+
+  """All values greater than or equal the given value."""
+  codigo_gte: String
+
+  """All values containing the given string."""
+  codigo_contains: String
+
+  """All values not containing the given string."""
+  codigo_not_contains: String
+
+  """All values starting with the given string."""
+  codigo_starts_with: String
+
+  """All values not starting with the given string."""
+  codigo_not_starts_with: String
+
+  """All values ending with the given string."""
+  codigo_ends_with: String
+
+  """All values not ending with the given string."""
+  codigo_not_ends_with: String
+  descripcion: String
+
+  """All values that are not equal to given value."""
+  descripcion_not: String
+
+  """All values that are contained in given list."""
+  descripcion_in: [String!]
+
+  """All values that are not contained in given list."""
+  descripcion_not_in: [String!]
+
+  """All values less than the given value."""
+  descripcion_lt: String
+
+  """All values less than or equal the given value."""
+  descripcion_lte: String
+
+  """All values greater than the given value."""
+  descripcion_gt: String
+
+  """All values greater than or equal the given value."""
+  descripcion_gte: String
+
+  """All values containing the given string."""
+  descripcion_contains: String
+
+  """All values not containing the given string."""
+  descripcion_not_contains: String
+
+  """All values starting with the given string."""
+  descripcion_starts_with: String
+
+  """All values not starting with the given string."""
+  descripcion_not_starts_with: String
+
+  """All values ending with the given string."""
+  descripcion_ends_with: String
+
+  """All values not ending with the given string."""
+  descripcion_not_ends_with: String
+  activo: Boolean
+
+  """All values that are not equal to given value."""
+  activo_not: Boolean
+  pais: PaisWhereInput
+}
+
+input ProvinciaWhereUniqueInput {
+  id: Int
+  codigo: String
+}
+
+type Query {
+  provincias(where: ProvinciaWhereInput, orderBy: ProvinciaOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Provincia]!
+  paises(where: PaisWhereInput, orderBy: PaisOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Pais]!
+  provincia(where: ProvinciaWhereUniqueInput!): Provincia
+  pais(where: PaisWhereUniqueInput!): Pais
+  provinciasConnection(where: ProvinciaWhereInput, orderBy: ProvinciaOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProvinciaConnection!
+  paisesConnection(where: PaisWhereInput, orderBy: PaisOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PaisConnection!
+
+  """Fetches an object given its ID"""
+  node(
+    """The ID of an object"""
+    id: ID!
+  ): Node
+}
+
+type Subscription {
+  provincia(where: ProvinciaSubscriptionWhereInput): ProvinciaSubscriptionPayload
+  pais(where: PaisSubscriptionWhereInput): PaisSubscriptionPayload
+}
