@@ -1,0 +1,23 @@
+# Importamos esquemas de prisma
+# import * from './generated/prisma.graphql'
+
+type Query {
+    paises(
+        where: PaisWhereInput,
+        orderBy: PaisOrderByInput,
+        skip: Int,
+        after: String,
+        before: String,
+        first: Int,
+        last: Int): [Pais]!
+    pais(where: PaisWhereUniqueInput!): Pais
+    provincias(
+        where: ProvinciaWhereInput,
+        orderBy: ProvinciaOrderByInput,
+        skip: Int,
+        after: String,
+        before: String,
+        first: Int,
+        last: Int): [Provincia]!
+    provincia(where: ProvinciaWhereUniqueInput!): Provincia
+}
