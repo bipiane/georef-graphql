@@ -36,13 +36,25 @@
   $ npm run import  
 ```
 
-### Server
+### Server App
 ```sh
   $ npm run start  
 ```
 
-### Playground
+### Playground App & Prisma Admin
 ```sh
   # Edit .graphqlconfig.yml and run
   $ graphql playground  
+```
+
+### Token GraphQL Prisma Admin
+```sh
+  # Generate JWT
+  $ prisma token    
+```
+
+```  
+  {
+    "Authorization":"Bearer eyJhbG...7Qk8"
+  }    
 ```

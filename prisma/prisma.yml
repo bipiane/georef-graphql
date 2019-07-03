@@ -1,6 +1,8 @@
 endpoint: http://localhost:${env:PRISMA_PORT}
 datamodel: datamodel.graphql
 
+secret: ${env:secret}
+
 generate:
 - generator: javascript-client
   output: ./generated/prisma-client/

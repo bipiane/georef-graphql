@@ -5,25 +5,27 @@ const {Prisma} = require('prisma-binding');
 const dotenv = require('dotenv');
 dotenv.config();
 
+const {prisma} = require('./../prisma/generated/prisma-client');
+
 const resolvers = {
     Query: {
-        paises: (_, args, context, info) => {
-            return context.prisma.query.paises(args, info,)
+        paises: (_, args) => {
+            return prisma.paises(args);
         },
-        pais: (_, args, context, info) => {
-            return context.prisma.query.pais(args, info,)
+        pais: (_, args) => {
+            return prisma.pais(args.where);
         },
-        provincias: (_, args, context, info) => {
-            return context.prisma.query.provincias(args, info,)
+        provincias: (_, args) => {
+            return prisma.provincias(args);
         },
-        provincia: (_, args, context, info) => {
-            return context.prisma.query.provincia(args, info,)
+        provincia: (_, args) => {
+            return prisma.provincia(args.where);
         },
-        localidades: (_, args, context, info) => {
-            return context.prisma.query.localidads(args, info,)
+        localidades: (_, args) => {
+            return prisma.localidads(args);
         },
-        localidad: (_, args, context, info) => {
-            return context.prisma.query.localidad(args, info,)
+        localidad: (_, args) => {
+            return prisma.localidad(args.where);
         },
     },
 };
