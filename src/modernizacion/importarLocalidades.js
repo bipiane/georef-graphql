@@ -1,9 +1,10 @@
 const axios = require('axios');
-const {prisma} = require('./../../prisma/generated/prisma-client');
 
 // Cargamos .env
 const dotenv = require('dotenv');
 dotenv.config();
+
+const {prisma} = require('./../../prisma/generated/prisma-client');
 
 async function main() {
     console.log(`🚀 Comenzamos a importar localidades de Modernización...`);

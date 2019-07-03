@@ -1,3 +1,7 @@
+// Cargamos .env
+const dotenv = require('dotenv');
+dotenv.config();
+
 const {prisma} = require('../generated/prisma-client');
 const paisesJSON = require('./paises.json');
 const provinciasJSON = require('./provincia.json');
