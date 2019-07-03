@@ -1,5 +1,10 @@
 endpoint: http://localhost:${env:PRISMA_PORT}
 datamodel: datamodel.graphql
+
+generate:
+  - generator: javascript-client
+    output: ./generated/prisma-client/
+
 hooks:
   post-deploy:
     - graphql get-schema -p prisma
