@@ -26,6 +26,11 @@
   $ prisma deploy  
 ```
 
+### Seed Países y Provincias
+```sh
+  $ npm run seed  
+```
+
 ### Import Localidades
 ```sh
   $ npm run import  

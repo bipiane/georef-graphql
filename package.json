@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "node src/index.js",
+    "seed": "node prisma/seed/seed.js",
     "import": "node src/modernizacion/importarLocalidades.js"
   },
   "private": true,

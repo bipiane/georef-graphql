@@ -55,11 +55,11 @@ function guardarLocalidades(inicio = 0) {
  * @returns {Promise<void>}
  */
 async function saveUpdateLocalidad(data) {
-    const userExists = await prisma.$exists.localidad({
+    const exist = await prisma.$exists.localidad({
         codigo_indec: data.id
     });
 
-    if (!userExists) {
+    if (!exist) {
         return await prisma.createLocalidad({
             codigo_indec: data.id,
             descripcion: data.nombre,

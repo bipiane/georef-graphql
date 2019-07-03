@@ -1,0 +1,37 @@
+[
+  {
+    "codigo": "AR",
+    "descripcion": "Argentina",
+    "activo": true
+  },
+  {
+    "codigo": "BO",
+    "descripcion": "Bolivia",
+    "activo": true
+  },
+  {
+    "codigo": "BR",
+    "descripcion": "Brasil",
+    "activo": true
+  },
+  {
+    "codigo": "CL",
+    "descripcion": "Chile",
+    "activo": true
+  },
+  {
+    "codigo": "PY",
+    "descripcion": "Paraguay",
+    "activo": true
+  },
+  {
+    "codigo": "PE",
+    "descripcion": "Parú",
+    "activo": true
+  },
+  {
+    "codigo": "UY",
+    "descripcion": "Uruguay",
+    "activo": true
+  }
+]
