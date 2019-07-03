@@ -20,4 +20,13 @@ type Query {
         first: Int,
         last: Int): [Provincia]!
     provincia(where: ProvinciaWhereUniqueInput!): Provincia
+    localidades(
+        where: LocalidadWhereInput,
+        orderBy: LocalidadOrderByInput,
+        skip: Int,
+        after: String,
+        before: String,
+        first: Int,
+        last: Int): [Localidad]!
+    localidad(where: LocalidadWhereUniqueInput!): Localidad
 }

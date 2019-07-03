@@ -19,6 +19,12 @@ const resolvers = {
         provincia: (_, args, context, info) => {
             return context.prisma.query.provincia(args, info,)
         },
+        localidades: (_, args, context, info) => {
+            return context.prisma.query.localidads(args, info,)
+        },
+        localidad: (_, args, context, info) => {
+            return context.prisma.query.localidad(args, info,)
+        },
     },
 };
 
