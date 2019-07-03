@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Tue Jul 02 2019 17:32:31 GMT-0300 (Argentina Standard Time)
+# timestamp: Wed Jul 03 2019 10:04:10 GMT-0300 (Argentina Standard Time)
 
 type AggregateLocalidad {
   count: Int!
@@ -20,10 +20,11 @@ type BatchPayload {
 
 type Localidad {
   id: Int!
+  codigo_indec: String
   descripcion: String!
   provincia: Provincia!
-  lat: Float!
-  lon: Float!
+  lat: Float
+  lon: Float
   activo: Boolean!
 }
 
@@ -38,9 +39,10 @@ type LocalidadConnection {
 }
 
 input LocalidadCreateInput {
+  codigo_indec: String
   descripcion: String!
-  lat: Float!
-  lon: Float!
+  lat: Float
+  lon: Float
   activo: Boolean!
   provincia: ProvinciaCreateOneWithoutLocalidadesInput!
 }
@@ -51,9 +53,10 @@ input LocalidadCreateManyWithoutProvinciaInput {
 }
 
 input LocalidadCreateWithoutProvinciaInput {
+  codigo_indec: String
   descripcion: String!
-  lat: Float!
-  lon: Float!
+  lat: Float
+  lon: Float
   activo: Boolean!
 }
 
@@ -69,6 +72,8 @@ type LocalidadEdge {
 enum LocalidadOrderByInput {
   id_ASC
   id_DESC
+  codigo_indec_ASC
+  codigo_indec_DESC
   descripcion_ASC
   descripcion_DESC
   lat_ASC
@@ -81,9 +86,10 @@ enum LocalidadOrderByInput {
 
 type LocalidadPreviousValues {
   id: Int!
+  codigo_indec: String
   descripcion: String!
-  lat: Float!
-  lon: Float!
+  lat: Float
+  lon: Float
   activo: Boolean!
 }
 
@@ -118,6 +124,46 @@ input LocalidadScalarWhereInput {
 
   """All values greater than or equal the given value."""
   id_gte: Int
+  codigo_indec: String
+
+  """All values that are not equal to given value."""
+  codigo_indec_not: String
+
+  """All values that are contained in given list."""
+  codigo_indec_in: [String!]
+
+  """All values that are not contained in given list."""
+  codigo_indec_not_in: [String!]
+
+  """All values less than the given value."""
+  codigo_indec_lt: String
+
+  """All values less than or equal the given value."""
+  codigo_indec_lte: String
+
+  """All values greater than the given value."""
+  codigo_indec_gt: String
+
+  """All values greater than or equal the given value."""
+  codigo_indec_gte: String
+
+  """All values containing the given string."""
+  codigo_indec_contains: String
+
+  """All values not containing the given string."""
+  codigo_indec_not_contains: String
+
+  """All values starting with the given string."""
+  codigo_indec_starts_with: String
+
+  """All values not starting with the given string."""
+  codigo_indec_not_starts_with: String
+
+  """All values ending with the given string."""
+  codigo_indec_ends_with: String
+
+  """All values not ending with the given string."""
+  codigo_indec_not_ends_with: String
   descripcion: String
 
   """All values that are not equal to given value."""
@@ -225,9 +271,7 @@ input LocalidadSubscriptionWhereInput {
   """Logical NOT on all given filters combined by AND."""
   NOT: [LocalidadSubscriptionWhereInput!]
 
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
+  """The subscription event gets dispatched when it's listed in mutation_in"""
   mutation_in: [MutationType!]
 
   """
@@ -248,6 +292,7 @@ input LocalidadSubscriptionWhereInput {
 }
 
 input LocalidadUpdateInput {
+  codigo_indec: String
   descripcion: String
   lat: Float
   lon: Float
@@ -256,6 +301,7 @@ input LocalidadUpdateInput {
 }
 
 input LocalidadUpdateManyDataInput {
+  codigo_indec: String
   descripcion: String
   lat: Float
   lon: Float
@@ -263,6 +309,7 @@ input LocalidadUpdateManyDataInput {
 }
 
 input LocalidadUpdateManyMutationInput {
+  codigo_indec: String
   descripcion: String
   lat: Float
   lon: Float
@@ -287,6 +334,7 @@ input LocalidadUpdateManyWithWhereNestedInput {
 }
 
 input LocalidadUpdateWithoutProvinciaDataInput {
+  codigo_indec: String
   descripcion: String
   lat: Float
   lon: Float
@@ -335,6 +383,46 @@ input LocalidadWhereInput {
 
   """All values greater than or equal the given value."""
   id_gte: Int
+  codigo_indec: String
+
+  """All values that are not equal to given value."""
+  codigo_indec_not: String
+
+  """All values that are contained in given list."""
+  codigo_indec_in: [String!]
+
+  """All values that are not contained in given list."""
+  codigo_indec_not_in: [String!]
+
+  """All values less than the given value."""
+  codigo_indec_lt: String
+
+  """All values less than or equal the given value."""
+  codigo_indec_lte: String
+
+  """All values greater than the given value."""
+  codigo_indec_gt: String
+
+  """All values greater than or equal the given value."""
+  codigo_indec_gte: String
+
+  """All values containing the given string."""
+  codigo_indec_contains: String
+
+  """All values not containing the given string."""
+  codigo_indec_not_contains: String
+
+  """All values starting with the given string."""
+  codigo_indec_starts_with: String
+
+  """All values not starting with the given string."""
+  codigo_indec_not_starts_with: String
+
+  """All values ending with the given string."""
+  codigo_indec_ends_with: String
+
+  """All values not ending with the given string."""
+  codigo_indec_not_ends_with: String
   descripcion: String
 
   """All values that are not equal to given value."""
@@ -428,6 +516,7 @@ input LocalidadWhereInput {
 
 input LocalidadWhereUniqueInput {
   id: Int
+  codigo_indec: String
 }
 
 """
@@ -564,9 +653,7 @@ input PaisSubscriptionWhereInput {
   """Logical NOT on all given filters combined by AND."""
   NOT: [PaisSubscriptionWhereInput!]
 
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
+  """The subscription event gets dispatched when it's listed in mutation_in"""
   mutation_in: [MutationType!]
 
   """
@@ -746,6 +833,7 @@ type Provincia {
   id: Int!
   pais: Pais!
   codigo: String!
+  codigo_indec: String
   descripcion: String!
   activo: Boolean!
   localidades(where: LocalidadWhereInput, orderBy: LocalidadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Localidad!]
@@ -763,6 +851,7 @@ type ProvinciaConnection {
 
 input ProvinciaCreateInput {
   codigo: String!
+  codigo_indec: String
   descripcion: String!
   activo: Boolean!
   pais: PaisCreateOneWithoutProvinciasInput!
@@ -781,6 +870,7 @@ input ProvinciaCreateOneWithoutLocalidadesInput {
 
 input ProvinciaCreateWithoutLocalidadesInput {
   codigo: String!
+  codigo_indec: String
   descripcion: String!
   activo: Boolean!
   pais: PaisCreateOneWithoutProvinciasInput!
@@ -788,6 +878,7 @@ input ProvinciaCreateWithoutLocalidadesInput {
 
 input ProvinciaCreateWithoutPaisInput {
   codigo: String!
+  codigo_indec: String
   descripcion: String!
   activo: Boolean!
   localidades: LocalidadCreateManyWithoutProvinciaInput
@@ -807,6 +898,8 @@ enum ProvinciaOrderByInput {
   id_DESC
   codigo_ASC
   codigo_DESC
+  codigo_indec_ASC
+  codigo_indec_DESC
   descripcion_ASC
   descripcion_DESC
   activo_ASC
@@ -816,6 +909,7 @@ enum ProvinciaOrderByInput {
 type ProvinciaPreviousValues {
   id: Int!
   codigo: String!
+  codigo_indec: String
   descripcion: String!
   activo: Boolean!
 }
@@ -891,6 +985,46 @@ input ProvinciaScalarWhereInput {
 
   """All values not ending with the given string."""
   codigo_not_ends_with: String
+  codigo_indec: String
+
+  """All values that are not equal to given value."""
+  codigo_indec_not: String
+
+  """All values that are contained in given list."""
+  codigo_indec_in: [String!]
+
+  """All values that are not contained in given list."""
+  codigo_indec_not_in: [String!]
+
+  """All values less than the given value."""
+  codigo_indec_lt: String
+
+  """All values less than or equal the given value."""
+  codigo_indec_lte: String
+
+  """All values greater than the given value."""
+  codigo_indec_gt: String
+
+  """All values greater than or equal the given value."""
+  codigo_indec_gte: String
+
+  """All values containing the given string."""
+  codigo_indec_contains: String
+
+  """All values not containing the given string."""
+  codigo_indec_not_contains: String
+
+  """All values starting with the given string."""
+  codigo_indec_starts_with: String
+
+  """All values not starting with the given string."""
+  codigo_indec_not_starts_with: String
+
+  """All values ending with the given string."""
+  codigo_indec_ends_with: String
+
+  """All values not ending with the given string."""
+  codigo_indec_not_ends_with: String
   descripcion: String
 
   """All values that are not equal to given value."""
@@ -954,9 +1088,7 @@ input ProvinciaSubscriptionWhereInput {
   """Logical NOT on all given filters combined by AND."""
   NOT: [ProvinciaSubscriptionWhereInput!]
 
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
+  """The subscription event gets dispatched when it's listed in mutation_in"""
   mutation_in: [MutationType!]
 
   """
@@ -978,6 +1110,7 @@ input ProvinciaSubscriptionWhereInput {
 
 input ProvinciaUpdateInput {
   codigo: String
+  codigo_indec: String
   descripcion: String
   activo: Boolean
   pais: PaisUpdateOneRequiredWithoutProvinciasInput
@@ -986,12 +1119,14 @@ input ProvinciaUpdateInput {
 
 input ProvinciaUpdateManyDataInput {
   codigo: String
+  codigo_indec: String
   descripcion: String
   activo: Boolean
 }
 
 input ProvinciaUpdateManyMutationInput {
   codigo: String
+  codigo_indec: String
   descripcion: String
   activo: Boolean
 }
@@ -1022,6 +1157,7 @@ input ProvinciaUpdateOneRequiredWithoutLocalidadesInput {
 
 input ProvinciaUpdateWithoutLocalidadesDataInput {
   codigo: String
+  codigo_indec: String
   descripcion: String
   activo: Boolean
   pais: PaisUpdateOneRequiredWithoutProvinciasInput
@@ -1029,6 +1165,7 @@ input ProvinciaUpdateWithoutLocalidadesDataInput {
 
 input ProvinciaUpdateWithoutPaisDataInput {
   codigo: String
+  codigo_indec: String
   descripcion: String
   activo: Boolean
   localidades: LocalidadUpdateManyWithoutProvinciaInput
@@ -1121,6 +1258,46 @@ input ProvinciaWhereInput {
 
   """All values not ending with the given string."""
   codigo_not_ends_with: String
+  codigo_indec: String
+
+  """All values that are not equal to given value."""
+  codigo_indec_not: String
+
+  """All values that are contained in given list."""
+  codigo_indec_in: [String!]
+
+  """All values that are not contained in given list."""
+  codigo_indec_not_in: [String!]
+
+  """All values less than the given value."""
+  codigo_indec_lt: String
+
+  """All values less than or equal the given value."""
+  codigo_indec_lte: String
+
+  """All values greater than the given value."""
+  codigo_indec_gt: String
+
+  """All values greater than or equal the given value."""
+  codigo_indec_gte: String
+
+  """All values containing the given string."""
+  codigo_indec_contains: String
+
+  """All values not containing the given string."""
+  codigo_indec_not_contains: String
+
+  """All values starting with the given string."""
+  codigo_indec_starts_with: String
+
+  """All values not starting with the given string."""
+  codigo_indec_not_starts_with: String
+
+  """All values ending with the given string."""
+  codigo_indec_ends_with: String
+
+  """All values not ending with the given string."""
+  codigo_indec_not_ends_with: String
   descripcion: String
 
   """All values that are not equal to given value."""
@@ -1174,6 +1351,7 @@ input ProvinciaWhereInput {
 input ProvinciaWhereUniqueInput {
   id: Int
   codigo: String
+  codigo_indec: String
 }
 
 type Query {
