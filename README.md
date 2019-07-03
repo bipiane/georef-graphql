@@ -26,6 +26,11 @@
   $ prisma deploy  
 ```
 
+### Import Localidades
+```sh
+  $ npm run import  
+```
+
 ### Server
 ```sh
   $ npm run start  
