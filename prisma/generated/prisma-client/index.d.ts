@@ -16,6 +16,7 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
 export type Maybe<T> = T | undefined | null;
 
 export interface Exists {
+  departamento: (where?: DepartamentoWhereInput) => Promise<boolean>;
   localidad: (where?: LocalidadWhereInput) => Promise<boolean>;
   pais: (where?: PaisWhereInput) => Promise<boolean>;
   provincia: (where?: ProvinciaWhereInput) => Promise<boolean>;
@@ -40,6 +41,27 @@ export interface Prisma {
    * Queries
    */
 
+  departamento: (
+    where: DepartamentoWhereUniqueInput
+  ) => DepartamentoNullablePromise;
+  departamentoes: (args?: {
+    where?: DepartamentoWhereInput;
+    orderBy?: DepartamentoOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Departamento>;
+  departamentoesConnection: (args?: {
+    where?: DepartamentoWhereInput;
+    orderBy?: DepartamentoOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => DepartamentoConnectionPromise;
   localidad: (where: LocalidadWhereUniqueInput) => LocalidadNullablePromise;
   localidads: (args?: {
     where?: LocalidadWhereInput;
@@ -103,6 +125,26 @@ export interface Prisma {
    * Mutations
    */
 
+  createDepartamento: (data: DepartamentoCreateInput) => DepartamentoPromise;
+  updateDepartamento: (args: {
+    data: DepartamentoUpdateInput;
+    where: DepartamentoWhereUniqueInput;
+  }) => DepartamentoPromise;
+  updateManyDepartamentoes: (args: {
+    data: DepartamentoUpdateManyMutationInput;
+    where?: DepartamentoWhereInput;
+  }) => BatchPayloadPromise;
+  upsertDepartamento: (args: {
+    where: DepartamentoWhereUniqueInput;
+    create: DepartamentoCreateInput;
+    update: DepartamentoUpdateInput;
+  }) => DepartamentoPromise;
+  deleteDepartamento: (
+    where: DepartamentoWhereUniqueInput
+  ) => DepartamentoPromise;
+  deleteManyDepartamentoes: (
+    where?: DepartamentoWhereInput
+  ) => BatchPayloadPromise;
   createLocalidad: (data: LocalidadCreateInput) => LocalidadPromise;
   updateLocalidad: (args: {
     data: LocalidadUpdateInput;
@@ -160,6 +202,9 @@ export interface Prisma {
 }
 
 export interface Subscription {
+  departamento: (
+    where?: DepartamentoSubscriptionWhereInput
+  ) => DepartamentoSubscriptionPayloadSubscription;
   localidad: (
     where?: LocalidadSubscriptionWhereInput
   ) => LocalidadSubscriptionPayloadSubscription;
@@ -205,6 +250,14 @@ export type LocalidadOrderByInput =
   | "activo_ASC"
   | "activo_DESC";
 
+export type DepartamentoOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "codigo_indec_ASC"
+  | "codigo_indec_DESC"
+  | "nombre_ASC"
+  | "nombre_DESC";
+
 export type PaisOrderByInput =
   | "id_ASC"
   | "id_DESC"
@@ -217,52 +270,90 @@ export type PaisOrderByInput =
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export interface PaisUpsertWithoutProvinciasInput {
-  update: PaisUpdateWithoutProvinciasDataInput;
-  create: PaisCreateWithoutProvinciasInput;
+export interface LocalidadUpdateWithWhereUniqueWithoutProvinciaInput {
+  where: LocalidadWhereUniqueInput;
+  data: LocalidadUpdateWithoutProvinciaDataInput;
 }
 
-export type LocalidadWhereUniqueInput = AtLeastOne<{
+export type DepartamentoWhereUniqueInput = AtLeastOne<{
   id: Maybe<Int>;
   codigo_indec?: Maybe<String>;
 }>;
 
-export interface ProvinciaCreateWithoutLocalidadesInput {
+export interface DepartamentoUpsertWithoutLocalidadesInput {
+  update: DepartamentoUpdateWithoutLocalidadesDataInput;
+  create: DepartamentoCreateWithoutLocalidadesInput;
+}
+
+export interface ProvinciaWhereInput {
   id?: Maybe<Int>;
-  pais: PaisCreateOneWithoutProvinciasInput;
-  codigo: String;
+  id_not?: Maybe<Int>;
+  id_in?: Maybe<Int[] | Int>;
+  id_not_in?: Maybe<Int[] | Int>;
+  id_lt?: Maybe<Int>;
+  id_lte?: Maybe<Int>;
+  id_gt?: Maybe<Int>;
+  id_gte?: Maybe<Int>;
+  pais?: Maybe<PaisWhereInput>;
+  codigo?: Maybe<String>;
+  codigo_not?: Maybe<String>;
+  codigo_in?: Maybe<String[] | String>;
+  codigo_not_in?: Maybe<String[] | String>;
+  codigo_lt?: Maybe<String>;
+  codigo_lte?: Maybe<String>;
+  codigo_gt?: Maybe<String>;
+  codigo_gte?: Maybe<String>;
+  codigo_contains?: Maybe<String>;
+  codigo_not_contains?: Maybe<String>;
+  codigo_starts_with?: Maybe<String>;
+  codigo_not_starts_with?: Maybe<String>;
+  codigo_ends_with?: Maybe<String>;
+  codigo_not_ends_with?: Maybe<String>;
   codigo_indec?: Maybe<String>;
-  nombre: String;
-  activo: Boolean;
+  codigo_indec_not?: Maybe<String>;
+  codigo_indec_in?: Maybe<String[] | String>;
+  codigo_indec_not_in?: Maybe<String[] | String>;
+  codigo_indec_lt?: Maybe<String>;
+  codigo_indec_lte?: Maybe<String>;
+  codigo_indec_gt?: Maybe<String>;
+  codigo_indec_gte?: Maybe<String>;
+  codigo_indec_contains?: Maybe<String>;
+  codigo_indec_not_contains?: Maybe<String>;
+  codigo_indec_starts_with?: Maybe<String>;
+  codigo_indec_not_starts_with?: Maybe<String>;
+  codigo_indec_ends_with?: Maybe<String>;
+  codigo_indec_not_ends_with?: Maybe<String>;
+  nombre?: Maybe<String>;
+  nombre_not?: Maybe<String>;
+  nombre_in?: Maybe<String[] | String>;
+  nombre_not_in?: Maybe<String[] | String>;
+  nombre_lt?: Maybe<String>;
+  nombre_lte?: Maybe<String>;
+  nombre_gt?: Maybe<String>;
+  nombre_gte?: Maybe<String>;
+  nombre_contains?: Maybe<String>;
+  nombre_not_contains?: Maybe<String>;
+  nombre_starts_with?: Maybe<String>;
+  nombre_not_starts_with?: Maybe<String>;
+  nombre_ends_with?: Maybe<String>;
+  nombre_not_ends_with?: Maybe<String>;
+  activo?: Maybe<Boolean>;
+  activo_not?: Maybe<Boolean>;
+  localidades_every?: Maybe<LocalidadWhereInput>;
+  localidades_some?: Maybe<LocalidadWhereInput>;
+  localidades_none?: Maybe<LocalidadWhereInput>;
+  departamentos_every?: Maybe<DepartamentoWhereInput>;
+  departamentos_some?: Maybe<DepartamentoWhereInput>;
+  departamentos_none?: Maybe<DepartamentoWhereInput>;
+  AND?: Maybe<ProvinciaWhereInput[] | ProvinciaWhereInput>;
+  OR?: Maybe<ProvinciaWhereInput[] | ProvinciaWhereInput>;
+  NOT?: Maybe<ProvinciaWhereInput[] | ProvinciaWhereInput>;
 }
 
-export interface LocalidadUpdateManyWithoutProvinciaInput {
-  create?: Maybe<
-    | LocalidadCreateWithoutProvinciaInput[]
-    | LocalidadCreateWithoutProvinciaInput
-  >;
-  delete?: Maybe<LocalidadWhereUniqueInput[] | LocalidadWhereUniqueInput>;
-  connect?: Maybe<LocalidadWhereUniqueInput[] | LocalidadWhereUniqueInput>;
-  set?: Maybe<LocalidadWhereUniqueInput[] | LocalidadWhereUniqueInput>;
-  disconnect?: Maybe<LocalidadWhereUniqueInput[] | LocalidadWhereUniqueInput>;
-  update?: Maybe<
-    | LocalidadUpdateWithWhereUniqueWithoutProvinciaInput[]
-    | LocalidadUpdateWithWhereUniqueWithoutProvinciaInput
-  >;
-  upsert?: Maybe<
-    | LocalidadUpsertWithWhereUniqueWithoutProvinciaInput[]
-    | LocalidadUpsertWithWhereUniqueWithoutProvinciaInput
-  >;
-  deleteMany?: Maybe<LocalidadScalarWhereInput[] | LocalidadScalarWhereInput>;
-  updateMany?: Maybe<
-    | LocalidadUpdateManyWithWhereNestedInput[]
-    | LocalidadUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface PaisCreateOneWithoutProvinciasInput {
-  create?: Maybe<PaisCreateWithoutProvinciasInput>;
-  connect?: Maybe<PaisWhereUniqueInput>;
+export interface LocalidadUpsertWithWhereUniqueWithoutProvinciaInput {
+  where: LocalidadWhereUniqueInput;
+  update: LocalidadUpdateWithoutProvinciaDataInput;
+  create: LocalidadCreateWithoutProvinciaInput;
 }
 
 export interface LocalidadWhereInput {
@@ -303,6 +394,7 @@ export interface LocalidadWhereInput {
   nombre_ends_with?: Maybe<String>;
   nombre_not_ends_with?: Maybe<String>;
   provincia?: Maybe<ProvinciaWhereInput>;
+  departamento?: Maybe<DepartamentoWhereInput>;
   lat?: Maybe<Float>;
   lat_not?: Maybe<Float>;
   lat_in?: Maybe<Float[] | Float>;
@@ -326,113 +418,32 @@ export interface LocalidadWhereInput {
   NOT?: Maybe<LocalidadWhereInput[] | LocalidadWhereInput>;
 }
 
-export interface PaisCreateWithoutProvinciasInput {
+export interface DepartamentoCreateManyWithoutProvinciaInput {
+  create?: Maybe<
+    | DepartamentoCreateWithoutProvinciaInput[]
+    | DepartamentoCreateWithoutProvinciaInput
+  >;
+  connect?: Maybe<
+    DepartamentoWhereUniqueInput[] | DepartamentoWhereUniqueInput
+  >;
+}
+
+export interface LocalidadCreateInput {
   id?: Maybe<Int>;
-  codigo: String;
+  codigo_indec?: Maybe<String>;
   nombre: String;
+  provincia: ProvinciaCreateOneWithoutLocalidadesInput;
+  departamento?: Maybe<DepartamentoCreateOneWithoutLocalidadesInput>;
+  lat?: Maybe<Float>;
+  lon?: Maybe<Float>;
   activo: Boolean;
 }
 
-export interface PaisSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<PaisWhereInput>;
-  AND?: Maybe<PaisSubscriptionWhereInput[] | PaisSubscriptionWhereInput>;
-  OR?: Maybe<PaisSubscriptionWhereInput[] | PaisSubscriptionWhereInput>;
-  NOT?: Maybe<PaisSubscriptionWhereInput[] | PaisSubscriptionWhereInput>;
-}
-
-export interface LocalidadUpdateInput {
-  codigo_indec?: Maybe<String>;
-  nombre?: Maybe<String>;
-  provincia?: Maybe<ProvinciaUpdateOneRequiredWithoutLocalidadesInput>;
-  lat?: Maybe<Float>;
-  lon?: Maybe<Float>;
-  activo?: Maybe<Boolean>;
-}
-
-export interface ProvinciaUpdateManyMutationInput {
-  codigo?: Maybe<String>;
-  codigo_indec?: Maybe<String>;
-  nombre?: Maybe<String>;
-  activo?: Maybe<Boolean>;
-}
-
-export interface ProvinciaUpdateOneRequiredWithoutLocalidadesInput {
-  create?: Maybe<ProvinciaCreateWithoutLocalidadesInput>;
-  update?: Maybe<ProvinciaUpdateWithoutLocalidadesDataInput>;
-  upsert?: Maybe<ProvinciaUpsertWithoutLocalidadesInput>;
-  connect?: Maybe<ProvinciaWhereUniqueInput>;
-}
-
-export interface ProvinciaCreateInput {
+export interface DepartamentoCreateWithoutProvinciaInput {
   id?: Maybe<Int>;
-  pais: PaisCreateOneWithoutProvinciasInput;
-  codigo: String;
   codigo_indec?: Maybe<String>;
   nombre: String;
-  activo: Boolean;
-  localidades?: Maybe<LocalidadCreateManyWithoutProvinciaInput>;
-}
-
-export interface ProvinciaUpdateWithoutLocalidadesDataInput {
-  pais?: Maybe<PaisUpdateOneRequiredWithoutProvinciasInput>;
-  codigo?: Maybe<String>;
-  codigo_indec?: Maybe<String>;
-  nombre?: Maybe<String>;
-  activo?: Maybe<Boolean>;
-}
-
-export type PaisWhereUniqueInput = AtLeastOne<{
-  id: Maybe<Int>;
-  codigo?: Maybe<String>;
-}>;
-
-export interface PaisUpdateOneRequiredWithoutProvinciasInput {
-  create?: Maybe<PaisCreateWithoutProvinciasInput>;
-  update?: Maybe<PaisUpdateWithoutProvinciasDataInput>;
-  upsert?: Maybe<PaisUpsertWithoutProvinciasInput>;
-  connect?: Maybe<PaisWhereUniqueInput>;
-}
-
-export interface ProvinciaUpdateManyWithWhereNestedInput {
-  where: ProvinciaScalarWhereInput;
-  data: ProvinciaUpdateManyDataInput;
-}
-
-export interface PaisUpdateWithoutProvinciasDataInput {
-  codigo?: Maybe<String>;
-  nombre?: Maybe<String>;
-  activo?: Maybe<Boolean>;
-}
-
-export interface ProvinciaUpsertWithWhereUniqueWithoutPaisInput {
-  where: ProvinciaWhereUniqueInput;
-  update: ProvinciaUpdateWithoutPaisDataInput;
-  create: ProvinciaCreateWithoutPaisInput;
-}
-
-export interface LocalidadUpdateWithoutProvinciaDataInput {
-  codigo_indec?: Maybe<String>;
-  nombre?: Maybe<String>;
-  lat?: Maybe<Float>;
-  lon?: Maybe<Float>;
-  activo?: Maybe<Boolean>;
-}
-
-export interface LocalidadUpdateManyDataInput {
-  codigo_indec?: Maybe<String>;
-  nombre?: Maybe<String>;
-  lat?: Maybe<Float>;
-  lon?: Maybe<Float>;
-  activo?: Maybe<Boolean>;
-}
-
-export interface ProvinciaUpsertWithoutLocalidadesInput {
-  update: ProvinciaUpdateWithoutLocalidadesDataInput;
-  create: ProvinciaCreateWithoutLocalidadesInput;
+  localidades?: Maybe<LocalidadCreateManyWithoutDepartamentoInput>;
 }
 
 export interface LocalidadScalarWhereInput {
@@ -495,17 +506,50 @@ export interface LocalidadScalarWhereInput {
   NOT?: Maybe<LocalidadScalarWhereInput[] | LocalidadScalarWhereInput>;
 }
 
-export interface LocalidadCreateInput {
-  id?: Maybe<Int>;
+export interface DepartamentoUpdateInput {
   codigo_indec?: Maybe<String>;
-  nombre: String;
-  provincia: ProvinciaCreateOneWithoutLocalidadesInput;
-  lat?: Maybe<Float>;
-  lon?: Maybe<Float>;
-  activo: Boolean;
+  nombre?: Maybe<String>;
+  provincia?: Maybe<ProvinciaUpdateOneRequiredWithoutDepartamentosInput>;
+  localidades?: Maybe<LocalidadUpdateManyWithoutDepartamentoInput>;
 }
 
-export interface ProvinciaUpdateWithoutPaisDataInput {
+export interface PaisSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<PaisWhereInput>;
+  AND?: Maybe<PaisSubscriptionWhereInput[] | PaisSubscriptionWhereInput>;
+  OR?: Maybe<PaisSubscriptionWhereInput[] | PaisSubscriptionWhereInput>;
+  NOT?: Maybe<PaisSubscriptionWhereInput[] | PaisSubscriptionWhereInput>;
+}
+
+export interface ProvinciaUpdateOneRequiredWithoutDepartamentosInput {
+  create?: Maybe<ProvinciaCreateWithoutDepartamentosInput>;
+  update?: Maybe<ProvinciaUpdateWithoutDepartamentosDataInput>;
+  upsert?: Maybe<ProvinciaUpsertWithoutDepartamentosInput>;
+  connect?: Maybe<ProvinciaWhereUniqueInput>;
+}
+
+export interface DepartamentoSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<DepartamentoWhereInput>;
+  AND?: Maybe<
+    DepartamentoSubscriptionWhereInput[] | DepartamentoSubscriptionWhereInput
+  >;
+  OR?: Maybe<
+    DepartamentoSubscriptionWhereInput[] | DepartamentoSubscriptionWhereInput
+  >;
+  NOT?: Maybe<
+    DepartamentoSubscriptionWhereInput[] | DepartamentoSubscriptionWhereInput
+  >;
+}
+
+export interface ProvinciaUpdateWithoutDepartamentosDataInput {
+  pais?: Maybe<PaisUpdateOneRequiredWithoutProvinciasInput>;
   codigo?: Maybe<String>;
   codigo_indec?: Maybe<String>;
   nombre?: Maybe<String>;
@@ -513,79 +557,154 @@ export interface ProvinciaUpdateWithoutPaisDataInput {
   localidades?: Maybe<LocalidadUpdateManyWithoutProvinciaInput>;
 }
 
-export interface ProvinciaWhereInput {
-  id?: Maybe<Int>;
-  id_not?: Maybe<Int>;
-  id_in?: Maybe<Int[] | Int>;
-  id_not_in?: Maybe<Int[] | Int>;
-  id_lt?: Maybe<Int>;
-  id_lte?: Maybe<Int>;
-  id_gt?: Maybe<Int>;
-  id_gte?: Maybe<Int>;
-  pais?: Maybe<PaisWhereInput>;
+export interface ProvinciaUpdateInput {
+  pais?: Maybe<PaisUpdateOneRequiredWithoutProvinciasInput>;
   codigo?: Maybe<String>;
-  codigo_not?: Maybe<String>;
-  codigo_in?: Maybe<String[] | String>;
-  codigo_not_in?: Maybe<String[] | String>;
-  codigo_lt?: Maybe<String>;
-  codigo_lte?: Maybe<String>;
-  codigo_gt?: Maybe<String>;
-  codigo_gte?: Maybe<String>;
-  codigo_contains?: Maybe<String>;
-  codigo_not_contains?: Maybe<String>;
-  codigo_starts_with?: Maybe<String>;
-  codigo_not_starts_with?: Maybe<String>;
-  codigo_ends_with?: Maybe<String>;
-  codigo_not_ends_with?: Maybe<String>;
   codigo_indec?: Maybe<String>;
-  codigo_indec_not?: Maybe<String>;
-  codigo_indec_in?: Maybe<String[] | String>;
-  codigo_indec_not_in?: Maybe<String[] | String>;
-  codigo_indec_lt?: Maybe<String>;
-  codigo_indec_lte?: Maybe<String>;
-  codigo_indec_gt?: Maybe<String>;
-  codigo_indec_gte?: Maybe<String>;
-  codigo_indec_contains?: Maybe<String>;
-  codigo_indec_not_contains?: Maybe<String>;
-  codigo_indec_starts_with?: Maybe<String>;
-  codigo_indec_not_starts_with?: Maybe<String>;
-  codigo_indec_ends_with?: Maybe<String>;
-  codigo_indec_not_ends_with?: Maybe<String>;
   nombre?: Maybe<String>;
-  nombre_not?: Maybe<String>;
-  nombre_in?: Maybe<String[] | String>;
-  nombre_not_in?: Maybe<String[] | String>;
-  nombre_lt?: Maybe<String>;
-  nombre_lte?: Maybe<String>;
-  nombre_gt?: Maybe<String>;
-  nombre_gte?: Maybe<String>;
-  nombre_contains?: Maybe<String>;
-  nombre_not_contains?: Maybe<String>;
-  nombre_starts_with?: Maybe<String>;
-  nombre_not_starts_with?: Maybe<String>;
-  nombre_ends_with?: Maybe<String>;
-  nombre_not_ends_with?: Maybe<String>;
   activo?: Maybe<Boolean>;
-  activo_not?: Maybe<Boolean>;
-  localidades_every?: Maybe<LocalidadWhereInput>;
-  localidades_some?: Maybe<LocalidadWhereInput>;
-  localidades_none?: Maybe<LocalidadWhereInput>;
-  AND?: Maybe<ProvinciaWhereInput[] | ProvinciaWhereInput>;
-  OR?: Maybe<ProvinciaWhereInput[] | ProvinciaWhereInput>;
-  NOT?: Maybe<ProvinciaWhereInput[] | ProvinciaWhereInput>;
+  localidades?: Maybe<LocalidadUpdateManyWithoutProvinciaInput>;
+  departamentos?: Maybe<DepartamentoUpdateManyWithoutProvinciaInput>;
 }
 
-export interface LocalidadUpdateManyMutationInput {
+export interface PaisUpdateOneRequiredWithoutProvinciasInput {
+  create?: Maybe<PaisCreateWithoutProvinciasInput>;
+  update?: Maybe<PaisUpdateWithoutProvinciasDataInput>;
+  upsert?: Maybe<PaisUpsertWithoutProvinciasInput>;
+  connect?: Maybe<PaisWhereUniqueInput>;
+}
+
+export type LocalidadWhereUniqueInput = AtLeastOne<{
+  id: Maybe<Int>;
+  codigo_indec?: Maybe<String>;
+}>;
+
+export interface PaisUpdateWithoutProvinciasDataInput {
+  codigo?: Maybe<String>;
+  nombre?: Maybe<String>;
+  activo?: Maybe<Boolean>;
+}
+
+export interface ProvinciaUpdateManyDataInput {
+  codigo?: Maybe<String>;
   codigo_indec?: Maybe<String>;
   nombre?: Maybe<String>;
+  activo?: Maybe<Boolean>;
+}
+
+export interface PaisUpsertWithoutProvinciasInput {
+  update: PaisUpdateWithoutProvinciasDataInput;
+  create: PaisCreateWithoutProvinciasInput;
+}
+
+export type PaisWhereUniqueInput = AtLeastOne<{
+  id: Maybe<Int>;
+  codigo?: Maybe<String>;
+}>;
+
+export interface LocalidadUpdateManyWithoutProvinciaInput {
+  create?: Maybe<
+    | LocalidadCreateWithoutProvinciaInput[]
+    | LocalidadCreateWithoutProvinciaInput
+  >;
+  delete?: Maybe<LocalidadWhereUniqueInput[] | LocalidadWhereUniqueInput>;
+  connect?: Maybe<LocalidadWhereUniqueInput[] | LocalidadWhereUniqueInput>;
+  set?: Maybe<LocalidadWhereUniqueInput[] | LocalidadWhereUniqueInput>;
+  disconnect?: Maybe<LocalidadWhereUniqueInput[] | LocalidadWhereUniqueInput>;
+  update?: Maybe<
+    | LocalidadUpdateWithWhereUniqueWithoutProvinciaInput[]
+    | LocalidadUpdateWithWhereUniqueWithoutProvinciaInput
+  >;
+  upsert?: Maybe<
+    | LocalidadUpsertWithWhereUniqueWithoutProvinciaInput[]
+    | LocalidadUpsertWithWhereUniqueWithoutProvinciaInput
+  >;
+  deleteMany?: Maybe<LocalidadScalarWhereInput[] | LocalidadScalarWhereInput>;
+  updateMany?: Maybe<
+    | LocalidadUpdateManyWithWhereNestedInput[]
+    | LocalidadUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface ProvinciaUpsertWithWhereUniqueWithoutPaisInput {
+  where: ProvinciaWhereUniqueInput;
+  update: ProvinciaUpdateWithoutPaisDataInput;
+  create: ProvinciaCreateWithoutPaisInput;
+}
+
+export interface PaisCreateInput {
+  id?: Maybe<Int>;
+  codigo: String;
+  nombre: String;
+  activo: Boolean;
+  provincias?: Maybe<ProvinciaCreateManyWithoutPaisInput>;
+}
+
+export interface ProvinciaUpdateWithWhereUniqueWithoutPaisInput {
+  where: ProvinciaWhereUniqueInput;
+  data: ProvinciaUpdateWithoutPaisDataInput;
+}
+
+export interface LocalidadUpdateWithoutProvinciaDataInput {
+  codigo_indec?: Maybe<String>;
+  nombre?: Maybe<String>;
+  departamento?: Maybe<DepartamentoUpdateOneWithoutLocalidadesInput>;
   lat?: Maybe<Float>;
   lon?: Maybe<Float>;
   activo?: Maybe<Boolean>;
 }
 
-export interface LocalidadUpdateWithWhereUniqueWithoutProvinciaInput {
-  where: LocalidadWhereUniqueInput;
-  data: LocalidadUpdateWithoutProvinciaDataInput;
+export interface ProvinciaUpdateManyWithoutPaisInput {
+  create?: Maybe<
+    ProvinciaCreateWithoutPaisInput[] | ProvinciaCreateWithoutPaisInput
+  >;
+  delete?: Maybe<ProvinciaWhereUniqueInput[] | ProvinciaWhereUniqueInput>;
+  connect?: Maybe<ProvinciaWhereUniqueInput[] | ProvinciaWhereUniqueInput>;
+  set?: Maybe<ProvinciaWhereUniqueInput[] | ProvinciaWhereUniqueInput>;
+  disconnect?: Maybe<ProvinciaWhereUniqueInput[] | ProvinciaWhereUniqueInput>;
+  update?: Maybe<
+    | ProvinciaUpdateWithWhereUniqueWithoutPaisInput[]
+    | ProvinciaUpdateWithWhereUniqueWithoutPaisInput
+  >;
+  upsert?: Maybe<
+    | ProvinciaUpsertWithWhereUniqueWithoutPaisInput[]
+    | ProvinciaUpsertWithWhereUniqueWithoutPaisInput
+  >;
+  deleteMany?: Maybe<ProvinciaScalarWhereInput[] | ProvinciaScalarWhereInput>;
+  updateMany?: Maybe<
+    | ProvinciaUpdateManyWithWhereNestedInput[]
+    | ProvinciaUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface DepartamentoUpdateOneWithoutLocalidadesInput {
+  create?: Maybe<DepartamentoCreateWithoutLocalidadesInput>;
+  update?: Maybe<DepartamentoUpdateWithoutLocalidadesDataInput>;
+  upsert?: Maybe<DepartamentoUpsertWithoutLocalidadesInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<DepartamentoWhereUniqueInput>;
+}
+
+export interface ProvinciaCreateWithoutPaisInput {
+  id?: Maybe<Int>;
+  codigo: String;
+  codigo_indec?: Maybe<String>;
+  nombre: String;
+  activo: Boolean;
+  localidades?: Maybe<LocalidadCreateManyWithoutProvinciaInput>;
+  departamentos?: Maybe<DepartamentoCreateManyWithoutProvinciaInput>;
+}
+
+export interface DepartamentoUpdateWithoutLocalidadesDataInput {
+  codigo_indec?: Maybe<String>;
+  nombre?: Maybe<String>;
+  provincia?: Maybe<ProvinciaUpdateOneRequiredWithoutDepartamentosInput>;
+}
+
+export interface ProvinciaCreateOneWithoutDepartamentosInput {
+  create?: Maybe<ProvinciaCreateWithoutDepartamentosInput>;
+  connect?: Maybe<ProvinciaWhereUniqueInput>;
 }
 
 export interface PaisWhereInput {
@@ -635,36 +754,160 @@ export interface PaisWhereInput {
   NOT?: Maybe<PaisWhereInput[] | PaisWhereInput>;
 }
 
-export interface PaisCreateInput {
-  id?: Maybe<Int>;
-  codigo: String;
-  nombre: String;
-  activo: Boolean;
-  provincias?: Maybe<ProvinciaCreateManyWithoutPaisInput>;
+export interface PaisCreateOneWithoutProvinciasInput {
+  create?: Maybe<PaisCreateWithoutProvinciasInput>;
+  connect?: Maybe<PaisWhereUniqueInput>;
 }
 
-export interface LocalidadSubscriptionWhereInput {
+export interface DepartamentoWhereInput {
+  id?: Maybe<Int>;
+  id_not?: Maybe<Int>;
+  id_in?: Maybe<Int[] | Int>;
+  id_not_in?: Maybe<Int[] | Int>;
+  id_lt?: Maybe<Int>;
+  id_lte?: Maybe<Int>;
+  id_gt?: Maybe<Int>;
+  id_gte?: Maybe<Int>;
+  codigo_indec?: Maybe<String>;
+  codigo_indec_not?: Maybe<String>;
+  codigo_indec_in?: Maybe<String[] | String>;
+  codigo_indec_not_in?: Maybe<String[] | String>;
+  codigo_indec_lt?: Maybe<String>;
+  codigo_indec_lte?: Maybe<String>;
+  codigo_indec_gt?: Maybe<String>;
+  codigo_indec_gte?: Maybe<String>;
+  codigo_indec_contains?: Maybe<String>;
+  codigo_indec_not_contains?: Maybe<String>;
+  codigo_indec_starts_with?: Maybe<String>;
+  codigo_indec_not_starts_with?: Maybe<String>;
+  codigo_indec_ends_with?: Maybe<String>;
+  codigo_indec_not_ends_with?: Maybe<String>;
+  nombre?: Maybe<String>;
+  nombre_not?: Maybe<String>;
+  nombre_in?: Maybe<String[] | String>;
+  nombre_not_in?: Maybe<String[] | String>;
+  nombre_lt?: Maybe<String>;
+  nombre_lte?: Maybe<String>;
+  nombre_gt?: Maybe<String>;
+  nombre_gte?: Maybe<String>;
+  nombre_contains?: Maybe<String>;
+  nombre_not_contains?: Maybe<String>;
+  nombre_starts_with?: Maybe<String>;
+  nombre_not_starts_with?: Maybe<String>;
+  nombre_ends_with?: Maybe<String>;
+  nombre_not_ends_with?: Maybe<String>;
+  provincia?: Maybe<ProvinciaWhereInput>;
+  localidades_every?: Maybe<LocalidadWhereInput>;
+  localidades_some?: Maybe<LocalidadWhereInput>;
+  localidades_none?: Maybe<LocalidadWhereInput>;
+  AND?: Maybe<DepartamentoWhereInput[] | DepartamentoWhereInput>;
+  OR?: Maybe<DepartamentoWhereInput[] | DepartamentoWhereInput>;
+  NOT?: Maybe<DepartamentoWhereInput[] | DepartamentoWhereInput>;
+}
+
+export interface LocalidadCreateManyWithoutProvinciaInput {
+  create?: Maybe<
+    | LocalidadCreateWithoutProvinciaInput[]
+    | LocalidadCreateWithoutProvinciaInput
+  >;
+  connect?: Maybe<LocalidadWhereUniqueInput[] | LocalidadWhereUniqueInput>;
+}
+
+export interface LocalidadUpdateManyMutationInput {
+  codigo_indec?: Maybe<String>;
+  nombre?: Maybe<String>;
+  lat?: Maybe<Float>;
+  lon?: Maybe<Float>;
+  activo?: Maybe<Boolean>;
+}
+
+export interface DepartamentoCreateOneWithoutLocalidadesInput {
+  create?: Maybe<DepartamentoCreateWithoutLocalidadesInput>;
+  connect?: Maybe<DepartamentoWhereUniqueInput>;
+}
+
+export interface LocalidadUpdateManyWithWhereNestedInput {
+  where: LocalidadScalarWhereInput;
+  data: LocalidadUpdateManyDataInput;
+}
+
+export interface LocalidadCreateManyWithoutDepartamentoInput {
+  create?: Maybe<
+    | LocalidadCreateWithoutDepartamentoInput[]
+    | LocalidadCreateWithoutDepartamentoInput
+  >;
+  connect?: Maybe<LocalidadWhereUniqueInput[] | LocalidadWhereUniqueInput>;
+}
+
+export interface LocalidadUpdateManyDataInput {
+  codigo_indec?: Maybe<String>;
+  nombre?: Maybe<String>;
+  lat?: Maybe<Float>;
+  lon?: Maybe<Float>;
+  activo?: Maybe<Boolean>;
+}
+
+export interface ProvinciaCreateOneWithoutLocalidadesInput {
+  create?: Maybe<ProvinciaCreateWithoutLocalidadesInput>;
+  connect?: Maybe<ProvinciaWhereUniqueInput>;
+}
+
+export interface ProvinciaUpsertWithoutDepartamentosInput {
+  update: ProvinciaUpdateWithoutDepartamentosDataInput;
+  create: ProvinciaCreateWithoutDepartamentosInput;
+}
+
+export interface ProvinciaSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
   updatedFields_contains_every?: Maybe<String[] | String>;
   updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<LocalidadWhereInput>;
+  node?: Maybe<ProvinciaWhereInput>;
   AND?: Maybe<
-    LocalidadSubscriptionWhereInput[] | LocalidadSubscriptionWhereInput
+    ProvinciaSubscriptionWhereInput[] | ProvinciaSubscriptionWhereInput
   >;
   OR?: Maybe<
-    LocalidadSubscriptionWhereInput[] | LocalidadSubscriptionWhereInput
+    ProvinciaSubscriptionWhereInput[] | ProvinciaSubscriptionWhereInput
   >;
   NOT?: Maybe<
-    LocalidadSubscriptionWhereInput[] | LocalidadSubscriptionWhereInput
+    ProvinciaSubscriptionWhereInput[] | ProvinciaSubscriptionWhereInput
   >;
 }
 
-export interface ProvinciaCreateManyWithoutPaisInput {
+export interface LocalidadUpdateManyWithoutDepartamentoInput {
   create?: Maybe<
-    ProvinciaCreateWithoutPaisInput[] | ProvinciaCreateWithoutPaisInput
+    | LocalidadCreateWithoutDepartamentoInput[]
+    | LocalidadCreateWithoutDepartamentoInput
   >;
-  connect?: Maybe<ProvinciaWhereUniqueInput[] | ProvinciaWhereUniqueInput>;
+  delete?: Maybe<LocalidadWhereUniqueInput[] | LocalidadWhereUniqueInput>;
+  connect?: Maybe<LocalidadWhereUniqueInput[] | LocalidadWhereUniqueInput>;
+  set?: Maybe<LocalidadWhereUniqueInput[] | LocalidadWhereUniqueInput>;
+  disconnect?: Maybe<LocalidadWhereUniqueInput[] | LocalidadWhereUniqueInput>;
+  update?: Maybe<
+    | LocalidadUpdateWithWhereUniqueWithoutDepartamentoInput[]
+    | LocalidadUpdateWithWhereUniqueWithoutDepartamentoInput
+  >;
+  upsert?: Maybe<
+    | LocalidadUpsertWithWhereUniqueWithoutDepartamentoInput[]
+    | LocalidadUpsertWithWhereUniqueWithoutDepartamentoInput
+  >;
+  deleteMany?: Maybe<LocalidadScalarWhereInput[] | LocalidadScalarWhereInput>;
+  updateMany?: Maybe<
+    | LocalidadUpdateManyWithWhereNestedInput[]
+    | LocalidadUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface ProvinciaUpdateManyMutationInput {
+  codigo?: Maybe<String>;
+  codigo_indec?: Maybe<String>;
+  nombre?: Maybe<String>;
+  activo?: Maybe<Boolean>;
+}
+
+export interface LocalidadUpdateWithWhereUniqueWithoutDepartamentoInput {
+  where: LocalidadWhereUniqueInput;
+  data: LocalidadUpdateWithoutDepartamentoDataInput;
 }
 
 export interface PaisUpdateManyMutationInput {
@@ -673,13 +916,13 @@ export interface PaisUpdateManyMutationInput {
   activo?: Maybe<Boolean>;
 }
 
-export interface ProvinciaCreateWithoutPaisInput {
-  id?: Maybe<Int>;
-  codigo: String;
+export interface LocalidadUpdateWithoutDepartamentoDataInput {
   codigo_indec?: Maybe<String>;
-  nombre: String;
-  activo: Boolean;
-  localidades?: Maybe<LocalidadCreateManyWithoutProvinciaInput>;
+  nombre?: Maybe<String>;
+  provincia?: Maybe<ProvinciaUpdateOneRequiredWithoutLocalidadesInput>;
+  lat?: Maybe<Float>;
+  lon?: Maybe<Float>;
+  activo?: Maybe<Boolean>;
 }
 
 export interface ProvinciaScalarWhereInput {
@@ -740,50 +983,179 @@ export interface ProvinciaScalarWhereInput {
   NOT?: Maybe<ProvinciaScalarWhereInput[] | ProvinciaScalarWhereInput>;
 }
 
-export interface LocalidadCreateManyWithoutProvinciaInput {
-  create?: Maybe<
-    | LocalidadCreateWithoutProvinciaInput[]
-    | LocalidadCreateWithoutProvinciaInput
-  >;
-  connect?: Maybe<LocalidadWhereUniqueInput[] | LocalidadWhereUniqueInput>;
-}
-
-export interface LocalidadUpdateManyWithWhereNestedInput {
-  where: LocalidadScalarWhereInput;
-  data: LocalidadUpdateManyDataInput;
-}
-
-export interface ProvinciaCreateOneWithoutLocalidadesInput {
+export interface ProvinciaUpdateOneRequiredWithoutLocalidadesInput {
   create?: Maybe<ProvinciaCreateWithoutLocalidadesInput>;
+  update?: Maybe<ProvinciaUpdateWithoutLocalidadesDataInput>;
+  upsert?: Maybe<ProvinciaUpsertWithoutLocalidadesInput>;
   connect?: Maybe<ProvinciaWhereUniqueInput>;
 }
 
-export interface ProvinciaUpdateWithWhereUniqueWithoutPaisInput {
-  where: ProvinciaWhereUniqueInput;
-  data: ProvinciaUpdateWithoutPaisDataInput;
+export type ProvinciaWhereUniqueInput = AtLeastOne<{
+  id: Maybe<Int>;
+  codigo?: Maybe<String>;
+  codigo_indec?: Maybe<String>;
+}>;
+
+export interface ProvinciaUpdateWithoutLocalidadesDataInput {
+  pais?: Maybe<PaisUpdateOneRequiredWithoutProvinciasInput>;
+  codigo?: Maybe<String>;
+  codigo_indec?: Maybe<String>;
+  nombre?: Maybe<String>;
+  activo?: Maybe<Boolean>;
+  departamentos?: Maybe<DepartamentoUpdateManyWithoutProvinciaInput>;
 }
 
-export interface ProvinciaUpdateManyWithoutPaisInput {
+export interface ProvinciaCreateManyWithoutPaisInput {
   create?: Maybe<
     ProvinciaCreateWithoutPaisInput[] | ProvinciaCreateWithoutPaisInput
   >;
-  delete?: Maybe<ProvinciaWhereUniqueInput[] | ProvinciaWhereUniqueInput>;
   connect?: Maybe<ProvinciaWhereUniqueInput[] | ProvinciaWhereUniqueInput>;
-  set?: Maybe<ProvinciaWhereUniqueInput[] | ProvinciaWhereUniqueInput>;
-  disconnect?: Maybe<ProvinciaWhereUniqueInput[] | ProvinciaWhereUniqueInput>;
+}
+
+export interface DepartamentoUpdateManyWithoutProvinciaInput {
+  create?: Maybe<
+    | DepartamentoCreateWithoutProvinciaInput[]
+    | DepartamentoCreateWithoutProvinciaInput
+  >;
+  delete?: Maybe<DepartamentoWhereUniqueInput[] | DepartamentoWhereUniqueInput>;
+  connect?: Maybe<
+    DepartamentoWhereUniqueInput[] | DepartamentoWhereUniqueInput
+  >;
+  set?: Maybe<DepartamentoWhereUniqueInput[] | DepartamentoWhereUniqueInput>;
+  disconnect?: Maybe<
+    DepartamentoWhereUniqueInput[] | DepartamentoWhereUniqueInput
+  >;
   update?: Maybe<
-    | ProvinciaUpdateWithWhereUniqueWithoutPaisInput[]
-    | ProvinciaUpdateWithWhereUniqueWithoutPaisInput
+    | DepartamentoUpdateWithWhereUniqueWithoutProvinciaInput[]
+    | DepartamentoUpdateWithWhereUniqueWithoutProvinciaInput
   >;
   upsert?: Maybe<
-    | ProvinciaUpsertWithWhereUniqueWithoutPaisInput[]
-    | ProvinciaUpsertWithWhereUniqueWithoutPaisInput
+    | DepartamentoUpsertWithWhereUniqueWithoutProvinciaInput[]
+    | DepartamentoUpsertWithWhereUniqueWithoutProvinciaInput
   >;
-  deleteMany?: Maybe<ProvinciaScalarWhereInput[] | ProvinciaScalarWhereInput>;
+  deleteMany?: Maybe<
+    DepartamentoScalarWhereInput[] | DepartamentoScalarWhereInput
+  >;
   updateMany?: Maybe<
-    | ProvinciaUpdateManyWithWhereNestedInput[]
-    | ProvinciaUpdateManyWithWhereNestedInput
+    | DepartamentoUpdateManyWithWhereNestedInput[]
+    | DepartamentoUpdateManyWithWhereNestedInput
   >;
+}
+
+export interface ProvinciaCreateWithoutDepartamentosInput {
+  id?: Maybe<Int>;
+  pais: PaisCreateOneWithoutProvinciasInput;
+  codigo: String;
+  codigo_indec?: Maybe<String>;
+  nombre: String;
+  activo: Boolean;
+  localidades?: Maybe<LocalidadCreateManyWithoutProvinciaInput>;
+}
+
+export interface DepartamentoUpdateWithWhereUniqueWithoutProvinciaInput {
+  where: DepartamentoWhereUniqueInput;
+  data: DepartamentoUpdateWithoutProvinciaDataInput;
+}
+
+export interface LocalidadCreateWithoutProvinciaInput {
+  id?: Maybe<Int>;
+  codigo_indec?: Maybe<String>;
+  nombre: String;
+  departamento?: Maybe<DepartamentoCreateOneWithoutLocalidadesInput>;
+  lat?: Maybe<Float>;
+  lon?: Maybe<Float>;
+  activo: Boolean;
+}
+
+export interface DepartamentoUpdateWithoutProvinciaDataInput {
+  codigo_indec?: Maybe<String>;
+  nombre?: Maybe<String>;
+  localidades?: Maybe<LocalidadUpdateManyWithoutDepartamentoInput>;
+}
+
+export interface LocalidadCreateWithoutDepartamentoInput {
+  id?: Maybe<Int>;
+  codigo_indec?: Maybe<String>;
+  nombre: String;
+  provincia: ProvinciaCreateOneWithoutLocalidadesInput;
+  lat?: Maybe<Float>;
+  lon?: Maybe<Float>;
+  activo: Boolean;
+}
+
+export interface DepartamentoUpsertWithWhereUniqueWithoutProvinciaInput {
+  where: DepartamentoWhereUniqueInput;
+  update: DepartamentoUpdateWithoutProvinciaDataInput;
+  create: DepartamentoCreateWithoutProvinciaInput;
+}
+
+export interface LocalidadSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<LocalidadWhereInput>;
+  AND?: Maybe<
+    LocalidadSubscriptionWhereInput[] | LocalidadSubscriptionWhereInput
+  >;
+  OR?: Maybe<
+    LocalidadSubscriptionWhereInput[] | LocalidadSubscriptionWhereInput
+  >;
+  NOT?: Maybe<
+    LocalidadSubscriptionWhereInput[] | LocalidadSubscriptionWhereInput
+  >;
+}
+
+export interface DepartamentoScalarWhereInput {
+  id?: Maybe<Int>;
+  id_not?: Maybe<Int>;
+  id_in?: Maybe<Int[] | Int>;
+  id_not_in?: Maybe<Int[] | Int>;
+  id_lt?: Maybe<Int>;
+  id_lte?: Maybe<Int>;
+  id_gt?: Maybe<Int>;
+  id_gte?: Maybe<Int>;
+  codigo_indec?: Maybe<String>;
+  codigo_indec_not?: Maybe<String>;
+  codigo_indec_in?: Maybe<String[] | String>;
+  codigo_indec_not_in?: Maybe<String[] | String>;
+  codigo_indec_lt?: Maybe<String>;
+  codigo_indec_lte?: Maybe<String>;
+  codigo_indec_gt?: Maybe<String>;
+  codigo_indec_gte?: Maybe<String>;
+  codigo_indec_contains?: Maybe<String>;
+  codigo_indec_not_contains?: Maybe<String>;
+  codigo_indec_starts_with?: Maybe<String>;
+  codigo_indec_not_starts_with?: Maybe<String>;
+  codigo_indec_ends_with?: Maybe<String>;
+  codigo_indec_not_ends_with?: Maybe<String>;
+  nombre?: Maybe<String>;
+  nombre_not?: Maybe<String>;
+  nombre_in?: Maybe<String[] | String>;
+  nombre_not_in?: Maybe<String[] | String>;
+  nombre_lt?: Maybe<String>;
+  nombre_lte?: Maybe<String>;
+  nombre_gt?: Maybe<String>;
+  nombre_gte?: Maybe<String>;
+  nombre_contains?: Maybe<String>;
+  nombre_not_contains?: Maybe<String>;
+  nombre_starts_with?: Maybe<String>;
+  nombre_not_starts_with?: Maybe<String>;
+  nombre_ends_with?: Maybe<String>;
+  nombre_not_ends_with?: Maybe<String>;
+  AND?: Maybe<DepartamentoScalarWhereInput[] | DepartamentoScalarWhereInput>;
+  OR?: Maybe<DepartamentoScalarWhereInput[] | DepartamentoScalarWhereInput>;
+  NOT?: Maybe<DepartamentoScalarWhereInput[] | DepartamentoScalarWhereInput>;
+}
+
+export interface ProvinciaUpdateManyWithWhereNestedInput {
+  where: ProvinciaScalarWhereInput;
+  data: ProvinciaUpdateManyDataInput;
+}
+
+export interface DepartamentoUpdateManyWithWhereNestedInput {
+  where: DepartamentoScalarWhereInput;
+  data: DepartamentoUpdateManyDataInput;
 }
 
 export interface PaisUpdateInput {
@@ -793,78 +1165,91 @@ export interface PaisUpdateInput {
   provincias?: Maybe<ProvinciaUpdateManyWithoutPaisInput>;
 }
 
-export interface LocalidadCreateWithoutProvinciaInput {
-  id?: Maybe<Int>;
+export interface DepartamentoUpdateManyDataInput {
   codigo_indec?: Maybe<String>;
+  nombre?: Maybe<String>;
+}
+
+export interface PaisCreateWithoutProvinciasInput {
+  id?: Maybe<Int>;
+  codigo: String;
   nombre: String;
-  lat?: Maybe<Float>;
-  lon?: Maybe<Float>;
   activo: Boolean;
 }
 
-export interface ProvinciaSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<ProvinciaWhereInput>;
-  AND?: Maybe<
-    ProvinciaSubscriptionWhereInput[] | ProvinciaSubscriptionWhereInput
-  >;
-  OR?: Maybe<
-    ProvinciaSubscriptionWhereInput[] | ProvinciaSubscriptionWhereInput
-  >;
-  NOT?: Maybe<
-    ProvinciaSubscriptionWhereInput[] | ProvinciaSubscriptionWhereInput
-  >;
-}
-
-export interface LocalidadUpsertWithWhereUniqueWithoutProvinciaInput {
-  where: LocalidadWhereUniqueInput;
-  update: LocalidadUpdateWithoutProvinciaDataInput;
-  create: LocalidadCreateWithoutProvinciaInput;
-}
-
-export type ProvinciaWhereUniqueInput = AtLeastOne<{
-  id: Maybe<Int>;
-  codigo?: Maybe<String>;
-  codigo_indec?: Maybe<String>;
-}>;
-
-export interface ProvinciaUpdateManyDataInput {
-  codigo?: Maybe<String>;
+export interface LocalidadUpdateInput {
   codigo_indec?: Maybe<String>;
   nombre?: Maybe<String>;
+  provincia?: Maybe<ProvinciaUpdateOneRequiredWithoutLocalidadesInput>;
+  departamento?: Maybe<DepartamentoUpdateOneWithoutLocalidadesInput>;
+  lat?: Maybe<Float>;
+  lon?: Maybe<Float>;
   activo?: Maybe<Boolean>;
 }
 
-export interface ProvinciaUpdateInput {
-  pais?: Maybe<PaisUpdateOneRequiredWithoutProvinciasInput>;
+export interface DepartamentoUpdateManyMutationInput {
+  codigo_indec?: Maybe<String>;
+  nombre?: Maybe<String>;
+}
+
+export interface LocalidadUpsertWithWhereUniqueWithoutDepartamentoInput {
+  where: LocalidadWhereUniqueInput;
+  update: LocalidadUpdateWithoutDepartamentoDataInput;
+  create: LocalidadCreateWithoutDepartamentoInput;
+}
+
+export interface ProvinciaUpsertWithoutLocalidadesInput {
+  update: ProvinciaUpdateWithoutLocalidadesDataInput;
+  create: ProvinciaCreateWithoutLocalidadesInput;
+}
+
+export interface DepartamentoCreateWithoutLocalidadesInput {
+  id?: Maybe<Int>;
+  codigo_indec?: Maybe<String>;
+  nombre: String;
+  provincia: ProvinciaCreateOneWithoutDepartamentosInput;
+}
+
+export interface DepartamentoCreateInput {
+  id?: Maybe<Int>;
+  codigo_indec?: Maybe<String>;
+  nombre: String;
+  provincia: ProvinciaCreateOneWithoutDepartamentosInput;
+  localidades?: Maybe<LocalidadCreateManyWithoutDepartamentoInput>;
+}
+
+export interface ProvinciaUpdateWithoutPaisDataInput {
   codigo?: Maybe<String>;
   codigo_indec?: Maybe<String>;
   nombre?: Maybe<String>;
   activo?: Maybe<Boolean>;
   localidades?: Maybe<LocalidadUpdateManyWithoutProvinciaInput>;
+  departamentos?: Maybe<DepartamentoUpdateManyWithoutProvinciaInput>;
+}
+
+export interface ProvinciaCreateInput {
+  id?: Maybe<Int>;
+  pais: PaisCreateOneWithoutProvinciasInput;
+  codigo: String;
+  codigo_indec?: Maybe<String>;
+  nombre: String;
+  activo: Boolean;
+  localidades?: Maybe<LocalidadCreateManyWithoutProvinciaInput>;
+  departamentos?: Maybe<DepartamentoCreateManyWithoutProvinciaInput>;
+}
+
+export interface ProvinciaCreateWithoutLocalidadesInput {
+  id?: Maybe<Int>;
+  pais: PaisCreateOneWithoutProvinciasInput;
+  codigo: String;
+  codigo_indec?: Maybe<String>;
+  nombre: String;
+  activo: Boolean;
+  departamentos?: Maybe<DepartamentoCreateManyWithoutProvinciaInput>;
 }
 
 export interface NodeNode {
   id: ID_Output;
-}
-
-export interface BatchPayload {
-  count: Long;
-}
-
-export interface BatchPayloadPromise
-  extends Promise<BatchPayload>,
-    Fragmentable {
-  count: () => Promise<Long>;
-}
-
-export interface BatchPayloadSubscription
-  extends Promise<AsyncIterator<BatchPayload>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Long>>;
 }
 
 export interface ProvinciaPreviousValues {
@@ -895,20 +1280,122 @@ export interface ProvinciaPreviousValuesSubscription
   activo: () => Promise<AsyncIterator<Boolean>>;
 }
 
-export interface AggregateLocalidad {
+export interface LocalidadEdge {
+  node: Localidad;
+  cursor: String;
+}
+
+export interface LocalidadEdgePromise
+  extends Promise<LocalidadEdge>,
+    Fragmentable {
+  node: <T = LocalidadPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface LocalidadEdgeSubscription
+  extends Promise<AsyncIterator<LocalidadEdge>>,
+    Fragmentable {
+  node: <T = LocalidadSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface Localidad {
+  id: Int;
+  codigo_indec?: String;
+  nombre: String;
+  lat?: Float;
+  lon?: Float;
+  activo: Boolean;
+}
+
+export interface LocalidadPromise extends Promise<Localidad>, Fragmentable {
+  id: () => Promise<Int>;
+  codigo_indec: () => Promise<String>;
+  nombre: () => Promise<String>;
+  provincia: <T = ProvinciaPromise>() => T;
+  departamento: <T = DepartamentoPromise>() => T;
+  lat: () => Promise<Float>;
+  lon: () => Promise<Float>;
+  activo: () => Promise<Boolean>;
+}
+
+export interface LocalidadSubscription
+  extends Promise<AsyncIterator<Localidad>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<Int>>;
+  codigo_indec: () => Promise<AsyncIterator<String>>;
+  nombre: () => Promise<AsyncIterator<String>>;
+  provincia: <T = ProvinciaSubscription>() => T;
+  departamento: <T = DepartamentoSubscription>() => T;
+  lat: () => Promise<AsyncIterator<Float>>;
+  lon: () => Promise<AsyncIterator<Float>>;
+  activo: () => Promise<AsyncIterator<Boolean>>;
+}
+
+export interface LocalidadNullablePromise
+  extends Promise<Localidad | null>,
+    Fragmentable {
+  id: () => Promise<Int>;
+  codigo_indec: () => Promise<String>;
+  nombre: () => Promise<String>;
+  provincia: <T = ProvinciaPromise>() => T;
+  departamento: <T = DepartamentoPromise>() => T;
+  lat: () => Promise<Float>;
+  lon: () => Promise<Float>;
+  activo: () => Promise<Boolean>;
+}
+
+export interface LocalidadConnection {
+  pageInfo: PageInfo;
+  edges: LocalidadEdge[];
+}
+
+export interface LocalidadConnectionPromise
+  extends Promise<LocalidadConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<LocalidadEdge>>() => T;
+  aggregate: <T = AggregateLocalidadPromise>() => T;
+}
+
+export interface LocalidadConnectionSubscription
+  extends Promise<AsyncIterator<LocalidadConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<LocalidadEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateLocalidadSubscription>() => T;
+}
+
+export interface AggregateDepartamento {
   count: Int;
 }
 
-export interface AggregateLocalidadPromise
-  extends Promise<AggregateLocalidad>,
+export interface AggregateDepartamentoPromise
+  extends Promise<AggregateDepartamento>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregateLocalidadSubscription
-  extends Promise<AsyncIterator<AggregateLocalidad>>,
+export interface AggregateDepartamentoSubscription
+  extends Promise<AsyncIterator<AggregateDepartamento>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface BatchPayload {
+  count: Long;
+}
+
+export interface BatchPayloadPromise
+  extends Promise<BatchPayload>,
+    Fragmentable {
+  count: () => Promise<Long>;
+}
+
+export interface BatchPayloadSubscription
+  extends Promise<AsyncIterator<BatchPayload>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Long>>;
 }
 
 export interface Pais {
@@ -970,23 +1457,39 @@ export interface PaisNullablePromise
   }) => T;
 }
 
-export interface LocalidadEdge {
-  node: Localidad;
+export interface DepartamentoEdge {
+  node: Departamento;
   cursor: String;
 }
 
-export interface LocalidadEdgePromise
-  extends Promise<LocalidadEdge>,
+export interface DepartamentoEdgePromise
+  extends Promise<DepartamentoEdge>,
     Fragmentable {
-  node: <T = LocalidadPromise>() => T;
+  node: <T = DepartamentoPromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface LocalidadEdgeSubscription
-  extends Promise<AsyncIterator<LocalidadEdge>>,
+export interface DepartamentoEdgeSubscription
+  extends Promise<AsyncIterator<DepartamentoEdge>>,
     Fragmentable {
-  node: <T = LocalidadSubscription>() => T;
+  node: <T = DepartamentoSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateProvincia {
+  count: Int;
+}
+
+export interface AggregateProvinciaPromise
+  extends Promise<AggregateProvincia>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateProvinciaSubscription
+  extends Promise<AsyncIterator<AggregateProvincia>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface PageInfo {
@@ -1012,68 +1515,6 @@ export interface PageInfoSubscription
   endCursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface PaisPreviousValues {
-  id: Int;
-  codigo: String;
-  nombre: String;
-  activo: Boolean;
-}
-
-export interface PaisPreviousValuesPromise
-  extends Promise<PaisPreviousValues>,
-    Fragmentable {
-  id: () => Promise<Int>;
-  codigo: () => Promise<String>;
-  nombre: () => Promise<String>;
-  activo: () => Promise<Boolean>;
-}
-
-export interface PaisPreviousValuesSubscription
-  extends Promise<AsyncIterator<PaisPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<Int>>;
-  codigo: () => Promise<AsyncIterator<String>>;
-  nombre: () => Promise<AsyncIterator<String>>;
-  activo: () => Promise<AsyncIterator<Boolean>>;
-}
-
-export interface AggregateProvincia {
-  count: Int;
-}
-
-export interface AggregateProvinciaPromise
-  extends Promise<AggregateProvincia>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateProvinciaSubscription
-  extends Promise<AsyncIterator<AggregateProvincia>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface LocalidadConnection {
-  pageInfo: PageInfo;
-  edges: LocalidadEdge[];
-}
-
-export interface LocalidadConnectionPromise
-  extends Promise<LocalidadConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<LocalidadEdge>>() => T;
-  aggregate: <T = AggregateLocalidadPromise>() => T;
-}
-
-export interface LocalidadConnectionSubscription
-  extends Promise<AsyncIterator<LocalidadConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<LocalidadEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateLocalidadSubscription>() => T;
-}
-
 export interface ProvinciaConnection {
   pageInfo: PageInfo;
   edges: ProvinciaEdge[];
@@ -1095,6 +1536,27 @@ export interface ProvinciaConnectionSubscription
   aggregate: <T = AggregateProvinciaSubscription>() => T;
 }
 
+export interface DepartamentoConnection {
+  pageInfo: PageInfo;
+  edges: DepartamentoEdge[];
+}
+
+export interface DepartamentoConnectionPromise
+  extends Promise<DepartamentoConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<DepartamentoEdge>>() => T;
+  aggregate: <T = AggregateDepartamentoPromise>() => T;
+}
+
+export interface DepartamentoConnectionSubscription
+  extends Promise<AsyncIterator<DepartamentoConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<DepartamentoEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateDepartamentoSubscription>() => T;
+}
+
 export interface PaisEdge {
   node: Pais;
   cursor: String;
@@ -1109,6 +1571,160 @@ export interface PaisEdgeSubscription
   extends Promise<AsyncIterator<PaisEdge>>,
     Fragmentable {
   node: <T = PaisSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface PaisSubscriptionPayload {
+  mutation: MutationType;
+  node: Pais;
+  updatedFields: String[];
+  previousValues: PaisPreviousValues;
+}
+
+export interface PaisSubscriptionPayloadPromise
+  extends Promise<PaisSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = PaisPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = PaisPreviousValuesPromise>() => T;
+}
+
+export interface PaisSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<PaisSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = PaisSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = PaisPreviousValuesSubscription>() => T;
+}
+
+export interface Departamento {
+  id: Int;
+  codigo_indec?: String;
+  nombre: String;
+}
+
+export interface DepartamentoPromise
+  extends Promise<Departamento>,
+    Fragmentable {
+  id: () => Promise<Int>;
+  codigo_indec: () => Promise<String>;
+  nombre: () => Promise<String>;
+  provincia: <T = ProvinciaPromise>() => T;
+  localidades: <T = FragmentableArray<Localidad>>(args?: {
+    where?: LocalidadWhereInput;
+    orderBy?: LocalidadOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface DepartamentoSubscription
+  extends Promise<AsyncIterator<Departamento>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<Int>>;
+  codigo_indec: () => Promise<AsyncIterator<String>>;
+  nombre: () => Promise<AsyncIterator<String>>;
+  provincia: <T = ProvinciaSubscription>() => T;
+  localidades: <T = Promise<AsyncIterator<LocalidadSubscription>>>(args?: {
+    where?: LocalidadWhereInput;
+    orderBy?: LocalidadOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface DepartamentoNullablePromise
+  extends Promise<Departamento | null>,
+    Fragmentable {
+  id: () => Promise<Int>;
+  codigo_indec: () => Promise<String>;
+  nombre: () => Promise<String>;
+  provincia: <T = ProvinciaPromise>() => T;
+  localidades: <T = FragmentableArray<Localidad>>(args?: {
+    where?: LocalidadWhereInput;
+    orderBy?: LocalidadOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface DepartamentoSubscriptionPayload {
+  mutation: MutationType;
+  node: Departamento;
+  updatedFields: String[];
+  previousValues: DepartamentoPreviousValues;
+}
+
+export interface DepartamentoSubscriptionPayloadPromise
+  extends Promise<DepartamentoSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = DepartamentoPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = DepartamentoPreviousValuesPromise>() => T;
+}
+
+export interface DepartamentoSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<DepartamentoSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = DepartamentoSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = DepartamentoPreviousValuesSubscription>() => T;
+}
+
+export interface ProvinciaSubscriptionPayload {
+  mutation: MutationType;
+  node: Provincia;
+  updatedFields: String[];
+  previousValues: ProvinciaPreviousValues;
+}
+
+export interface ProvinciaSubscriptionPayloadPromise
+  extends Promise<ProvinciaSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ProvinciaPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ProvinciaPreviousValuesPromise>() => T;
+}
+
+export interface ProvinciaSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ProvinciaSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ProvinciaSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ProvinciaPreviousValuesSubscription>() => T;
+}
+
+export interface ProvinciaEdge {
+  node: Provincia;
+  cursor: String;
+}
+
+export interface ProvinciaEdgePromise
+  extends Promise<ProvinciaEdge>,
+    Fragmentable {
+  node: <T = ProvinciaPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ProvinciaEdgeSubscription
+  extends Promise<AsyncIterator<ProvinciaEdge>>,
+    Fragmentable {
+  node: <T = ProvinciaSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
@@ -1168,31 +1784,6 @@ export interface LocalidadSubscriptionPayloadSubscription
   previousValues: <T = LocalidadPreviousValuesSubscription>() => T;
 }
 
-export interface PaisSubscriptionPayload {
-  mutation: MutationType;
-  node: Pais;
-  updatedFields: String[];
-  previousValues: PaisPreviousValues;
-}
-
-export interface PaisSubscriptionPayloadPromise
-  extends Promise<PaisSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = PaisPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = PaisPreviousValuesPromise>() => T;
-}
-
-export interface PaisSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<PaisSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = PaisSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = PaisPreviousValuesSubscription>() => T;
-}
-
 export interface Provincia {
   id: Int;
   codigo: String;
@@ -1211,6 +1802,15 @@ export interface ProvinciaPromise extends Promise<Provincia>, Fragmentable {
   localidades: <T = FragmentableArray<Localidad>>(args?: {
     where?: LocalidadWhereInput;
     orderBy?: LocalidadOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  departamentos: <T = FragmentableArray<Departamento>>(args?: {
+    where?: DepartamentoWhereInput;
+    orderBy?: DepartamentoOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
@@ -1237,6 +1837,15 @@ export interface ProvinciaSubscription
     first?: Int;
     last?: Int;
   }) => T;
+  departamentos: <T = Promise<AsyncIterator<DepartamentoSubscription>>>(args?: {
+    where?: DepartamentoWhereInput;
+    orderBy?: DepartamentoOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
 export interface ProvinciaNullablePromise
@@ -1257,6 +1866,94 @@ export interface ProvinciaNullablePromise
     first?: Int;
     last?: Int;
   }) => T;
+  departamentos: <T = FragmentableArray<Departamento>>(args?: {
+    where?: DepartamentoWhereInput;
+    orderBy?: DepartamentoOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface DepartamentoPreviousValues {
+  id: Int;
+  codigo_indec?: String;
+  nombre: String;
+}
+
+export interface DepartamentoPreviousValuesPromise
+  extends Promise<DepartamentoPreviousValues>,
+    Fragmentable {
+  id: () => Promise<Int>;
+  codigo_indec: () => Promise<String>;
+  nombre: () => Promise<String>;
+}
+
+export interface DepartamentoPreviousValuesSubscription
+  extends Promise<AsyncIterator<DepartamentoPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<Int>>;
+  codigo_indec: () => Promise<AsyncIterator<String>>;
+  nombre: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregatePais {
+  count: Int;
+}
+
+export interface AggregatePaisPromise
+  extends Promise<AggregatePais>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregatePaisSubscription
+  extends Promise<AsyncIterator<AggregatePais>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface PaisPreviousValues {
+  id: Int;
+  codigo: String;
+  nombre: String;
+  activo: Boolean;
+}
+
+export interface PaisPreviousValuesPromise
+  extends Promise<PaisPreviousValues>,
+    Fragmentable {
+  id: () => Promise<Int>;
+  codigo: () => Promise<String>;
+  nombre: () => Promise<String>;
+  activo: () => Promise<Boolean>;
+}
+
+export interface PaisPreviousValuesSubscription
+  extends Promise<AsyncIterator<PaisPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<Int>>;
+  codigo: () => Promise<AsyncIterator<String>>;
+  nombre: () => Promise<AsyncIterator<String>>;
+  activo: () => Promise<AsyncIterator<Boolean>>;
+}
+
+export interface AggregateLocalidad {
+  count: Int;
+}
+
+export interface AggregateLocalidadPromise
+  extends Promise<AggregateLocalidad>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateLocalidadSubscription
+  extends Promise<AsyncIterator<AggregateLocalidad>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface PaisConnection {
@@ -1280,131 +1977,28 @@ export interface PaisConnectionSubscription
   aggregate: <T = AggregatePaisSubscription>() => T;
 }
 
-export interface AggregatePais {
-  count: Int;
-}
+/*
+The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
+*/
+export type Float = number;
 
-export interface AggregatePaisPromise
-  extends Promise<AggregatePais>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregatePaisSubscription
-  extends Promise<AsyncIterator<AggregatePais>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface ProvinciaEdge {
-  node: Provincia;
-  cursor: String;
-}
-
-export interface ProvinciaEdgePromise
-  extends Promise<ProvinciaEdge>,
-    Fragmentable {
-  node: <T = ProvinciaPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface ProvinciaEdgeSubscription
-  extends Promise<AsyncIterator<ProvinciaEdge>>,
-    Fragmentable {
-  node: <T = ProvinciaSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface ProvinciaSubscriptionPayload {
-  mutation: MutationType;
-  node: Provincia;
-  updatedFields: String[];
-  previousValues: ProvinciaPreviousValues;
-}
-
-export interface ProvinciaSubscriptionPayloadPromise
-  extends Promise<ProvinciaSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = ProvinciaPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = ProvinciaPreviousValuesPromise>() => T;
-}
-
-export interface ProvinciaSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<ProvinciaSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = ProvinciaSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = ProvinciaPreviousValuesSubscription>() => T;
-}
-
-export interface Localidad {
-  id: Int;
-  codigo_indec?: String;
-  nombre: String;
-  lat?: Float;
-  lon?: Float;
-  activo: Boolean;
-}
-
-export interface LocalidadPromise extends Promise<Localidad>, Fragmentable {
-  id: () => Promise<Int>;
-  codigo_indec: () => Promise<String>;
-  nombre: () => Promise<String>;
-  provincia: <T = ProvinciaPromise>() => T;
-  lat: () => Promise<Float>;
-  lon: () => Promise<Float>;
-  activo: () => Promise<Boolean>;
-}
-
-export interface LocalidadSubscription
-  extends Promise<AsyncIterator<Localidad>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<Int>>;
-  codigo_indec: () => Promise<AsyncIterator<String>>;
-  nombre: () => Promise<AsyncIterator<String>>;
-  provincia: <T = ProvinciaSubscription>() => T;
-  lat: () => Promise<AsyncIterator<Float>>;
-  lon: () => Promise<AsyncIterator<Float>>;
-  activo: () => Promise<AsyncIterator<Boolean>>;
-}
-
-export interface LocalidadNullablePromise
-  extends Promise<Localidad | null>,
-    Fragmentable {
-  id: () => Promise<Int>;
-  codigo_indec: () => Promise<String>;
-  nombre: () => Promise<String>;
-  provincia: <T = ProvinciaPromise>() => T;
-  lat: () => Promise<Float>;
-  lon: () => Promise<Float>;
-  activo: () => Promise<Boolean>;
-}
+export type Long = string;
 
 /*
 The `Boolean` scalar type represents `true` or `false`.
 */
 export type Boolean = boolean;
 
-export type Long = string;
+/*
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
+*/
+export type Int = number;
 
 /*
 The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
 */
 export type ID_Input = string | number;
 export type ID_Output = string;
-
-/*
-The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
-*/
-export type Float = number;
-
-/*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
-*/
-export type Int = number;
 
 /*
 The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
@@ -1426,6 +2020,10 @@ export const models: Model[] = [
   },
   {
     name: "Localidad",
+    embedded: false
+  },
+  {
+    name: "Departamento",
     embedded: false
   }
 ];

@@ -14,6 +14,7 @@ type Provincia @db(name: "provincia") {
     nombre: String!
     activo: Boolean!
     localidades: [Localidad]
+    departamentos: [Departamento]
 }
 
 type Localidad @db(name: "localidad") {
@@ -21,7 +22,16 @@ type Localidad @db(name: "localidad") {
     codigo_indec: String @unique
     nombre: String!
     provincia: Provincia! @db(name: "provincia_id")
+    departamento: Departamento @db(name: "departamento_id")
     lat: Float
     lon: Float
     activo: Boolean!
+}
+
+type Departamento @db(name: "departamento") {
+    id: Int! @id
+    codigo_indec: String @unique
+    nombre: String!
+    provincia: Provincia! @db(name: "provincia_id")
+    localidades: [Localidad]
 }

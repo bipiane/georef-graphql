@@ -1,5 +1,9 @@
 # source: http://localhost:4466/georef/dev
-# timestamp: Sat Jul 06 2019 14:25:03 GMT-0300 (Argentina Standard Time)
+# timestamp: Sat Jul 06 2019 14:40:51 GMT-0300 (Argentina Standard Time)
+
+type AggregateDepartamento {
+  count: Int!
+}
 
 type AggregateLocalidad {
   count: Int!
@@ -18,11 +22,426 @@ type BatchPayload {
   count: Long!
 }
 
+type Departamento {
+  id: Int!
+  codigo_indec: String
+  nombre: String!
+  provincia: Provincia!
+  localidades(where: LocalidadWhereInput, orderBy: LocalidadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Localidad!]
+}
+
+"""A connection to a list of items."""
+type DepartamentoConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [DepartamentoEdge]!
+  aggregate: AggregateDepartamento!
+}
+
+input DepartamentoCreateInput {
+  codigo_indec: String
+  nombre: String!
+  provincia: ProvinciaCreateOneWithoutDepartamentosInput!
+  localidades: LocalidadCreateManyWithoutDepartamentoInput
+}
+
+input DepartamentoCreateManyWithoutProvinciaInput {
+  create: [DepartamentoCreateWithoutProvinciaInput!]
+  connect: [DepartamentoWhereUniqueInput!]
+}
+
+input DepartamentoCreateOneWithoutLocalidadesInput {
+  create: DepartamentoCreateWithoutLocalidadesInput
+  connect: DepartamentoWhereUniqueInput
+}
+
+input DepartamentoCreateWithoutLocalidadesInput {
+  codigo_indec: String
+  nombre: String!
+  provincia: ProvinciaCreateOneWithoutDepartamentosInput!
+}
+
+input DepartamentoCreateWithoutProvinciaInput {
+  codigo_indec: String
+  nombre: String!
+  localidades: LocalidadCreateManyWithoutDepartamentoInput
+}
+
+"""An edge in a connection."""
+type DepartamentoEdge {
+  """The item at the end of the edge."""
+  node: Departamento!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum DepartamentoOrderByInput {
+  id_ASC
+  id_DESC
+  codigo_indec_ASC
+  codigo_indec_DESC
+  nombre_ASC
+  nombre_DESC
+}
+
+type DepartamentoPreviousValues {
+  id: Int!
+  codigo_indec: String
+  nombre: String!
+}
+
+input DepartamentoScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [DepartamentoScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [DepartamentoScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [DepartamentoScalarWhereInput!]
+  id: Int
+
+  """All values that are not equal to given value."""
+  id_not: Int
+
+  """All values that are contained in given list."""
+  id_in: [Int!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [Int!]
+
+  """All values less than the given value."""
+  id_lt: Int
+
+  """All values less than or equal the given value."""
+  id_lte: Int
+
+  """All values greater than the given value."""
+  id_gt: Int
+
+  """All values greater than or equal the given value."""
+  id_gte: Int
+  codigo_indec: String
+
+  """All values that are not equal to given value."""
+  codigo_indec_not: String
+
+  """All values that are contained in given list."""
+  codigo_indec_in: [String!]
+
+  """All values that are not contained in given list."""
+  codigo_indec_not_in: [String!]
+
+  """All values less than the given value."""
+  codigo_indec_lt: String
+
+  """All values less than or equal the given value."""
+  codigo_indec_lte: String
+
+  """All values greater than the given value."""
+  codigo_indec_gt: String
+
+  """All values greater than or equal the given value."""
+  codigo_indec_gte: String
+
+  """All values containing the given string."""
+  codigo_indec_contains: String
+
+  """All values not containing the given string."""
+  codigo_indec_not_contains: String
+
+  """All values starting with the given string."""
+  codigo_indec_starts_with: String
+
+  """All values not starting with the given string."""
+  codigo_indec_not_starts_with: String
+
+  """All values ending with the given string."""
+  codigo_indec_ends_with: String
+
+  """All values not ending with the given string."""
+  codigo_indec_not_ends_with: String
+  nombre: String
+
+  """All values that are not equal to given value."""
+  nombre_not: String
+
+  """All values that are contained in given list."""
+  nombre_in: [String!]
+
+  """All values that are not contained in given list."""
+  nombre_not_in: [String!]
+
+  """All values less than the given value."""
+  nombre_lt: String
+
+  """All values less than or equal the given value."""
+  nombre_lte: String
+
+  """All values greater than the given value."""
+  nombre_gt: String
+
+  """All values greater than or equal the given value."""
+  nombre_gte: String
+
+  """All values containing the given string."""
+  nombre_contains: String
+
+  """All values not containing the given string."""
+  nombre_not_contains: String
+
+  """All values starting with the given string."""
+  nombre_starts_with: String
+
+  """All values not starting with the given string."""
+  nombre_not_starts_with: String
+
+  """All values ending with the given string."""
+  nombre_ends_with: String
+
+  """All values not ending with the given string."""
+  nombre_not_ends_with: String
+}
+
+type DepartamentoSubscriptionPayload {
+  mutation: MutationType!
+  node: Departamento
+  updatedFields: [String!]
+  previousValues: DepartamentoPreviousValues
+}
+
+input DepartamentoSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [DepartamentoSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [DepartamentoSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [DepartamentoSubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: DepartamentoWhereInput
+}
+
+input DepartamentoUpdateInput {
+  codigo_indec: String
+  nombre: String
+  provincia: ProvinciaUpdateOneRequiredWithoutDepartamentosInput
+  localidades: LocalidadUpdateManyWithoutDepartamentoInput
+}
+
+input DepartamentoUpdateManyDataInput {
+  codigo_indec: String
+  nombre: String
+}
+
+input DepartamentoUpdateManyMutationInput {
+  codigo_indec: String
+  nombre: String
+}
+
+input DepartamentoUpdateManyWithoutProvinciaInput {
+  create: [DepartamentoCreateWithoutProvinciaInput!]
+  connect: [DepartamentoWhereUniqueInput!]
+  set: [DepartamentoWhereUniqueInput!]
+  disconnect: [DepartamentoWhereUniqueInput!]
+  delete: [DepartamentoWhereUniqueInput!]
+  update: [DepartamentoUpdateWithWhereUniqueWithoutProvinciaInput!]
+  updateMany: [DepartamentoUpdateManyWithWhereNestedInput!]
+  deleteMany: [DepartamentoScalarWhereInput!]
+  upsert: [DepartamentoUpsertWithWhereUniqueWithoutProvinciaInput!]
+}
+
+input DepartamentoUpdateManyWithWhereNestedInput {
+  where: DepartamentoScalarWhereInput!
+  data: DepartamentoUpdateManyDataInput!
+}
+
+input DepartamentoUpdateOneWithoutLocalidadesInput {
+  create: DepartamentoCreateWithoutLocalidadesInput
+  connect: DepartamentoWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: DepartamentoUpdateWithoutLocalidadesDataInput
+  upsert: DepartamentoUpsertWithoutLocalidadesInput
+}
+
+input DepartamentoUpdateWithoutLocalidadesDataInput {
+  codigo_indec: String
+  nombre: String
+  provincia: ProvinciaUpdateOneRequiredWithoutDepartamentosInput
+}
+
+input DepartamentoUpdateWithoutProvinciaDataInput {
+  codigo_indec: String
+  nombre: String
+  localidades: LocalidadUpdateManyWithoutDepartamentoInput
+}
+
+input DepartamentoUpdateWithWhereUniqueWithoutProvinciaInput {
+  where: DepartamentoWhereUniqueInput!
+  data: DepartamentoUpdateWithoutProvinciaDataInput!
+}
+
+input DepartamentoUpsertWithoutLocalidadesInput {
+  update: DepartamentoUpdateWithoutLocalidadesDataInput!
+  create: DepartamentoCreateWithoutLocalidadesInput!
+}
+
+input DepartamentoUpsertWithWhereUniqueWithoutProvinciaInput {
+  where: DepartamentoWhereUniqueInput!
+  update: DepartamentoUpdateWithoutProvinciaDataInput!
+  create: DepartamentoCreateWithoutProvinciaInput!
+}
+
+input DepartamentoWhereInput {
+  """Logical AND on all given filters."""
+  AND: [DepartamentoWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [DepartamentoWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [DepartamentoWhereInput!]
+  id: Int
+
+  """All values that are not equal to given value."""
+  id_not: Int
+
+  """All values that are contained in given list."""
+  id_in: [Int!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [Int!]
+
+  """All values less than the given value."""
+  id_lt: Int
+
+  """All values less than or equal the given value."""
+  id_lte: Int
+
+  """All values greater than the given value."""
+  id_gt: Int
+
+  """All values greater than or equal the given value."""
+  id_gte: Int
+  codigo_indec: String
+
+  """All values that are not equal to given value."""
+  codigo_indec_not: String
+
+  """All values that are contained in given list."""
+  codigo_indec_in: [String!]
+
+  """All values that are not contained in given list."""
+  codigo_indec_not_in: [String!]
+
+  """All values less than the given value."""
+  codigo_indec_lt: String
+
+  """All values less than or equal the given value."""
+  codigo_indec_lte: String
+
+  """All values greater than the given value."""
+  codigo_indec_gt: String
+
+  """All values greater than or equal the given value."""
+  codigo_indec_gte: String
+
+  """All values containing the given string."""
+  codigo_indec_contains: String
+
+  """All values not containing the given string."""
+  codigo_indec_not_contains: String
+
+  """All values starting with the given string."""
+  codigo_indec_starts_with: String
+
+  """All values not starting with the given string."""
+  codigo_indec_not_starts_with: String
+
+  """All values ending with the given string."""
+  codigo_indec_ends_with: String
+
+  """All values not ending with the given string."""
+  codigo_indec_not_ends_with: String
+  nombre: String
+
+  """All values that are not equal to given value."""
+  nombre_not: String
+
+  """All values that are contained in given list."""
+  nombre_in: [String!]
+
+  """All values that are not contained in given list."""
+  nombre_not_in: [String!]
+
+  """All values less than the given value."""
+  nombre_lt: String
+
+  """All values less than or equal the given value."""
+  nombre_lte: String
+
+  """All values greater than the given value."""
+  nombre_gt: String
+
+  """All values greater than or equal the given value."""
+  nombre_gte: String
+
+  """All values containing the given string."""
+  nombre_contains: String
+
+  """All values not containing the given string."""
+  nombre_not_contains: String
+
+  """All values starting with the given string."""
+  nombre_starts_with: String
+
+  """All values not starting with the given string."""
+  nombre_not_starts_with: String
+
+  """All values ending with the given string."""
+  nombre_ends_with: String
+
+  """All values not ending with the given string."""
+  nombre_not_ends_with: String
+  provincia: ProvinciaWhereInput
+  localidades_every: LocalidadWhereInput
+  localidades_some: LocalidadWhereInput
+  localidades_none: LocalidadWhereInput
+}
+
+input DepartamentoWhereUniqueInput {
+  id: Int
+  codigo_indec: String
+}
+
 type Localidad {
   id: Int!
   codigo_indec: String
   nombre: String!
   provincia: Provincia!
+  departamento: Departamento
   lat: Float
   lon: Float
   activo: Boolean!
@@ -45,11 +464,26 @@ input LocalidadCreateInput {
   lon: Float
   activo: Boolean!
   provincia: ProvinciaCreateOneWithoutLocalidadesInput!
+  departamento: DepartamentoCreateOneWithoutLocalidadesInput
+}
+
+input LocalidadCreateManyWithoutDepartamentoInput {
+  create: [LocalidadCreateWithoutDepartamentoInput!]
+  connect: [LocalidadWhereUniqueInput!]
 }
 
 input LocalidadCreateManyWithoutProvinciaInput {
   create: [LocalidadCreateWithoutProvinciaInput!]
   connect: [LocalidadWhereUniqueInput!]
+}
+
+input LocalidadCreateWithoutDepartamentoInput {
+  codigo_indec: String
+  nombre: String!
+  lat: Float
+  lon: Float
+  activo: Boolean!
+  provincia: ProvinciaCreateOneWithoutLocalidadesInput!
 }
 
 input LocalidadCreateWithoutProvinciaInput {
@@ -58,6 +492,7 @@ input LocalidadCreateWithoutProvinciaInput {
   lat: Float
   lon: Float
   activo: Boolean!
+  departamento: DepartamentoCreateOneWithoutLocalidadesInput
 }
 
 """An edge in a connection."""
@@ -298,6 +733,7 @@ input LocalidadUpdateInput {
   lon: Float
   activo: Boolean
   provincia: ProvinciaUpdateOneRequiredWithoutLocalidadesInput
+  departamento: DepartamentoUpdateOneWithoutLocalidadesInput
 }
 
 input LocalidadUpdateManyDataInput {
@@ -314,6 +750,18 @@ input LocalidadUpdateManyMutationInput {
   lat: Float
   lon: Float
   activo: Boolean
+}
+
+input LocalidadUpdateManyWithoutDepartamentoInput {
+  create: [LocalidadCreateWithoutDepartamentoInput!]
+  connect: [LocalidadWhereUniqueInput!]
+  set: [LocalidadWhereUniqueInput!]
+  disconnect: [LocalidadWhereUniqueInput!]
+  delete: [LocalidadWhereUniqueInput!]
+  update: [LocalidadUpdateWithWhereUniqueWithoutDepartamentoInput!]
+  updateMany: [LocalidadUpdateManyWithWhereNestedInput!]
+  deleteMany: [LocalidadScalarWhereInput!]
+  upsert: [LocalidadUpsertWithWhereUniqueWithoutDepartamentoInput!]
 }
 
 input LocalidadUpdateManyWithoutProvinciaInput {
@@ -333,17 +781,38 @@ input LocalidadUpdateManyWithWhereNestedInput {
   data: LocalidadUpdateManyDataInput!
 }
 
+input LocalidadUpdateWithoutDepartamentoDataInput {
+  codigo_indec: String
+  nombre: String
+  lat: Float
+  lon: Float
+  activo: Boolean
+  provincia: ProvinciaUpdateOneRequiredWithoutLocalidadesInput
+}
+
 input LocalidadUpdateWithoutProvinciaDataInput {
   codigo_indec: String
   nombre: String
   lat: Float
   lon: Float
   activo: Boolean
+  departamento: DepartamentoUpdateOneWithoutLocalidadesInput
+}
+
+input LocalidadUpdateWithWhereUniqueWithoutDepartamentoInput {
+  where: LocalidadWhereUniqueInput!
+  data: LocalidadUpdateWithoutDepartamentoDataInput!
 }
 
 input LocalidadUpdateWithWhereUniqueWithoutProvinciaInput {
   where: LocalidadWhereUniqueInput!
   data: LocalidadUpdateWithoutProvinciaDataInput!
+}
+
+input LocalidadUpsertWithWhereUniqueWithoutDepartamentoInput {
+  where: LocalidadWhereUniqueInput!
+  update: LocalidadUpdateWithoutDepartamentoDataInput!
+  create: LocalidadCreateWithoutDepartamentoInput!
 }
 
 input LocalidadUpsertWithWhereUniqueWithoutProvinciaInput {
@@ -512,6 +981,7 @@ input LocalidadWhereInput {
   """All values that are not equal to given value."""
   activo_not: Boolean
   provincia: ProvinciaWhereInput
+  departamento: DepartamentoWhereInput
 }
 
 input LocalidadWhereUniqueInput {
@@ -529,21 +999,27 @@ type Mutation {
   createPais(data: PaisCreateInput!): Pais!
   createProvincia(data: ProvinciaCreateInput!): Provincia!
   createLocalidad(data: LocalidadCreateInput!): Localidad!
+  createDepartamento(data: DepartamentoCreateInput!): Departamento!
   updatePais(data: PaisUpdateInput!, where: PaisWhereUniqueInput!): Pais
   updateProvincia(data: ProvinciaUpdateInput!, where: ProvinciaWhereUniqueInput!): Provincia
   updateLocalidad(data: LocalidadUpdateInput!, where: LocalidadWhereUniqueInput!): Localidad
+  updateDepartamento(data: DepartamentoUpdateInput!, where: DepartamentoWhereUniqueInput!): Departamento
   deletePais(where: PaisWhereUniqueInput!): Pais
   deleteProvincia(where: ProvinciaWhereUniqueInput!): Provincia
   deleteLocalidad(where: LocalidadWhereUniqueInput!): Localidad
+  deleteDepartamento(where: DepartamentoWhereUniqueInput!): Departamento
   upsertPais(where: PaisWhereUniqueInput!, create: PaisCreateInput!, update: PaisUpdateInput!): Pais!
   upsertProvincia(where: ProvinciaWhereUniqueInput!, create: ProvinciaCreateInput!, update: ProvinciaUpdateInput!): Provincia!
   upsertLocalidad(where: LocalidadWhereUniqueInput!, create: LocalidadCreateInput!, update: LocalidadUpdateInput!): Localidad!
+  upsertDepartamento(where: DepartamentoWhereUniqueInput!, create: DepartamentoCreateInput!, update: DepartamentoUpdateInput!): Departamento!
   updateManyPaises(data: PaisUpdateManyMutationInput!, where: PaisWhereInput): BatchPayload!
   updateManyProvincias(data: ProvinciaUpdateManyMutationInput!, where: ProvinciaWhereInput): BatchPayload!
   updateManyLocalidads(data: LocalidadUpdateManyMutationInput!, where: LocalidadWhereInput): BatchPayload!
+  updateManyDepartamentoes(data: DepartamentoUpdateManyMutationInput!, where: DepartamentoWhereInput): BatchPayload!
   deleteManyPaises(where: PaisWhereInput): BatchPayload!
   deleteManyProvincias(where: ProvinciaWhereInput): BatchPayload!
   deleteManyLocalidads(where: LocalidadWhereInput): BatchPayload!
+  deleteManyDepartamentoes(where: DepartamentoWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -837,6 +1313,7 @@ type Provincia {
   nombre: String!
   activo: Boolean!
   localidades(where: LocalidadWhereInput, orderBy: LocalidadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Localidad!]
+  departamentos(where: DepartamentoWhereInput, orderBy: DepartamentoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Departamento!]
 }
 
 """A connection to a list of items."""
@@ -856,6 +1333,7 @@ input ProvinciaCreateInput {
   activo: Boolean!
   pais: PaisCreateOneWithoutProvinciasInput!
   localidades: LocalidadCreateManyWithoutProvinciaInput
+  departamentos: DepartamentoCreateManyWithoutProvinciaInput
 }
 
 input ProvinciaCreateManyWithoutPaisInput {
@@ -863,9 +1341,23 @@ input ProvinciaCreateManyWithoutPaisInput {
   connect: [ProvinciaWhereUniqueInput!]
 }
 
+input ProvinciaCreateOneWithoutDepartamentosInput {
+  create: ProvinciaCreateWithoutDepartamentosInput
+  connect: ProvinciaWhereUniqueInput
+}
+
 input ProvinciaCreateOneWithoutLocalidadesInput {
   create: ProvinciaCreateWithoutLocalidadesInput
   connect: ProvinciaWhereUniqueInput
+}
+
+input ProvinciaCreateWithoutDepartamentosInput {
+  codigo: String!
+  codigo_indec: String
+  nombre: String!
+  activo: Boolean!
+  pais: PaisCreateOneWithoutProvinciasInput!
+  localidades: LocalidadCreateManyWithoutProvinciaInput
 }
 
 input ProvinciaCreateWithoutLocalidadesInput {
@@ -874,6 +1366,7 @@ input ProvinciaCreateWithoutLocalidadesInput {
   nombre: String!
   activo: Boolean!
   pais: PaisCreateOneWithoutProvinciasInput!
+  departamentos: DepartamentoCreateManyWithoutProvinciaInput
 }
 
 input ProvinciaCreateWithoutPaisInput {
@@ -882,6 +1375,7 @@ input ProvinciaCreateWithoutPaisInput {
   nombre: String!
   activo: Boolean!
   localidades: LocalidadCreateManyWithoutProvinciaInput
+  departamentos: DepartamentoCreateManyWithoutProvinciaInput
 }
 
 """An edge in a connection."""
@@ -1115,6 +1609,7 @@ input ProvinciaUpdateInput {
   activo: Boolean
   pais: PaisUpdateOneRequiredWithoutProvinciasInput
   localidades: LocalidadUpdateManyWithoutProvinciaInput
+  departamentos: DepartamentoUpdateManyWithoutProvinciaInput
 }
 
 input ProvinciaUpdateManyDataInput {
@@ -1148,11 +1643,27 @@ input ProvinciaUpdateManyWithWhereNestedInput {
   data: ProvinciaUpdateManyDataInput!
 }
 
+input ProvinciaUpdateOneRequiredWithoutDepartamentosInput {
+  create: ProvinciaCreateWithoutDepartamentosInput
+  connect: ProvinciaWhereUniqueInput
+  update: ProvinciaUpdateWithoutDepartamentosDataInput
+  upsert: ProvinciaUpsertWithoutDepartamentosInput
+}
+
 input ProvinciaUpdateOneRequiredWithoutLocalidadesInput {
   create: ProvinciaCreateWithoutLocalidadesInput
   connect: ProvinciaWhereUniqueInput
   update: ProvinciaUpdateWithoutLocalidadesDataInput
   upsert: ProvinciaUpsertWithoutLocalidadesInput
+}
+
+input ProvinciaUpdateWithoutDepartamentosDataInput {
+  codigo: String
+  codigo_indec: String
+  nombre: String
+  activo: Boolean
+  pais: PaisUpdateOneRequiredWithoutProvinciasInput
+  localidades: LocalidadUpdateManyWithoutProvinciaInput
 }
 
 input ProvinciaUpdateWithoutLocalidadesDataInput {
@@ -1161,6 +1672,7 @@ input ProvinciaUpdateWithoutLocalidadesDataInput {
   nombre: String
   activo: Boolean
   pais: PaisUpdateOneRequiredWithoutProvinciasInput
+  departamentos: DepartamentoUpdateManyWithoutProvinciaInput
 }
 
 input ProvinciaUpdateWithoutPaisDataInput {
@@ -1169,11 +1681,17 @@ input ProvinciaUpdateWithoutPaisDataInput {
   nombre: String
   activo: Boolean
   localidades: LocalidadUpdateManyWithoutProvinciaInput
+  departamentos: DepartamentoUpdateManyWithoutProvinciaInput
 }
 
 input ProvinciaUpdateWithWhereUniqueWithoutPaisInput {
   where: ProvinciaWhereUniqueInput!
   data: ProvinciaUpdateWithoutPaisDataInput!
+}
+
+input ProvinciaUpsertWithoutDepartamentosInput {
+  update: ProvinciaUpdateWithoutDepartamentosDataInput!
+  create: ProvinciaCreateWithoutDepartamentosInput!
 }
 
 input ProvinciaUpsertWithoutLocalidadesInput {
@@ -1346,6 +1864,9 @@ input ProvinciaWhereInput {
   localidades_every: LocalidadWhereInput
   localidades_some: LocalidadWhereInput
   localidades_none: LocalidadWhereInput
+  departamentos_every: DepartamentoWhereInput
+  departamentos_some: DepartamentoWhereInput
+  departamentos_none: DepartamentoWhereInput
 }
 
 input ProvinciaWhereUniqueInput {
@@ -1358,12 +1879,15 @@ type Query {
   paises(where: PaisWhereInput, orderBy: PaisOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Pais]!
   provincias(where: ProvinciaWhereInput, orderBy: ProvinciaOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Provincia]!
   localidads(where: LocalidadWhereInput, orderBy: LocalidadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Localidad]!
+  departamentoes(where: DepartamentoWhereInput, orderBy: DepartamentoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Departamento]!
   pais(where: PaisWhereUniqueInput!): Pais
   provincia(where: ProvinciaWhereUniqueInput!): Provincia
   localidad(where: LocalidadWhereUniqueInput!): Localidad
+  departamento(where: DepartamentoWhereUniqueInput!): Departamento
   paisesConnection(where: PaisWhereInput, orderBy: PaisOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PaisConnection!
   provinciasConnection(where: ProvinciaWhereInput, orderBy: ProvinciaOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProvinciaConnection!
   localidadsConnection(where: LocalidadWhereInput, orderBy: LocalidadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LocalidadConnection!
+  departamentoesConnection(where: DepartamentoWhereInput, orderBy: DepartamentoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): DepartamentoConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -1376,4 +1900,5 @@ type Subscription {
   pais(where: PaisSubscriptionWhereInput): PaisSubscriptionPayload
   provincia(where: ProvinciaSubscriptionWhereInput): ProvinciaSubscriptionPayload
   localidad(where: LocalidadSubscriptionWhereInput): LocalidadSubscriptionPayload
+  departamento(where: DepartamentoSubscriptionWhereInput): DepartamentoSubscriptionPayload
 }

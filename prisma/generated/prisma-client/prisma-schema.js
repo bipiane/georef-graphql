@@ -3,7 +3,11 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregateLocalidad {
+/* GraphQL */ `type AggregateDepartamento {
+  count: Int!
+}
+
+type AggregateLocalidad {
   count: Int!
 }
 
@@ -19,11 +23,260 @@ type BatchPayload {
   count: Long!
 }
 
+type Departamento {
+  id: Int!
+  codigo_indec: String
+  nombre: String!
+  provincia: Provincia!
+  localidades(where: LocalidadWhereInput, orderBy: LocalidadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Localidad!]
+}
+
+type DepartamentoConnection {
+  pageInfo: PageInfo!
+  edges: [DepartamentoEdge]!
+  aggregate: AggregateDepartamento!
+}
+
+input DepartamentoCreateInput {
+  id: Int
+  codigo_indec: String
+  nombre: String!
+  provincia: ProvinciaCreateOneWithoutDepartamentosInput!
+  localidades: LocalidadCreateManyWithoutDepartamentoInput
+}
+
+input DepartamentoCreateManyWithoutProvinciaInput {
+  create: [DepartamentoCreateWithoutProvinciaInput!]
+  connect: [DepartamentoWhereUniqueInput!]
+}
+
+input DepartamentoCreateOneWithoutLocalidadesInput {
+  create: DepartamentoCreateWithoutLocalidadesInput
+  connect: DepartamentoWhereUniqueInput
+}
+
+input DepartamentoCreateWithoutLocalidadesInput {
+  id: Int
+  codigo_indec: String
+  nombre: String!
+  provincia: ProvinciaCreateOneWithoutDepartamentosInput!
+}
+
+input DepartamentoCreateWithoutProvinciaInput {
+  id: Int
+  codigo_indec: String
+  nombre: String!
+  localidades: LocalidadCreateManyWithoutDepartamentoInput
+}
+
+type DepartamentoEdge {
+  node: Departamento!
+  cursor: String!
+}
+
+enum DepartamentoOrderByInput {
+  id_ASC
+  id_DESC
+  codigo_indec_ASC
+  codigo_indec_DESC
+  nombre_ASC
+  nombre_DESC
+}
+
+type DepartamentoPreviousValues {
+  id: Int!
+  codigo_indec: String
+  nombre: String!
+}
+
+input DepartamentoScalarWhereInput {
+  id: Int
+  id_not: Int
+  id_in: [Int!]
+  id_not_in: [Int!]
+  id_lt: Int
+  id_lte: Int
+  id_gt: Int
+  id_gte: Int
+  codigo_indec: String
+  codigo_indec_not: String
+  codigo_indec_in: [String!]
+  codigo_indec_not_in: [String!]
+  codigo_indec_lt: String
+  codigo_indec_lte: String
+  codigo_indec_gt: String
+  codigo_indec_gte: String
+  codigo_indec_contains: String
+  codigo_indec_not_contains: String
+  codigo_indec_starts_with: String
+  codigo_indec_not_starts_with: String
+  codigo_indec_ends_with: String
+  codigo_indec_not_ends_with: String
+  nombre: String
+  nombre_not: String
+  nombre_in: [String!]
+  nombre_not_in: [String!]
+  nombre_lt: String
+  nombre_lte: String
+  nombre_gt: String
+  nombre_gte: String
+  nombre_contains: String
+  nombre_not_contains: String
+  nombre_starts_with: String
+  nombre_not_starts_with: String
+  nombre_ends_with: String
+  nombre_not_ends_with: String
+  AND: [DepartamentoScalarWhereInput!]
+  OR: [DepartamentoScalarWhereInput!]
+  NOT: [DepartamentoScalarWhereInput!]
+}
+
+type DepartamentoSubscriptionPayload {
+  mutation: MutationType!
+  node: Departamento
+  updatedFields: [String!]
+  previousValues: DepartamentoPreviousValues
+}
+
+input DepartamentoSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: DepartamentoWhereInput
+  AND: [DepartamentoSubscriptionWhereInput!]
+  OR: [DepartamentoSubscriptionWhereInput!]
+  NOT: [DepartamentoSubscriptionWhereInput!]
+}
+
+input DepartamentoUpdateInput {
+  codigo_indec: String
+  nombre: String
+  provincia: ProvinciaUpdateOneRequiredWithoutDepartamentosInput
+  localidades: LocalidadUpdateManyWithoutDepartamentoInput
+}
+
+input DepartamentoUpdateManyDataInput {
+  codigo_indec: String
+  nombre: String
+}
+
+input DepartamentoUpdateManyMutationInput {
+  codigo_indec: String
+  nombre: String
+}
+
+input DepartamentoUpdateManyWithoutProvinciaInput {
+  create: [DepartamentoCreateWithoutProvinciaInput!]
+  delete: [DepartamentoWhereUniqueInput!]
+  connect: [DepartamentoWhereUniqueInput!]
+  set: [DepartamentoWhereUniqueInput!]
+  disconnect: [DepartamentoWhereUniqueInput!]
+  update: [DepartamentoUpdateWithWhereUniqueWithoutProvinciaInput!]
+  upsert: [DepartamentoUpsertWithWhereUniqueWithoutProvinciaInput!]
+  deleteMany: [DepartamentoScalarWhereInput!]
+  updateMany: [DepartamentoUpdateManyWithWhereNestedInput!]
+}
+
+input DepartamentoUpdateManyWithWhereNestedInput {
+  where: DepartamentoScalarWhereInput!
+  data: DepartamentoUpdateManyDataInput!
+}
+
+input DepartamentoUpdateOneWithoutLocalidadesInput {
+  create: DepartamentoCreateWithoutLocalidadesInput
+  update: DepartamentoUpdateWithoutLocalidadesDataInput
+  upsert: DepartamentoUpsertWithoutLocalidadesInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: DepartamentoWhereUniqueInput
+}
+
+input DepartamentoUpdateWithoutLocalidadesDataInput {
+  codigo_indec: String
+  nombre: String
+  provincia: ProvinciaUpdateOneRequiredWithoutDepartamentosInput
+}
+
+input DepartamentoUpdateWithoutProvinciaDataInput {
+  codigo_indec: String
+  nombre: String
+  localidades: LocalidadUpdateManyWithoutDepartamentoInput
+}
+
+input DepartamentoUpdateWithWhereUniqueWithoutProvinciaInput {
+  where: DepartamentoWhereUniqueInput!
+  data: DepartamentoUpdateWithoutProvinciaDataInput!
+}
+
+input DepartamentoUpsertWithoutLocalidadesInput {
+  update: DepartamentoUpdateWithoutLocalidadesDataInput!
+  create: DepartamentoCreateWithoutLocalidadesInput!
+}
+
+input DepartamentoUpsertWithWhereUniqueWithoutProvinciaInput {
+  where: DepartamentoWhereUniqueInput!
+  update: DepartamentoUpdateWithoutProvinciaDataInput!
+  create: DepartamentoCreateWithoutProvinciaInput!
+}
+
+input DepartamentoWhereInput {
+  id: Int
+  id_not: Int
+  id_in: [Int!]
+  id_not_in: [Int!]
+  id_lt: Int
+  id_lte: Int
+  id_gt: Int
+  id_gte: Int
+  codigo_indec: String
+  codigo_indec_not: String
+  codigo_indec_in: [String!]
+  codigo_indec_not_in: [String!]
+  codigo_indec_lt: String
+  codigo_indec_lte: String
+  codigo_indec_gt: String
+  codigo_indec_gte: String
+  codigo_indec_contains: String
+  codigo_indec_not_contains: String
+  codigo_indec_starts_with: String
+  codigo_indec_not_starts_with: String
+  codigo_indec_ends_with: String
+  codigo_indec_not_ends_with: String
+  nombre: String
+  nombre_not: String
+  nombre_in: [String!]
+  nombre_not_in: [String!]
+  nombre_lt: String
+  nombre_lte: String
+  nombre_gt: String
+  nombre_gte: String
+  nombre_contains: String
+  nombre_not_contains: String
+  nombre_starts_with: String
+  nombre_not_starts_with: String
+  nombre_ends_with: String
+  nombre_not_ends_with: String
+  provincia: ProvinciaWhereInput
+  localidades_every: LocalidadWhereInput
+  localidades_some: LocalidadWhereInput
+  localidades_none: LocalidadWhereInput
+  AND: [DepartamentoWhereInput!]
+  OR: [DepartamentoWhereInput!]
+  NOT: [DepartamentoWhereInput!]
+}
+
+input DepartamentoWhereUniqueInput {
+  id: Int
+  codigo_indec: String
+}
+
 type Localidad {
   id: Int!
   codigo_indec: String
   nombre: String!
   provincia: Provincia!
+  departamento: Departamento
   lat: Float
   lon: Float
   activo: Boolean!
@@ -40,9 +293,15 @@ input LocalidadCreateInput {
   codigo_indec: String
   nombre: String!
   provincia: ProvinciaCreateOneWithoutLocalidadesInput!
+  departamento: DepartamentoCreateOneWithoutLocalidadesInput
   lat: Float
   lon: Float
   activo: Boolean!
+}
+
+input LocalidadCreateManyWithoutDepartamentoInput {
+  create: [LocalidadCreateWithoutDepartamentoInput!]
+  connect: [LocalidadWhereUniqueInput!]
 }
 
 input LocalidadCreateManyWithoutProvinciaInput {
@@ -50,10 +309,21 @@ input LocalidadCreateManyWithoutProvinciaInput {
   connect: [LocalidadWhereUniqueInput!]
 }
 
+input LocalidadCreateWithoutDepartamentoInput {
+  id: Int
+  codigo_indec: String
+  nombre: String!
+  provincia: ProvinciaCreateOneWithoutLocalidadesInput!
+  lat: Float
+  lon: Float
+  activo: Boolean!
+}
+
 input LocalidadCreateWithoutProvinciaInput {
   id: Int
   codigo_indec: String
   nombre: String!
+  departamento: DepartamentoCreateOneWithoutLocalidadesInput
   lat: Float
   lon: Float
   activo: Boolean!
@@ -170,6 +440,7 @@ input LocalidadUpdateInput {
   codigo_indec: String
   nombre: String
   provincia: ProvinciaUpdateOneRequiredWithoutLocalidadesInput
+  departamento: DepartamentoUpdateOneWithoutLocalidadesInput
   lat: Float
   lon: Float
   activo: Boolean
@@ -191,6 +462,18 @@ input LocalidadUpdateManyMutationInput {
   activo: Boolean
 }
 
+input LocalidadUpdateManyWithoutDepartamentoInput {
+  create: [LocalidadCreateWithoutDepartamentoInput!]
+  delete: [LocalidadWhereUniqueInput!]
+  connect: [LocalidadWhereUniqueInput!]
+  set: [LocalidadWhereUniqueInput!]
+  disconnect: [LocalidadWhereUniqueInput!]
+  update: [LocalidadUpdateWithWhereUniqueWithoutDepartamentoInput!]
+  upsert: [LocalidadUpsertWithWhereUniqueWithoutDepartamentoInput!]
+  deleteMany: [LocalidadScalarWhereInput!]
+  updateMany: [LocalidadUpdateManyWithWhereNestedInput!]
+}
+
 input LocalidadUpdateManyWithoutProvinciaInput {
   create: [LocalidadCreateWithoutProvinciaInput!]
   delete: [LocalidadWhereUniqueInput!]
@@ -208,17 +491,38 @@ input LocalidadUpdateManyWithWhereNestedInput {
   data: LocalidadUpdateManyDataInput!
 }
 
-input LocalidadUpdateWithoutProvinciaDataInput {
+input LocalidadUpdateWithoutDepartamentoDataInput {
   codigo_indec: String
   nombre: String
+  provincia: ProvinciaUpdateOneRequiredWithoutLocalidadesInput
   lat: Float
   lon: Float
   activo: Boolean
 }
 
+input LocalidadUpdateWithoutProvinciaDataInput {
+  codigo_indec: String
+  nombre: String
+  departamento: DepartamentoUpdateOneWithoutLocalidadesInput
+  lat: Float
+  lon: Float
+  activo: Boolean
+}
+
+input LocalidadUpdateWithWhereUniqueWithoutDepartamentoInput {
+  where: LocalidadWhereUniqueInput!
+  data: LocalidadUpdateWithoutDepartamentoDataInput!
+}
+
 input LocalidadUpdateWithWhereUniqueWithoutProvinciaInput {
   where: LocalidadWhereUniqueInput!
   data: LocalidadUpdateWithoutProvinciaDataInput!
+}
+
+input LocalidadUpsertWithWhereUniqueWithoutDepartamentoInput {
+  where: LocalidadWhereUniqueInput!
+  update: LocalidadUpdateWithoutDepartamentoDataInput!
+  create: LocalidadCreateWithoutDepartamentoInput!
 }
 
 input LocalidadUpsertWithWhereUniqueWithoutProvinciaInput {
@@ -265,6 +569,7 @@ input LocalidadWhereInput {
   nombre_ends_with: String
   nombre_not_ends_with: String
   provincia: ProvinciaWhereInput
+  departamento: DepartamentoWhereInput
   lat: Float
   lat_not: Float
   lat_in: [Float!]
@@ -296,6 +601,12 @@ input LocalidadWhereUniqueInput {
 scalar Long
 
 type Mutation {
+  createDepartamento(data: DepartamentoCreateInput!): Departamento!
+  updateDepartamento(data: DepartamentoUpdateInput!, where: DepartamentoWhereUniqueInput!): Departamento
+  updateManyDepartamentoes(data: DepartamentoUpdateManyMutationInput!, where: DepartamentoWhereInput): BatchPayload!
+  upsertDepartamento(where: DepartamentoWhereUniqueInput!, create: DepartamentoCreateInput!, update: DepartamentoUpdateInput!): Departamento!
+  deleteDepartamento(where: DepartamentoWhereUniqueInput!): Departamento
+  deleteManyDepartamentoes(where: DepartamentoWhereInput): BatchPayload!
   createLocalidad(data: LocalidadCreateInput!): Localidad!
   updateLocalidad(data: LocalidadUpdateInput!, where: LocalidadWhereUniqueInput!): Localidad
   updateManyLocalidads(data: LocalidadUpdateManyMutationInput!, where: LocalidadWhereInput): BatchPayload!
@@ -499,6 +810,7 @@ type Provincia {
   nombre: String!
   activo: Boolean!
   localidades(where: LocalidadWhereInput, orderBy: LocalidadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Localidad!]
+  departamentos(where: DepartamentoWhereInput, orderBy: DepartamentoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Departamento!]
 }
 
 type ProvinciaConnection {
@@ -515,6 +827,7 @@ input ProvinciaCreateInput {
   nombre: String!
   activo: Boolean!
   localidades: LocalidadCreateManyWithoutProvinciaInput
+  departamentos: DepartamentoCreateManyWithoutProvinciaInput
 }
 
 input ProvinciaCreateManyWithoutPaisInput {
@@ -522,9 +835,24 @@ input ProvinciaCreateManyWithoutPaisInput {
   connect: [ProvinciaWhereUniqueInput!]
 }
 
+input ProvinciaCreateOneWithoutDepartamentosInput {
+  create: ProvinciaCreateWithoutDepartamentosInput
+  connect: ProvinciaWhereUniqueInput
+}
+
 input ProvinciaCreateOneWithoutLocalidadesInput {
   create: ProvinciaCreateWithoutLocalidadesInput
   connect: ProvinciaWhereUniqueInput
+}
+
+input ProvinciaCreateWithoutDepartamentosInput {
+  id: Int
+  pais: PaisCreateOneWithoutProvinciasInput!
+  codigo: String!
+  codigo_indec: String
+  nombre: String!
+  activo: Boolean!
+  localidades: LocalidadCreateManyWithoutProvinciaInput
 }
 
 input ProvinciaCreateWithoutLocalidadesInput {
@@ -534,6 +862,7 @@ input ProvinciaCreateWithoutLocalidadesInput {
   codigo_indec: String
   nombre: String!
   activo: Boolean!
+  departamentos: DepartamentoCreateManyWithoutProvinciaInput
 }
 
 input ProvinciaCreateWithoutPaisInput {
@@ -543,6 +872,7 @@ input ProvinciaCreateWithoutPaisInput {
   nombre: String!
   activo: Boolean!
   localidades: LocalidadCreateManyWithoutProvinciaInput
+  departamentos: DepartamentoCreateManyWithoutProvinciaInput
 }
 
 type ProvinciaEdge {
@@ -654,6 +984,7 @@ input ProvinciaUpdateInput {
   nombre: String
   activo: Boolean
   localidades: LocalidadUpdateManyWithoutProvinciaInput
+  departamentos: DepartamentoUpdateManyWithoutProvinciaInput
 }
 
 input ProvinciaUpdateManyDataInput {
@@ -687,11 +1018,27 @@ input ProvinciaUpdateManyWithWhereNestedInput {
   data: ProvinciaUpdateManyDataInput!
 }
 
+input ProvinciaUpdateOneRequiredWithoutDepartamentosInput {
+  create: ProvinciaCreateWithoutDepartamentosInput
+  update: ProvinciaUpdateWithoutDepartamentosDataInput
+  upsert: ProvinciaUpsertWithoutDepartamentosInput
+  connect: ProvinciaWhereUniqueInput
+}
+
 input ProvinciaUpdateOneRequiredWithoutLocalidadesInput {
   create: ProvinciaCreateWithoutLocalidadesInput
   update: ProvinciaUpdateWithoutLocalidadesDataInput
   upsert: ProvinciaUpsertWithoutLocalidadesInput
   connect: ProvinciaWhereUniqueInput
+}
+
+input ProvinciaUpdateWithoutDepartamentosDataInput {
+  pais: PaisUpdateOneRequiredWithoutProvinciasInput
+  codigo: String
+  codigo_indec: String
+  nombre: String
+  activo: Boolean
+  localidades: LocalidadUpdateManyWithoutProvinciaInput
 }
 
 input ProvinciaUpdateWithoutLocalidadesDataInput {
@@ -700,6 +1047,7 @@ input ProvinciaUpdateWithoutLocalidadesDataInput {
   codigo_indec: String
   nombre: String
   activo: Boolean
+  departamentos: DepartamentoUpdateManyWithoutProvinciaInput
 }
 
 input ProvinciaUpdateWithoutPaisDataInput {
@@ -708,11 +1056,17 @@ input ProvinciaUpdateWithoutPaisDataInput {
   nombre: String
   activo: Boolean
   localidades: LocalidadUpdateManyWithoutProvinciaInput
+  departamentos: DepartamentoUpdateManyWithoutProvinciaInput
 }
 
 input ProvinciaUpdateWithWhereUniqueWithoutPaisInput {
   where: ProvinciaWhereUniqueInput!
   data: ProvinciaUpdateWithoutPaisDataInput!
+}
+
+input ProvinciaUpsertWithoutDepartamentosInput {
+  update: ProvinciaUpdateWithoutDepartamentosDataInput!
+  create: ProvinciaCreateWithoutDepartamentosInput!
 }
 
 input ProvinciaUpsertWithoutLocalidadesInput {
@@ -783,6 +1137,9 @@ input ProvinciaWhereInput {
   localidades_every: LocalidadWhereInput
   localidades_some: LocalidadWhereInput
   localidades_none: LocalidadWhereInput
+  departamentos_every: DepartamentoWhereInput
+  departamentos_some: DepartamentoWhereInput
+  departamentos_none: DepartamentoWhereInput
   AND: [ProvinciaWhereInput!]
   OR: [ProvinciaWhereInput!]
   NOT: [ProvinciaWhereInput!]
@@ -795,6 +1152,9 @@ input ProvinciaWhereUniqueInput {
 }
 
 type Query {
+  departamento(where: DepartamentoWhereUniqueInput!): Departamento
+  departamentoes(where: DepartamentoWhereInput, orderBy: DepartamentoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Departamento]!
+  departamentoesConnection(where: DepartamentoWhereInput, orderBy: DepartamentoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): DepartamentoConnection!
   localidad(where: LocalidadWhereUniqueInput!): Localidad
   localidads(where: LocalidadWhereInput, orderBy: LocalidadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Localidad]!
   localidadsConnection(where: LocalidadWhereInput, orderBy: LocalidadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LocalidadConnection!
@@ -808,6 +1168,7 @@ type Query {
 }
 
 type Subscription {
+  departamento(where: DepartamentoSubscriptionWhereInput): DepartamentoSubscriptionPayload
   localidad(where: LocalidadSubscriptionWhereInput): LocalidadSubscriptionPayload
   pais(where: PaisSubscriptionWhereInput): PaisSubscriptionPayload
   provincia(where: ProvinciaSubscriptionWhereInput): ProvinciaSubscriptionPayload
