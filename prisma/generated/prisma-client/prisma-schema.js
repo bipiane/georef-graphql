@@ -22,7 +22,7 @@ type BatchPayload {
 type Localidad {
   id: Int!
   codigo_indec: String
-  descripcion: String!
+  nombre: String!
   provincia: Provincia!
   lat: Float
   lon: Float
@@ -38,7 +38,7 @@ type LocalidadConnection {
 input LocalidadCreateInput {
   id: Int
   codigo_indec: String
-  descripcion: String!
+  nombre: String!
   provincia: ProvinciaCreateOneWithoutLocalidadesInput!
   lat: Float
   lon: Float
@@ -53,7 +53,7 @@ input LocalidadCreateManyWithoutProvinciaInput {
 input LocalidadCreateWithoutProvinciaInput {
   id: Int
   codigo_indec: String
-  descripcion: String!
+  nombre: String!
   lat: Float
   lon: Float
   activo: Boolean!
@@ -69,8 +69,8 @@ enum LocalidadOrderByInput {
   id_DESC
   codigo_indec_ASC
   codigo_indec_DESC
-  descripcion_ASC
-  descripcion_DESC
+  nombre_ASC
+  nombre_DESC
   lat_ASC
   lat_DESC
   lon_ASC
@@ -82,7 +82,7 @@ enum LocalidadOrderByInput {
 type LocalidadPreviousValues {
   id: Int!
   codigo_indec: String
-  descripcion: String!
+  nombre: String!
   lat: Float
   lon: Float
   activo: Boolean!
@@ -111,20 +111,20 @@ input LocalidadScalarWhereInput {
   codigo_indec_not_starts_with: String
   codigo_indec_ends_with: String
   codigo_indec_not_ends_with: String
-  descripcion: String
-  descripcion_not: String
-  descripcion_in: [String!]
-  descripcion_not_in: [String!]
-  descripcion_lt: String
-  descripcion_lte: String
-  descripcion_gt: String
-  descripcion_gte: String
-  descripcion_contains: String
-  descripcion_not_contains: String
-  descripcion_starts_with: String
-  descripcion_not_starts_with: String
-  descripcion_ends_with: String
-  descripcion_not_ends_with: String
+  nombre: String
+  nombre_not: String
+  nombre_in: [String!]
+  nombre_not_in: [String!]
+  nombre_lt: String
+  nombre_lte: String
+  nombre_gt: String
+  nombre_gte: String
+  nombre_contains: String
+  nombre_not_contains: String
+  nombre_starts_with: String
+  nombre_not_starts_with: String
+  nombre_ends_with: String
+  nombre_not_ends_with: String
   lat: Float
   lat_not: Float
   lat_in: [Float!]
@@ -168,7 +168,7 @@ input LocalidadSubscriptionWhereInput {
 
 input LocalidadUpdateInput {
   codigo_indec: String
-  descripcion: String
+  nombre: String
   provincia: ProvinciaUpdateOneRequiredWithoutLocalidadesInput
   lat: Float
   lon: Float
@@ -177,7 +177,7 @@ input LocalidadUpdateInput {
 
 input LocalidadUpdateManyDataInput {
   codigo_indec: String
-  descripcion: String
+  nombre: String
   lat: Float
   lon: Float
   activo: Boolean
@@ -185,7 +185,7 @@ input LocalidadUpdateManyDataInput {
 
 input LocalidadUpdateManyMutationInput {
   codigo_indec: String
-  descripcion: String
+  nombre: String
   lat: Float
   lon: Float
   activo: Boolean
@@ -210,7 +210,7 @@ input LocalidadUpdateManyWithWhereNestedInput {
 
 input LocalidadUpdateWithoutProvinciaDataInput {
   codigo_indec: String
-  descripcion: String
+  nombre: String
   lat: Float
   lon: Float
   activo: Boolean
@@ -250,20 +250,20 @@ input LocalidadWhereInput {
   codigo_indec_not_starts_with: String
   codigo_indec_ends_with: String
   codigo_indec_not_ends_with: String
-  descripcion: String
-  descripcion_not: String
-  descripcion_in: [String!]
-  descripcion_not_in: [String!]
-  descripcion_lt: String
-  descripcion_lte: String
-  descripcion_gt: String
-  descripcion_gte: String
-  descripcion_contains: String
-  descripcion_not_contains: String
-  descripcion_starts_with: String
-  descripcion_not_starts_with: String
-  descripcion_ends_with: String
-  descripcion_not_ends_with: String
+  nombre: String
+  nombre_not: String
+  nombre_in: [String!]
+  nombre_not_in: [String!]
+  nombre_lt: String
+  nombre_lte: String
+  nombre_gt: String
+  nombre_gte: String
+  nombre_contains: String
+  nombre_not_contains: String
+  nombre_starts_with: String
+  nombre_not_starts_with: String
+  nombre_ends_with: String
+  nombre_not_ends_with: String
   provincia: ProvinciaWhereInput
   lat: Float
   lat_not: Float
@@ -336,7 +336,7 @@ type PageInfo {
 type Pais {
   id: Int!
   codigo: String!
-  descripcion: String!
+  nombre: String!
   activo: Boolean!
   provincias(where: ProvinciaWhereInput, orderBy: ProvinciaOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Provincia!]
 }
@@ -350,7 +350,7 @@ type PaisConnection {
 input PaisCreateInput {
   id: Int
   codigo: String!
-  descripcion: String!
+  nombre: String!
   activo: Boolean!
   provincias: ProvinciaCreateManyWithoutPaisInput
 }
@@ -363,7 +363,7 @@ input PaisCreateOneWithoutProvinciasInput {
 input PaisCreateWithoutProvinciasInput {
   id: Int
   codigo: String!
-  descripcion: String!
+  nombre: String!
   activo: Boolean!
 }
 
@@ -377,8 +377,8 @@ enum PaisOrderByInput {
   id_DESC
   codigo_ASC
   codigo_DESC
-  descripcion_ASC
-  descripcion_DESC
+  nombre_ASC
+  nombre_DESC
   activo_ASC
   activo_DESC
 }
@@ -386,7 +386,7 @@ enum PaisOrderByInput {
 type PaisPreviousValues {
   id: Int!
   codigo: String!
-  descripcion: String!
+  nombre: String!
   activo: Boolean!
 }
 
@@ -410,14 +410,14 @@ input PaisSubscriptionWhereInput {
 
 input PaisUpdateInput {
   codigo: String
-  descripcion: String
+  nombre: String
   activo: Boolean
   provincias: ProvinciaUpdateManyWithoutPaisInput
 }
 
 input PaisUpdateManyMutationInput {
   codigo: String
-  descripcion: String
+  nombre: String
   activo: Boolean
 }
 
@@ -430,7 +430,7 @@ input PaisUpdateOneRequiredWithoutProvinciasInput {
 
 input PaisUpdateWithoutProvinciasDataInput {
   codigo: String
-  descripcion: String
+  nombre: String
   activo: Boolean
 }
 
@@ -462,20 +462,20 @@ input PaisWhereInput {
   codigo_not_starts_with: String
   codigo_ends_with: String
   codigo_not_ends_with: String
-  descripcion: String
-  descripcion_not: String
-  descripcion_in: [String!]
-  descripcion_not_in: [String!]
-  descripcion_lt: String
-  descripcion_lte: String
-  descripcion_gt: String
-  descripcion_gte: String
-  descripcion_contains: String
-  descripcion_not_contains: String
-  descripcion_starts_with: String
-  descripcion_not_starts_with: String
-  descripcion_ends_with: String
-  descripcion_not_ends_with: String
+  nombre: String
+  nombre_not: String
+  nombre_in: [String!]
+  nombre_not_in: [String!]
+  nombre_lt: String
+  nombre_lte: String
+  nombre_gt: String
+  nombre_gte: String
+  nombre_contains: String
+  nombre_not_contains: String
+  nombre_starts_with: String
+  nombre_not_starts_with: String
+  nombre_ends_with: String
+  nombre_not_ends_with: String
   activo: Boolean
   activo_not: Boolean
   provincias_every: ProvinciaWhereInput
@@ -496,7 +496,7 @@ type Provincia {
   pais: Pais!
   codigo: String!
   codigo_indec: String
-  descripcion: String!
+  nombre: String!
   activo: Boolean!
   localidades(where: LocalidadWhereInput, orderBy: LocalidadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Localidad!]
 }
@@ -512,7 +512,7 @@ input ProvinciaCreateInput {
   pais: PaisCreateOneWithoutProvinciasInput!
   codigo: String!
   codigo_indec: String
-  descripcion: String!
+  nombre: String!
   activo: Boolean!
   localidades: LocalidadCreateManyWithoutProvinciaInput
 }
@@ -532,7 +532,7 @@ input ProvinciaCreateWithoutLocalidadesInput {
   pais: PaisCreateOneWithoutProvinciasInput!
   codigo: String!
   codigo_indec: String
-  descripcion: String!
+  nombre: String!
   activo: Boolean!
 }
 
@@ -540,7 +540,7 @@ input ProvinciaCreateWithoutPaisInput {
   id: Int
   codigo: String!
   codigo_indec: String
-  descripcion: String!
+  nombre: String!
   activo: Boolean!
   localidades: LocalidadCreateManyWithoutProvinciaInput
 }
@@ -557,8 +557,8 @@ enum ProvinciaOrderByInput {
   codigo_DESC
   codigo_indec_ASC
   codigo_indec_DESC
-  descripcion_ASC
-  descripcion_DESC
+  nombre_ASC
+  nombre_DESC
   activo_ASC
   activo_DESC
 }
@@ -567,7 +567,7 @@ type ProvinciaPreviousValues {
   id: Int!
   codigo: String!
   codigo_indec: String
-  descripcion: String!
+  nombre: String!
   activo: Boolean!
 }
 
@@ -608,20 +608,20 @@ input ProvinciaScalarWhereInput {
   codigo_indec_not_starts_with: String
   codigo_indec_ends_with: String
   codigo_indec_not_ends_with: String
-  descripcion: String
-  descripcion_not: String
-  descripcion_in: [String!]
-  descripcion_not_in: [String!]
-  descripcion_lt: String
-  descripcion_lte: String
-  descripcion_gt: String
-  descripcion_gte: String
-  descripcion_contains: String
-  descripcion_not_contains: String
-  descripcion_starts_with: String
-  descripcion_not_starts_with: String
-  descripcion_ends_with: String
-  descripcion_not_ends_with: String
+  nombre: String
+  nombre_not: String
+  nombre_in: [String!]
+  nombre_not_in: [String!]
+  nombre_lt: String
+  nombre_lte: String
+  nombre_gt: String
+  nombre_gte: String
+  nombre_contains: String
+  nombre_not_contains: String
+  nombre_starts_with: String
+  nombre_not_starts_with: String
+  nombre_ends_with: String
+  nombre_not_ends_with: String
   activo: Boolean
   activo_not: Boolean
   AND: [ProvinciaScalarWhereInput!]
@@ -651,7 +651,7 @@ input ProvinciaUpdateInput {
   pais: PaisUpdateOneRequiredWithoutProvinciasInput
   codigo: String
   codigo_indec: String
-  descripcion: String
+  nombre: String
   activo: Boolean
   localidades: LocalidadUpdateManyWithoutProvinciaInput
 }
@@ -659,14 +659,14 @@ input ProvinciaUpdateInput {
 input ProvinciaUpdateManyDataInput {
   codigo: String
   codigo_indec: String
-  descripcion: String
+  nombre: String
   activo: Boolean
 }
 
 input ProvinciaUpdateManyMutationInput {
   codigo: String
   codigo_indec: String
-  descripcion: String
+  nombre: String
   activo: Boolean
 }
 
@@ -698,14 +698,14 @@ input ProvinciaUpdateWithoutLocalidadesDataInput {
   pais: PaisUpdateOneRequiredWithoutProvinciasInput
   codigo: String
   codigo_indec: String
-  descripcion: String
+  nombre: String
   activo: Boolean
 }
 
 input ProvinciaUpdateWithoutPaisDataInput {
   codigo: String
   codigo_indec: String
-  descripcion: String
+  nombre: String
   activo: Boolean
   localidades: LocalidadUpdateManyWithoutProvinciaInput
 }
@@ -764,20 +764,20 @@ input ProvinciaWhereInput {
   codigo_indec_not_starts_with: String
   codigo_indec_ends_with: String
   codigo_indec_not_ends_with: String
-  descripcion: String
-  descripcion_not: String
-  descripcion_in: [String!]
-  descripcion_not_in: [String!]
-  descripcion_lt: String
-  descripcion_lte: String
-  descripcion_gt: String
-  descripcion_gte: String
-  descripcion_contains: String
-  descripcion_not_contains: String
-  descripcion_starts_with: String
-  descripcion_not_starts_with: String
-  descripcion_ends_with: String
-  descripcion_not_ends_with: String
+  nombre: String
+  nombre_not: String
+  nombre_in: [String!]
+  nombre_not_in: [String!]
+  nombre_lt: String
+  nombre_lte: String
+  nombre_gt: String
+  nombre_gte: String
+  nombre_contains: String
+  nombre_not_contains: String
+  nombre_starts_with: String
+  nombre_not_starts_with: String
+  nombre_ends_with: String
+  nombre_not_ends_with: String
   activo: Boolean
   activo_not: Boolean
   localidades_every: LocalidadWhereInput

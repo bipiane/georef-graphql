@@ -186,8 +186,8 @@ export type ProvinciaOrderByInput =
   | "codigo_DESC"
   | "codigo_indec_ASC"
   | "codigo_indec_DESC"
-  | "descripcion_ASC"
-  | "descripcion_DESC"
+  | "nombre_ASC"
+  | "nombre_DESC"
   | "activo_ASC"
   | "activo_DESC";
 
@@ -196,8 +196,8 @@ export type LocalidadOrderByInput =
   | "id_DESC"
   | "codigo_indec_ASC"
   | "codigo_indec_DESC"
-  | "descripcion_ASC"
-  | "descripcion_DESC"
+  | "nombre_ASC"
+  | "nombre_DESC"
   | "lat_ASC"
   | "lat_DESC"
   | "lon_ASC"
@@ -210,8 +210,8 @@ export type PaisOrderByInput =
   | "id_DESC"
   | "codigo_ASC"
   | "codigo_DESC"
-  | "descripcion_ASC"
-  | "descripcion_DESC"
+  | "nombre_ASC"
+  | "nombre_DESC"
   | "activo_ASC"
   | "activo_DESC";
 
@@ -232,7 +232,7 @@ export interface ProvinciaCreateWithoutLocalidadesInput {
   pais: PaisCreateOneWithoutProvinciasInput;
   codigo: String;
   codigo_indec?: Maybe<String>;
-  descripcion: String;
+  nombre: String;
   activo: Boolean;
 }
 
@@ -288,20 +288,20 @@ export interface LocalidadWhereInput {
   codigo_indec_not_starts_with?: Maybe<String>;
   codigo_indec_ends_with?: Maybe<String>;
   codigo_indec_not_ends_with?: Maybe<String>;
-  descripcion?: Maybe<String>;
-  descripcion_not?: Maybe<String>;
-  descripcion_in?: Maybe<String[] | String>;
-  descripcion_not_in?: Maybe<String[] | String>;
-  descripcion_lt?: Maybe<String>;
-  descripcion_lte?: Maybe<String>;
-  descripcion_gt?: Maybe<String>;
-  descripcion_gte?: Maybe<String>;
-  descripcion_contains?: Maybe<String>;
-  descripcion_not_contains?: Maybe<String>;
-  descripcion_starts_with?: Maybe<String>;
-  descripcion_not_starts_with?: Maybe<String>;
-  descripcion_ends_with?: Maybe<String>;
-  descripcion_not_ends_with?: Maybe<String>;
+  nombre?: Maybe<String>;
+  nombre_not?: Maybe<String>;
+  nombre_in?: Maybe<String[] | String>;
+  nombre_not_in?: Maybe<String[] | String>;
+  nombre_lt?: Maybe<String>;
+  nombre_lte?: Maybe<String>;
+  nombre_gt?: Maybe<String>;
+  nombre_gte?: Maybe<String>;
+  nombre_contains?: Maybe<String>;
+  nombre_not_contains?: Maybe<String>;
+  nombre_starts_with?: Maybe<String>;
+  nombre_not_starts_with?: Maybe<String>;
+  nombre_ends_with?: Maybe<String>;
+  nombre_not_ends_with?: Maybe<String>;
   provincia?: Maybe<ProvinciaWhereInput>;
   lat?: Maybe<Float>;
   lat_not?: Maybe<Float>;
@@ -329,7 +329,7 @@ export interface LocalidadWhereInput {
 export interface PaisCreateWithoutProvinciasInput {
   id?: Maybe<Int>;
   codigo: String;
-  descripcion: String;
+  nombre: String;
   activo: Boolean;
 }
 
@@ -346,7 +346,7 @@ export interface PaisSubscriptionWhereInput {
 
 export interface LocalidadUpdateInput {
   codigo_indec?: Maybe<String>;
-  descripcion?: Maybe<String>;
+  nombre?: Maybe<String>;
   provincia?: Maybe<ProvinciaUpdateOneRequiredWithoutLocalidadesInput>;
   lat?: Maybe<Float>;
   lon?: Maybe<Float>;
@@ -356,7 +356,7 @@ export interface LocalidadUpdateInput {
 export interface ProvinciaUpdateManyMutationInput {
   codigo?: Maybe<String>;
   codigo_indec?: Maybe<String>;
-  descripcion?: Maybe<String>;
+  nombre?: Maybe<String>;
   activo?: Maybe<Boolean>;
 }
 
@@ -372,7 +372,7 @@ export interface ProvinciaCreateInput {
   pais: PaisCreateOneWithoutProvinciasInput;
   codigo: String;
   codigo_indec?: Maybe<String>;
-  descripcion: String;
+  nombre: String;
   activo: Boolean;
   localidades?: Maybe<LocalidadCreateManyWithoutProvinciaInput>;
 }
@@ -381,7 +381,7 @@ export interface ProvinciaUpdateWithoutLocalidadesDataInput {
   pais?: Maybe<PaisUpdateOneRequiredWithoutProvinciasInput>;
   codigo?: Maybe<String>;
   codigo_indec?: Maybe<String>;
-  descripcion?: Maybe<String>;
+  nombre?: Maybe<String>;
   activo?: Maybe<Boolean>;
 }
 
@@ -404,7 +404,7 @@ export interface ProvinciaUpdateManyWithWhereNestedInput {
 
 export interface PaisUpdateWithoutProvinciasDataInput {
   codigo?: Maybe<String>;
-  descripcion?: Maybe<String>;
+  nombre?: Maybe<String>;
   activo?: Maybe<Boolean>;
 }
 
@@ -416,7 +416,7 @@ export interface ProvinciaUpsertWithWhereUniqueWithoutPaisInput {
 
 export interface LocalidadUpdateWithoutProvinciaDataInput {
   codigo_indec?: Maybe<String>;
-  descripcion?: Maybe<String>;
+  nombre?: Maybe<String>;
   lat?: Maybe<Float>;
   lon?: Maybe<Float>;
   activo?: Maybe<Boolean>;
@@ -424,7 +424,7 @@ export interface LocalidadUpdateWithoutProvinciaDataInput {
 
 export interface LocalidadUpdateManyDataInput {
   codigo_indec?: Maybe<String>;
-  descripcion?: Maybe<String>;
+  nombre?: Maybe<String>;
   lat?: Maybe<Float>;
   lon?: Maybe<Float>;
   activo?: Maybe<Boolean>;
@@ -458,20 +458,20 @@ export interface LocalidadScalarWhereInput {
   codigo_indec_not_starts_with?: Maybe<String>;
   codigo_indec_ends_with?: Maybe<String>;
   codigo_indec_not_ends_with?: Maybe<String>;
-  descripcion?: Maybe<String>;
-  descripcion_not?: Maybe<String>;
-  descripcion_in?: Maybe<String[] | String>;
-  descripcion_not_in?: Maybe<String[] | String>;
-  descripcion_lt?: Maybe<String>;
-  descripcion_lte?: Maybe<String>;
-  descripcion_gt?: Maybe<String>;
-  descripcion_gte?: Maybe<String>;
-  descripcion_contains?: Maybe<String>;
-  descripcion_not_contains?: Maybe<String>;
-  descripcion_starts_with?: Maybe<String>;
-  descripcion_not_starts_with?: Maybe<String>;
-  descripcion_ends_with?: Maybe<String>;
-  descripcion_not_ends_with?: Maybe<String>;
+  nombre?: Maybe<String>;
+  nombre_not?: Maybe<String>;
+  nombre_in?: Maybe<String[] | String>;
+  nombre_not_in?: Maybe<String[] | String>;
+  nombre_lt?: Maybe<String>;
+  nombre_lte?: Maybe<String>;
+  nombre_gt?: Maybe<String>;
+  nombre_gte?: Maybe<String>;
+  nombre_contains?: Maybe<String>;
+  nombre_not_contains?: Maybe<String>;
+  nombre_starts_with?: Maybe<String>;
+  nombre_not_starts_with?: Maybe<String>;
+  nombre_ends_with?: Maybe<String>;
+  nombre_not_ends_with?: Maybe<String>;
   lat?: Maybe<Float>;
   lat_not?: Maybe<Float>;
   lat_in?: Maybe<Float[] | Float>;
@@ -498,7 +498,7 @@ export interface LocalidadScalarWhereInput {
 export interface LocalidadCreateInput {
   id?: Maybe<Int>;
   codigo_indec?: Maybe<String>;
-  descripcion: String;
+  nombre: String;
   provincia: ProvinciaCreateOneWithoutLocalidadesInput;
   lat?: Maybe<Float>;
   lon?: Maybe<Float>;
@@ -508,7 +508,7 @@ export interface LocalidadCreateInput {
 export interface ProvinciaUpdateWithoutPaisDataInput {
   codigo?: Maybe<String>;
   codigo_indec?: Maybe<String>;
-  descripcion?: Maybe<String>;
+  nombre?: Maybe<String>;
   activo?: Maybe<Boolean>;
   localidades?: Maybe<LocalidadUpdateManyWithoutProvinciaInput>;
 }
@@ -551,20 +551,20 @@ export interface ProvinciaWhereInput {
   codigo_indec_not_starts_with?: Maybe<String>;
   codigo_indec_ends_with?: Maybe<String>;
   codigo_indec_not_ends_with?: Maybe<String>;
-  descripcion?: Maybe<String>;
-  descripcion_not?: Maybe<String>;
-  descripcion_in?: Maybe<String[] | String>;
-  descripcion_not_in?: Maybe<String[] | String>;
-  descripcion_lt?: Maybe<String>;
-  descripcion_lte?: Maybe<String>;
-  descripcion_gt?: Maybe<String>;
-  descripcion_gte?: Maybe<String>;
-  descripcion_contains?: Maybe<String>;
-  descripcion_not_contains?: Maybe<String>;
-  descripcion_starts_with?: Maybe<String>;
-  descripcion_not_starts_with?: Maybe<String>;
-  descripcion_ends_with?: Maybe<String>;
-  descripcion_not_ends_with?: Maybe<String>;
+  nombre?: Maybe<String>;
+  nombre_not?: Maybe<String>;
+  nombre_in?: Maybe<String[] | String>;
+  nombre_not_in?: Maybe<String[] | String>;
+  nombre_lt?: Maybe<String>;
+  nombre_lte?: Maybe<String>;
+  nombre_gt?: Maybe<String>;
+  nombre_gte?: Maybe<String>;
+  nombre_contains?: Maybe<String>;
+  nombre_not_contains?: Maybe<String>;
+  nombre_starts_with?: Maybe<String>;
+  nombre_not_starts_with?: Maybe<String>;
+  nombre_ends_with?: Maybe<String>;
+  nombre_not_ends_with?: Maybe<String>;
   activo?: Maybe<Boolean>;
   activo_not?: Maybe<Boolean>;
   localidades_every?: Maybe<LocalidadWhereInput>;
@@ -577,7 +577,7 @@ export interface ProvinciaWhereInput {
 
 export interface LocalidadUpdateManyMutationInput {
   codigo_indec?: Maybe<String>;
-  descripcion?: Maybe<String>;
+  nombre?: Maybe<String>;
   lat?: Maybe<Float>;
   lon?: Maybe<Float>;
   activo?: Maybe<Boolean>;
@@ -611,20 +611,20 @@ export interface PaisWhereInput {
   codigo_not_starts_with?: Maybe<String>;
   codigo_ends_with?: Maybe<String>;
   codigo_not_ends_with?: Maybe<String>;
-  descripcion?: Maybe<String>;
-  descripcion_not?: Maybe<String>;
-  descripcion_in?: Maybe<String[] | String>;
-  descripcion_not_in?: Maybe<String[] | String>;
-  descripcion_lt?: Maybe<String>;
-  descripcion_lte?: Maybe<String>;
-  descripcion_gt?: Maybe<String>;
-  descripcion_gte?: Maybe<String>;
-  descripcion_contains?: Maybe<String>;
-  descripcion_not_contains?: Maybe<String>;
-  descripcion_starts_with?: Maybe<String>;
-  descripcion_not_starts_with?: Maybe<String>;
-  descripcion_ends_with?: Maybe<String>;
-  descripcion_not_ends_with?: Maybe<String>;
+  nombre?: Maybe<String>;
+  nombre_not?: Maybe<String>;
+  nombre_in?: Maybe<String[] | String>;
+  nombre_not_in?: Maybe<String[] | String>;
+  nombre_lt?: Maybe<String>;
+  nombre_lte?: Maybe<String>;
+  nombre_gt?: Maybe<String>;
+  nombre_gte?: Maybe<String>;
+  nombre_contains?: Maybe<String>;
+  nombre_not_contains?: Maybe<String>;
+  nombre_starts_with?: Maybe<String>;
+  nombre_not_starts_with?: Maybe<String>;
+  nombre_ends_with?: Maybe<String>;
+  nombre_not_ends_with?: Maybe<String>;
   activo?: Maybe<Boolean>;
   activo_not?: Maybe<Boolean>;
   provincias_every?: Maybe<ProvinciaWhereInput>;
@@ -638,7 +638,7 @@ export interface PaisWhereInput {
 export interface PaisCreateInput {
   id?: Maybe<Int>;
   codigo: String;
-  descripcion: String;
+  nombre: String;
   activo: Boolean;
   provincias?: Maybe<ProvinciaCreateManyWithoutPaisInput>;
 }
@@ -669,7 +669,7 @@ export interface ProvinciaCreateManyWithoutPaisInput {
 
 export interface PaisUpdateManyMutationInput {
   codigo?: Maybe<String>;
-  descripcion?: Maybe<String>;
+  nombre?: Maybe<String>;
   activo?: Maybe<Boolean>;
 }
 
@@ -677,7 +677,7 @@ export interface ProvinciaCreateWithoutPaisInput {
   id?: Maybe<Int>;
   codigo: String;
   codigo_indec?: Maybe<String>;
-  descripcion: String;
+  nombre: String;
   activo: Boolean;
   localidades?: Maybe<LocalidadCreateManyWithoutProvinciaInput>;
 }
@@ -719,20 +719,20 @@ export interface ProvinciaScalarWhereInput {
   codigo_indec_not_starts_with?: Maybe<String>;
   codigo_indec_ends_with?: Maybe<String>;
   codigo_indec_not_ends_with?: Maybe<String>;
-  descripcion?: Maybe<String>;
-  descripcion_not?: Maybe<String>;
-  descripcion_in?: Maybe<String[] | String>;
-  descripcion_not_in?: Maybe<String[] | String>;
-  descripcion_lt?: Maybe<String>;
-  descripcion_lte?: Maybe<String>;
-  descripcion_gt?: Maybe<String>;
-  descripcion_gte?: Maybe<String>;
-  descripcion_contains?: Maybe<String>;
-  descripcion_not_contains?: Maybe<String>;
-  descripcion_starts_with?: Maybe<String>;
-  descripcion_not_starts_with?: Maybe<String>;
-  descripcion_ends_with?: Maybe<String>;
-  descripcion_not_ends_with?: Maybe<String>;
+  nombre?: Maybe<String>;
+  nombre_not?: Maybe<String>;
+  nombre_in?: Maybe<String[] | String>;
+  nombre_not_in?: Maybe<String[] | String>;
+  nombre_lt?: Maybe<String>;
+  nombre_lte?: Maybe<String>;
+  nombre_gt?: Maybe<String>;
+  nombre_gte?: Maybe<String>;
+  nombre_contains?: Maybe<String>;
+  nombre_not_contains?: Maybe<String>;
+  nombre_starts_with?: Maybe<String>;
+  nombre_not_starts_with?: Maybe<String>;
+  nombre_ends_with?: Maybe<String>;
+  nombre_not_ends_with?: Maybe<String>;
   activo?: Maybe<Boolean>;
   activo_not?: Maybe<Boolean>;
   AND?: Maybe<ProvinciaScalarWhereInput[] | ProvinciaScalarWhereInput>;
@@ -788,7 +788,7 @@ export interface ProvinciaUpdateManyWithoutPaisInput {
 
 export interface PaisUpdateInput {
   codigo?: Maybe<String>;
-  descripcion?: Maybe<String>;
+  nombre?: Maybe<String>;
   activo?: Maybe<Boolean>;
   provincias?: Maybe<ProvinciaUpdateManyWithoutPaisInput>;
 }
@@ -796,7 +796,7 @@ export interface PaisUpdateInput {
 export interface LocalidadCreateWithoutProvinciaInput {
   id?: Maybe<Int>;
   codigo_indec?: Maybe<String>;
-  descripcion: String;
+  nombre: String;
   lat?: Maybe<Float>;
   lon?: Maybe<Float>;
   activo: Boolean;
@@ -834,7 +834,7 @@ export type ProvinciaWhereUniqueInput = AtLeastOne<{
 export interface ProvinciaUpdateManyDataInput {
   codigo?: Maybe<String>;
   codigo_indec?: Maybe<String>;
-  descripcion?: Maybe<String>;
+  nombre?: Maybe<String>;
   activo?: Maybe<Boolean>;
 }
 
@@ -842,7 +842,7 @@ export interface ProvinciaUpdateInput {
   pais?: Maybe<PaisUpdateOneRequiredWithoutProvinciasInput>;
   codigo?: Maybe<String>;
   codigo_indec?: Maybe<String>;
-  descripcion?: Maybe<String>;
+  nombre?: Maybe<String>;
   activo?: Maybe<Boolean>;
   localidades?: Maybe<LocalidadUpdateManyWithoutProvinciaInput>;
 }
@@ -871,7 +871,7 @@ export interface ProvinciaPreviousValues {
   id: Int;
   codigo: String;
   codigo_indec?: String;
-  descripcion: String;
+  nombre: String;
   activo: Boolean;
 }
 
@@ -881,7 +881,7 @@ export interface ProvinciaPreviousValuesPromise
   id: () => Promise<Int>;
   codigo: () => Promise<String>;
   codigo_indec: () => Promise<String>;
-  descripcion: () => Promise<String>;
+  nombre: () => Promise<String>;
   activo: () => Promise<Boolean>;
 }
 
@@ -891,7 +891,7 @@ export interface ProvinciaPreviousValuesSubscription
   id: () => Promise<AsyncIterator<Int>>;
   codigo: () => Promise<AsyncIterator<String>>;
   codigo_indec: () => Promise<AsyncIterator<String>>;
-  descripcion: () => Promise<AsyncIterator<String>>;
+  nombre: () => Promise<AsyncIterator<String>>;
   activo: () => Promise<AsyncIterator<Boolean>>;
 }
 
@@ -914,14 +914,14 @@ export interface AggregateLocalidadSubscription
 export interface Pais {
   id: Int;
   codigo: String;
-  descripcion: String;
+  nombre: String;
   activo: Boolean;
 }
 
 export interface PaisPromise extends Promise<Pais>, Fragmentable {
   id: () => Promise<Int>;
   codigo: () => Promise<String>;
-  descripcion: () => Promise<String>;
+  nombre: () => Promise<String>;
   activo: () => Promise<Boolean>;
   provincias: <T = FragmentableArray<Provincia>>(args?: {
     where?: ProvinciaWhereInput;
@@ -939,7 +939,7 @@ export interface PaisSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<Int>>;
   codigo: () => Promise<AsyncIterator<String>>;
-  descripcion: () => Promise<AsyncIterator<String>>;
+  nombre: () => Promise<AsyncIterator<String>>;
   activo: () => Promise<AsyncIterator<Boolean>>;
   provincias: <T = Promise<AsyncIterator<ProvinciaSubscription>>>(args?: {
     where?: ProvinciaWhereInput;
@@ -957,7 +957,7 @@ export interface PaisNullablePromise
     Fragmentable {
   id: () => Promise<Int>;
   codigo: () => Promise<String>;
-  descripcion: () => Promise<String>;
+  nombre: () => Promise<String>;
   activo: () => Promise<Boolean>;
   provincias: <T = FragmentableArray<Provincia>>(args?: {
     where?: ProvinciaWhereInput;
@@ -1015,7 +1015,7 @@ export interface PageInfoSubscription
 export interface PaisPreviousValues {
   id: Int;
   codigo: String;
-  descripcion: String;
+  nombre: String;
   activo: Boolean;
 }
 
@@ -1024,7 +1024,7 @@ export interface PaisPreviousValuesPromise
     Fragmentable {
   id: () => Promise<Int>;
   codigo: () => Promise<String>;
-  descripcion: () => Promise<String>;
+  nombre: () => Promise<String>;
   activo: () => Promise<Boolean>;
 }
 
@@ -1033,7 +1033,7 @@ export interface PaisPreviousValuesSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<Int>>;
   codigo: () => Promise<AsyncIterator<String>>;
-  descripcion: () => Promise<AsyncIterator<String>>;
+  nombre: () => Promise<AsyncIterator<String>>;
   activo: () => Promise<AsyncIterator<Boolean>>;
 }
 
@@ -1115,7 +1115,7 @@ export interface PaisEdgeSubscription
 export interface LocalidadPreviousValues {
   id: Int;
   codigo_indec?: String;
-  descripcion: String;
+  nombre: String;
   lat?: Float;
   lon?: Float;
   activo: Boolean;
@@ -1126,7 +1126,7 @@ export interface LocalidadPreviousValuesPromise
     Fragmentable {
   id: () => Promise<Int>;
   codigo_indec: () => Promise<String>;
-  descripcion: () => Promise<String>;
+  nombre: () => Promise<String>;
   lat: () => Promise<Float>;
   lon: () => Promise<Float>;
   activo: () => Promise<Boolean>;
@@ -1137,7 +1137,7 @@ export interface LocalidadPreviousValuesSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<Int>>;
   codigo_indec: () => Promise<AsyncIterator<String>>;
-  descripcion: () => Promise<AsyncIterator<String>>;
+  nombre: () => Promise<AsyncIterator<String>>;
   lat: () => Promise<AsyncIterator<Float>>;
   lon: () => Promise<AsyncIterator<Float>>;
   activo: () => Promise<AsyncIterator<Boolean>>;
@@ -1197,7 +1197,7 @@ export interface Provincia {
   id: Int;
   codigo: String;
   codigo_indec?: String;
-  descripcion: String;
+  nombre: String;
   activo: Boolean;
 }
 
@@ -1206,7 +1206,7 @@ export interface ProvinciaPromise extends Promise<Provincia>, Fragmentable {
   pais: <T = PaisPromise>() => T;
   codigo: () => Promise<String>;
   codigo_indec: () => Promise<String>;
-  descripcion: () => Promise<String>;
+  nombre: () => Promise<String>;
   activo: () => Promise<Boolean>;
   localidades: <T = FragmentableArray<Localidad>>(args?: {
     where?: LocalidadWhereInput;
@@ -1226,7 +1226,7 @@ export interface ProvinciaSubscription
   pais: <T = PaisSubscription>() => T;
   codigo: () => Promise<AsyncIterator<String>>;
   codigo_indec: () => Promise<AsyncIterator<String>>;
-  descripcion: () => Promise<AsyncIterator<String>>;
+  nombre: () => Promise<AsyncIterator<String>>;
   activo: () => Promise<AsyncIterator<Boolean>>;
   localidades: <T = Promise<AsyncIterator<LocalidadSubscription>>>(args?: {
     where?: LocalidadWhereInput;
@@ -1246,7 +1246,7 @@ export interface ProvinciaNullablePromise
   pais: <T = PaisPromise>() => T;
   codigo: () => Promise<String>;
   codigo_indec: () => Promise<String>;
-  descripcion: () => Promise<String>;
+  nombre: () => Promise<String>;
   activo: () => Promise<Boolean>;
   localidades: <T = FragmentableArray<Localidad>>(args?: {
     where?: LocalidadWhereInput;
@@ -1343,7 +1343,7 @@ export interface ProvinciaSubscriptionPayloadSubscription
 export interface Localidad {
   id: Int;
   codigo_indec?: String;
-  descripcion: String;
+  nombre: String;
   lat?: Float;
   lon?: Float;
   activo: Boolean;
@@ -1352,7 +1352,7 @@ export interface Localidad {
 export interface LocalidadPromise extends Promise<Localidad>, Fragmentable {
   id: () => Promise<Int>;
   codigo_indec: () => Promise<String>;
-  descripcion: () => Promise<String>;
+  nombre: () => Promise<String>;
   provincia: <T = ProvinciaPromise>() => T;
   lat: () => Promise<Float>;
   lon: () => Promise<Float>;
@@ -1364,7 +1364,7 @@ export interface LocalidadSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<Int>>;
   codigo_indec: () => Promise<AsyncIterator<String>>;
-  descripcion: () => Promise<AsyncIterator<String>>;
+  nombre: () => Promise<AsyncIterator<String>>;
   provincia: <T = ProvinciaSubscription>() => T;
   lat: () => Promise<AsyncIterator<Float>>;
   lon: () => Promise<AsyncIterator<Float>>;
@@ -1376,7 +1376,7 @@ export interface LocalidadNullablePromise
     Fragmentable {
   id: () => Promise<Int>;
   codigo_indec: () => Promise<String>;
-  descripcion: () => Promise<String>;
+  nombre: () => Promise<String>;
   provincia: <T = ProvinciaPromise>() => T;
   lat: () => Promise<Float>;
   lon: () => Promise<Float>;

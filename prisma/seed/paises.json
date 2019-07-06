@@ -1,37 +1,37 @@
 [
   {
     "codigo": "AR",
-    "descripcion": "Argentina",
+    "nombre": "Argentina",
     "activo": true
   },
   {
     "codigo": "BO",
-    "descripcion": "Bolivia",
+    "nombre": "Bolivia",
     "activo": true
   },
   {
     "codigo": "BR",
-    "descripcion": "Brasil",
+    "nombre": "Brasil",
     "activo": true
   },
   {
     "codigo": "CL",
-    "descripcion": "Chile",
+    "nombre": "Chile",
     "activo": true
   },
   {
     "codigo": "PY",
-    "descripcion": "Paraguay",
+    "nombre": "Paraguay",
     "activo": true
   },
   {
     "codigo": "PE",
-    "descripcion": "Parú",
+    "nombre": "Parú",
     "activo": true
   },
   {
     "codigo": "UY",
-    "descripcion": "Uruguay",
+    "nombre": "Uruguay",
     "activo": true
   }
 ]

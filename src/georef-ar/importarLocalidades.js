@@ -63,7 +63,7 @@ async function saveUpdateLocalidad(data) {
     if (!exist) {
         return await prisma.createLocalidad({
             codigo_indec: data.id,
-            descripcion: data.nombre,
+            nombre: data.nombre,
             lat: data.centroide.lat,
             lon: data.centroide.lon,
             provincia: {
@@ -76,7 +76,7 @@ async function saveUpdateLocalidad(data) {
     } else {
         return await prisma.updateLocalidad({
             data: {
-                descripcion: data.nombre,
+                nombre: data.nombre,
                 lat: data.centroide.lat,
                 lon: data.centroide.lon,
                 provincia: {

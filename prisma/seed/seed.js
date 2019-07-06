@@ -11,14 +11,14 @@ async function main() {
     let premises = [];
     console.log('Países...');
     paisesJSON.forEach(p => {
-        console.log(`   ${p.descripcion}`);
+        console.log(`   ${p.nombre}`);
         premises.push(seedPais(p));
     });
     await Promise.all(premises);
 
     console.log('Provincias...');
     provinciasJSON.forEach(prov => {
-        console.log(`   ${prov.descripcion}`);
+        console.log(`   ${prov.nombre}`);
         premises.push(seedProvincia(prov));
     });
 
@@ -33,13 +33,13 @@ async function seedPais(data) {
     if (!exist) {
         return await prisma.createPais({
             codigo: data.codigo,
-            descripcion: data.descripcion,
+            nombre: data.nombre,
             activo: data.activo
         });
     } else {
         return await prisma.updatePais({
             data: {
-                descripcion: data.descripcion,
+                nombre: data.nombre,
                 activo: data.activo
             },
             where: {
@@ -58,7 +58,7 @@ async function seedProvincia(data) {
         return await prisma.createProvincia({
             codigo: data.codigo,
             codigo_indec: data.codigo_indec,
-            descripcion: data.descripcion,
+            nombre: data.nombre,
             pais: {
                 connect: {
                     id: data.pais_id
@@ -71,7 +71,7 @@ async function seedProvincia(data) {
             data: {
                 codigo: data.codigo,
                 codigo_indec: data.codigo_indec,
-                descripcion: data.descripcion,
+                nombre: data.nombre,
                 pais: {
                     connect: {
                         id: data.pais_id

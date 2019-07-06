@@ -1,7 +1,7 @@
 type Pais @db(name: "pais") {
     id: Int! @id
     codigo: String! @unique
-    descripcion: String!
+    nombre: String!
     activo: Boolean!
     provincias: [Provincia]
 }
@@ -11,7 +11,7 @@ type Provincia @db(name: "provincia") {
     pais: Pais! @db(name: "pais_id")
     codigo: String! @unique
     codigo_indec: String @unique
-    descripcion: String!
+    nombre: String!
     activo: Boolean!
     localidades: [Localidad]
 }
@@ -19,7 +19,7 @@ type Provincia @db(name: "provincia") {
 type Localidad @db(name: "localidad") {
     id: Int! @id
     codigo_indec: String @unique
-    descripcion: String!
+    nombre: String!
     provincia: Provincia! @db(name: "provincia_id")
     lat: Float
     lon: Float

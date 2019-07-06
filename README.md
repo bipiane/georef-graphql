@@ -21,7 +21,7 @@ georef-graphql es un proyecto que implementa una API GraphQL de los datos import
   $ npm install   
 ```
 ```sh
-  # Environment
+  # Environment: Copy .dist and edit .env
   $ cp .env.dist .env  
 ```
 ```sh
