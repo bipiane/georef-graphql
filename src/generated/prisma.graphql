@@ -1,5 +1,5 @@
-# source: http://localhost:4466
-# timestamp: Wed Jul 03 2019 10:04:10 GMT-0300 (Argentina Standard Time)
+# source: http://localhost:4466/georef/dev
+# timestamp: Thu Jul 04 2019 14:28:21 GMT-0300 (Argentina Standard Time)
 
 type AggregateLocalidad {
   count: Int!

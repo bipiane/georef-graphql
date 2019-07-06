@@ -30,7 +30,7 @@ const resolvers = {
     },
 };
 
-const prismaEndpoint = `http://localhost:${process.env.PRISMA_PORT}`;//'__YOUR_PRISMA_ENDPOINT__',
+const prismaEndpoint = `${process.env.PRISMA_ENDPOINT}`;
 
 const server = new GraphQLServer({
     typeDefs: 'src/schema.graphql',

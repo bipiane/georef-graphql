@@ -1,10 +1,17 @@
-# API GraphQL de Localidades Modernización:
+# API GraphQL del Servicio de Normalización de Datos Geográficos de Argentina
 
-- NodeJS
-- GraphQL
-- Prisma
-- Docker
-- MySQL 
+[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+
+georef-graphql es un proyecto que implementa una API GraphQL de los datos importados de la API REST de [georef-ar](https://datosgobar.github.io/georef-ar-api/).
+
+**georef-ar**: API del Servicio de Normalización de Datos Geográficos, permite normalizar y codificar los nombres de unidades territoriales de la Argentina (provincias, departamentos, municipios y localidades) y de sus calles, así como ubicar coordenadas dentro de ellas.
+
+### Tools
+- [NodeJS](https://nodejs.org/)
+- [GraphQL](https://graphql.org/)
+- [Prisma](https://www.prisma.io/)
+- [Docker](https://www.docker.com/)
+- [MySQL](https://www.mysql.com/) 
 
 ### Setup
 ```sh
@@ -22,7 +29,7 @@
   $ docker-compose -f prisma/docker-compose.yml up -d  
 ```
 ```sh
-  # Edit datamodel.graphql and run
+  # Edit datamodel.graphql and run Prisma
   $ prisma deploy  
 ```
 
@@ -31,7 +38,7 @@
   $ npm run seed  
 ```
 
-### Import Localidades
+### Import Georef AR
 ```sh
   $ npm run import  
 ```

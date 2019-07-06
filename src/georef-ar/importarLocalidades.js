@@ -7,7 +7,7 @@ dotenv.config();
 const {prisma} = require('./../../prisma/generated/prisma-client');
 
 async function main() {
-    console.log(`🚀 Comenzamos a importar localidades de Modernización...`);
+    console.log(`🚀 Comenzamos a importar localidades de Georef-AR...`);
 
     // Anular todas las localidades argentinas activas
     await prisma.updateManyLocalidads({
@@ -22,7 +22,7 @@ async function main() {
 }
 
 /**
- * Permite consultar recursivamente todas las localidades de Modernización y
+ * Permite consultar recursivamente todas las localidades de Georef-AR y
  * guardarlas en la base de datos
  * @param inicio
  * @returns {Promise<*>}
@@ -94,7 +94,9 @@ async function saveUpdateLocalidad(data) {
 }
 
 /**
- * Obtiene las localidades del Ministerio de Modernización
+ * Obtiene las localidades de Georef-AR.
+ * @see https://datosgobar.github.io/georef-ar-api/
+ * @see http://servicios.infoleg.gob.ar/infolegInternet/resaltaranexos/320000-324999/320992/res55-02.pdf
  * @param inicio
  * @param max
  * @param orden
@@ -109,7 +111,7 @@ function buscarLocalidades(inicio = 0, max = 500, orden = 'id') {
             return response.data;
         })
         .catch(error => {
-            console.log('Error al consultar API Modernización: ', error);
+            console.log('Error al consultar API Georef-AR: ', error);
             throw error;
         });
 }

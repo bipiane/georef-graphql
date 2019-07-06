@@ -1,15 +1,15 @@
 version: '3'
 services:
-  localidades_prisma:
+  georef_graphql:
     image: prismagraphql/prisma:1.34
     restart: always
     ports:
-    - "${PRISMA_PORT}:4466"
+    - "4466:4466"
     environment:
       PRISMA_CONFIG: |
         port: 4466
         # uncomment the next line and provide the env var PRISMA_MANAGEMENT_API_SECRET=my-secret to activate cluster security
-        managementApiSecret: ${PRISMA_MANAGEMENT_API_SECRET}
+        # managementApiSecret: PRISMA_MANAGEMENT_API_SECRET
         databases:
           default:
             connector: mysql
