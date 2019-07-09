@@ -33,7 +33,7 @@ const resolvers = {
                 return data.provincia
             });
         },
-        localidads: (_, args, context) => {
+        localidades: (_, args, context) => {
             const result = resolveGraphql(context.request);
             return result.then(data => {
                 return data.localidads
@@ -45,7 +45,7 @@ const resolvers = {
                 return data.localidad
             });
         },
-        departamentoes: (_, args, context) => {
+        departamentos: (_, args, context) => {
             const result = resolveGraphql(context.request);
             return result.then(data => {
                 return data.departamentoes
@@ -66,7 +66,13 @@ const resolvers = {
  * @returns {Promise<*>}
  */
 function resolveGraphql(request) {
-    return prisma.$graphql(request.body.query, request.body.variables);
+    let query = request.body.query;
+
+    // Renombramos queries a definición prisma.graphql
+    query = query.replace(/localidades\(/gi, 'localidads(');
+    query = query.replace(/departamentos\(/gi, 'departamentoes(');
+
+    return prisma.$graphql(query, request.body.variables);
 }
 
 const prismaEndpoint = `${process.env.PRISMA_ENDPOINT}`;

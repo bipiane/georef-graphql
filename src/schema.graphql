@@ -20,7 +20,7 @@ type Query {
         first: Int,
         last: Int): [Provincia]!
     provincia(where: ProvinciaWhereUniqueInput!): Provincia
-    localidads(
+    localidades(
         where: LocalidadWhereInput,
         orderBy: LocalidadOrderByInput,
         skip: Int,
@@ -29,7 +29,7 @@ type Query {
         first: Int,
         last: Int): [Localidad]!
     localidad(where: LocalidadWhereUniqueInput!): Localidad
-    departamentoes(
+    departamentos(
         where: DepartamentoWhereInput,
         orderBy: DepartamentoOrderByInput,
         skip: Int,
