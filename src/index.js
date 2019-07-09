@@ -1,5 +1,4 @@
 const {GraphQLServer} = require('graphql-yoga');
-const {Prisma} = require('prisma-binding');
 
 // Cargamos .env
 const dotenv = require('dotenv');
@@ -78,14 +77,11 @@ function resolveGraphql(request) {
 const prismaEndpoint = `${process.env.PRISMA_ENDPOINT}`;
 
 const server = new GraphQLServer({
-    typeDefs: 'src/schema.graphql',
+    typeDefs: './src/schema.graphql',
     resolvers,
     context: req => ({
         ...req,
-        prisma: new Prisma({
-            typeDefs: 'src/generated/prisma.graphql',
-            endpoint: prismaEndpoint,
-        }),
+        prisma,
     }),
 });
 
