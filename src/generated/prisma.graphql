@@ -1,5 +1,5 @@
 # source: http://localhost:4466/georef/dev
-# timestamp: Sat Jul 06 2019 14:40:51 GMT-0300 (Argentina Standard Time)
+# timestamp: Mon Jul 08 2019 17:08:16 GMT-0300 (Argentina Standard Time)
 
 type AggregateDepartamento {
   count: Int!

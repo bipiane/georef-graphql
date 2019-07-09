@@ -9,26 +9,65 @@ const {prisma} = require('./../prisma/generated/prisma-client');
 
 const resolvers = {
     Query: {
-        paises: (_, args) => {
-            return prisma.paises(args);
+        paises: (_, args, context) => {
+            const result = resolveGraphql(context.request);
+            return result.then(data => {
+                return data.paises
+            });
         },
-        pais: (_, args) => {
-            return prisma.pais(args.where);
+        pais: (_, args, context) => {
+            const result = resolveGraphql(context.request);
+            return result.then(data => {
+                return data.pais
+            });
         },
-        provincias: (_, args) => {
-            return prisma.provincias(args);
+        provincias: (_, args, context) => {
+            const result = resolveGraphql(context.request);
+            return result.then(data => {
+                return data.provincias
+            });
         },
-        provincia: (_, args) => {
-            return prisma.provincia(args.where);
+        provincia: (_, args, context) => {
+            const result = resolveGraphql(context.request);
+            return result.then(data => {
+                return data.provincia
+            });
         },
-        localidades: (_, args) => {
-            return prisma.localidads(args);
+        localidads: (_, args, context) => {
+            const result = resolveGraphql(context.request);
+            return result.then(data => {
+                return data.localidads
+            });
         },
-        localidad: (_, args) => {
-            return prisma.localidad(args.where);
+        localidad: (_, args, context) => {
+            const result = resolveGraphql(context.request);
+            return result.then(data => {
+                return data.localidad
+            });
+        },
+        departamentoes: (_, args, context) => {
+            const result = resolveGraphql(context.request);
+            return result.then(data => {
+                return data.departamentoes
+            });
+        },
+        departamento: (_, args, context) => {
+            const result = resolveGraphql(context.request);
+            return result.then(data => {
+                return data.departamento
+            });
         },
     },
 };
+
+/**
+ * Realiza la llamada GraphQL al servidor Pisma
+ * @param request
+ * @returns {Promise<*>}
+ */
+function resolveGraphql(request) {
+    return prisma.$graphql(request.body.query, request.body.variables);
+}
 
 const prismaEndpoint = `${process.env.PRISMA_ENDPOINT}`;
 
