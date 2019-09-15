@@ -1,0 +1,13 @@
+# App Server
+export APP_PORT=4000
+
+# Base de Datos
+export DB_HOST=127.0.0.1
+export DB_PORT=3306
+export DB_NAME=georef
+export DB_USER=root
+export DB_PASSWORD=root
+
+### Variables calculadas
+export MYSQL_URL="mysql://$DB_USER:$DB_PASSWORD@$DB_HOST:$DB_PORT/$DB_NAME"
+###

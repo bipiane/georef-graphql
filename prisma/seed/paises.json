@@ -1,37 +1,30 @@
 [
   {
-    "codigo": "AR",
-    "nombre": "Argentina",
-    "activo": true
+    "iso_code": "AR",
+    "name": "Argentina"
   },
   {
-    "codigo": "BO",
-    "nombre": "Bolivia",
-    "activo": true
+    "iso_code": "BO",
+    "name": "Bolivia"
   },
   {
-    "codigo": "BR",
-    "nombre": "Brasil",
-    "activo": true
+    "iso_code": "BR",
+    "name": "Brasil"
   },
   {
-    "codigo": "CL",
-    "nombre": "Chile",
-    "activo": true
+    "iso_code": "CL",
+    "name": "Chile"
   },
   {
-    "codigo": "PY",
-    "nombre": "Paraguay",
-    "activo": true
+    "iso_code": "PY",
+    "name": "Paraguay"
   },
   {
-    "codigo": "PE",
-    "nombre": "Parú",
-    "activo": true
+    "iso_code": "PE",
+    "name": "Parú"
   },
   {
-    "codigo": "UY",
-    "nombre": "Uruguay",
-    "activo": true
+    "iso_code": "UY",
+    "name": "Uruguay"
   }
 ]

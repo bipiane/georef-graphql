@@ -9,28 +9,24 @@ georef-graphql es un proyecto que implementa una API GraphQL de los datos import
 ### Tools
 - [NodeJS](https://nodejs.org/)
 - [GraphQL](https://graphql.org/)
-- [Prisma](https://www.prisma.io/)
-- [Docker](https://www.docker.com/)
+- [Prisma2](https://www.prisma.io/)
+- [Nexus](https://nexus.js.org/)
 - [MySQL](https://www.mysql.com/) 
 
 ### Setup
 ```sh
-  $ npm install -g prisma  
+  $ npm install -g prisma2  
 ```
 ```sh
   $ npm install   
 ```
 ```sh
-  # Environment: Copy .dist and edit .env
-  $ cp .env.dist .env  
+  # Environment: Copy .envrc.dist and edit .envrc
+  $ cp .envrc.dist .envrc  
 ```
 ```sh
-  # Docker
-  $ docker-compose -f prisma/docker-compose.yml up -d  
-```
-```sh
-  # Edit datamodel.graphql and run Prisma
-  $ prisma deploy  
+  # Edit prisma/schema.prisma and run Prisma2
+  $ prisma2 dev  
 ```
 
 ### Seed Países y Provincias
@@ -43,25 +39,13 @@ georef-graphql es un proyecto que implementa una API GraphQL de los datos import
   $ npm run import  
 ```
 
-### Server App
+### Server Nexus App
 ```sh
   $ npm run start  
 ```
 
-### Playground App & Prisma Admin
+### Playground App
 ```sh
   # Edit .graphqlconfig.yml and run
   $ graphql playground  
-```
-
-### Token GraphQL Prisma Admin
-```sh
-  # Generate JWT
-  $ prisma token    
-```
-
-```  
-  {
-    "Authorization":"Bearer eyJhbG...7Qk8"
-  }    
 ```

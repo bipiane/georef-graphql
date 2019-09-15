@@ -1,0 +1,334 @@
+{
+  "version": "0.2.50",
+  "steps": [
+    {
+      "stepType": "CreateModel",
+      "name": "Country",
+      "dbName": "country",
+      "embedded": false
+    },
+    {
+      "stepType": "CreateModel",
+      "name": "Province",
+      "dbName": "province",
+      "embedded": false
+    },
+    {
+      "stepType": "CreateModel",
+      "name": "City",
+      "dbName": "city",
+      "embedded": false
+    },
+    {
+      "stepType": "CreateModel",
+      "name": "Department",
+      "dbName": "department",
+      "embedded": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Country",
+      "name": "id",
+      "type": {
+        "Base": "Int"
+      },
+      "arity": "required",
+      "isUnique": false,
+      "id": {
+        "strategy": "Auto",
+        "sequence": null
+      }
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Country",
+      "name": "iso_code",
+      "type": {
+        "Base": "String"
+      },
+      "arity": "required",
+      "isUnique": true
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Country",
+      "name": "name",
+      "type": {
+        "Base": "String"
+      },
+      "arity": "required",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Country",
+      "name": "active",
+      "type": {
+        "Base": "Boolean"
+      },
+      "arity": "required",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Country",
+      "name": "provincies",
+      "type": {
+        "Relation": {
+          "to": "Province",
+          "to_fields": [],
+          "name": "CountryToProvince",
+          "on_delete": "None"
+        }
+      },
+      "arity": "list",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Province",
+      "name": "id",
+      "type": {
+        "Base": "Int"
+      },
+      "arity": "required",
+      "isUnique": false,
+      "id": {
+        "strategy": "Auto",
+        "sequence": null
+      }
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Province",
+      "name": "iso_code",
+      "type": {
+        "Base": "String"
+      },
+      "arity": "required",
+      "isUnique": true
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Province",
+      "name": "code",
+      "type": {
+        "Base": "String"
+      },
+      "arity": "required",
+      "isUnique": true
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Province",
+      "name": "country",
+      "type": {
+        "Relation": {
+          "to": "Country",
+          "to_fields": [
+            "id"
+          ],
+          "name": "CountryToProvince",
+          "on_delete": "None"
+        }
+      },
+      "arity": "required",
+      "dbName": "country_id",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Province",
+      "name": "name",
+      "type": {
+        "Base": "String"
+      },
+      "arity": "required",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Province",
+      "name": "active",
+      "type": {
+        "Base": "Boolean"
+      },
+      "arity": "required",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Province",
+      "name": "cities",
+      "type": {
+        "Relation": {
+          "to": "City",
+          "to_fields": [],
+          "name": "CityToProvince",
+          "on_delete": "None"
+        }
+      },
+      "arity": "list",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Province",
+      "name": "departments",
+      "type": {
+        "Relation": {
+          "to": "Department",
+          "to_fields": [],
+          "name": "DepartmentToProvince",
+          "on_delete": "None"
+        }
+      },
+      "arity": "list",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "City",
+      "name": "id",
+      "type": {
+        "Base": "Int"
+      },
+      "arity": "required",
+      "isUnique": false,
+      "id": {
+        "strategy": "Auto",
+        "sequence": null
+      }
+    },
+    {
+      "stepType": "CreateField",
+      "model": "City",
+      "name": "code",
+      "type": {
+        "Base": "String"
+      },
+      "arity": "required",
+      "isUnique": true
+    },
+    {
+      "stepType": "CreateField",
+      "model": "City",
+      "name": "name",
+      "type": {
+        "Base": "String"
+      },
+      "arity": "required",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "City",
+      "name": "province",
+      "type": {
+        "Relation": {
+          "to": "Province",
+          "to_fields": [
+            "id"
+          ],
+          "name": "CityToProvince",
+          "on_delete": "None"
+        }
+      },
+      "arity": "required",
+      "dbName": "province_id",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "City",
+      "name": "lat",
+      "type": {
+        "Base": "Float"
+      },
+      "arity": "optional",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "City",
+      "name": "lon",
+      "type": {
+        "Base": "Float"
+      },
+      "arity": "optional",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "City",
+      "name": "active",
+      "type": {
+        "Base": "Boolean"
+      },
+      "arity": "required",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Department",
+      "name": "id",
+      "type": {
+        "Base": "Int"
+      },
+      "arity": "required",
+      "isUnique": false,
+      "id": {
+        "strategy": "Auto",
+        "sequence": null
+      }
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Department",
+      "name": "code",
+      "type": {
+        "Base": "String"
+      },
+      "arity": "required",
+      "isUnique": true
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Department",
+      "name": "name",
+      "type": {
+        "Base": "String"
+      },
+      "arity": "required",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Department",
+      "name": "province",
+      "type": {
+        "Relation": {
+          "to": "Province",
+          "to_fields": [
+            "id"
+          ],
+          "name": "DepartmentToProvince",
+          "on_delete": "None"
+        }
+      },
+      "arity": "required",
+      "dbName": "province_id",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Department",
+      "name": "active",
+      "type": {
+        "Base": "Boolean"
+      },
+      "arity": "required",
+      "isUnique": false
+    }
+  ]
+}

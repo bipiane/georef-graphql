@@ -1,0 +1,146 @@
+[
+  {
+    "iso_code": "AR-A",
+    "code": "66",
+    "name": "SALTA",
+    "country_iso": "AR"
+  },
+  {
+    "iso_code": "AR-B",
+    "code": "06",
+    "name": "BUENOS AIRES",
+    "country_iso": "AR"
+  },
+  {
+    "iso_code": "AR-C",
+    "code": "02",
+    "name": "CIUDAD AUTONOMA DE BUENOS AIRES",
+    "country_iso": "AR"
+  },
+  {
+    "iso_code": "AR-D",
+    "code": "74",
+    "name": "SAN LUIS",
+    "country_iso": "AR"
+  },
+  {
+    "iso_code": "AR-E",
+    "code": "30",
+    "name": "ENTRE RIOS",
+    "country_iso": "AR"
+  },
+  {
+    "iso_code": "AR-F",
+    "code": "46",
+    "name": "LA RIOJA",
+    "country_iso": "AR"
+  },
+  {
+    "iso_code": "AR-G",
+    "code": "86",
+    "name": "SANTIAGO DEL ESTERO",
+    "country_iso": "AR"
+  },
+  {
+    "iso_code": "AR-H",
+    "code": "22",
+    "name": "CHACO",
+    "country_iso": "AR"
+  },
+  {
+    "iso_code": "AR-J",
+    "code": "70",
+    "name": "SAN JUAN",
+    "country_iso": "AR"
+  },
+  {
+    "iso_code": "AR-K",
+    "code": "10",
+    "name": "CATAMARCA",
+    "country_iso": "AR"
+  },
+  {
+    "iso_code": "AR-L",
+    "code": "42",
+    "name": "LA PAMPA",
+    "country_iso": "AR"
+  },
+  {
+    "iso_code": "AR-M",
+    "code": "50",
+    "name": "MENDOZA",
+    "country_iso": "AR"
+  },
+  {
+    "iso_code": "AR-N",
+    "code": "54",
+    "name": "MISIONES",
+    "country_iso": "AR"
+  },
+  {
+    "iso_code": "AR-P",
+    "code": "34",
+    "name": "FORMOSA",
+    "country_iso": "AR"
+  },
+  {
+    "iso_code": "AR-Q",
+    "code": "58",
+    "name": "NEUQUEN",
+    "country_iso": "AR"
+  },
+  {
+    "iso_code": "AR-R",
+    "code": "62",
+    "name": "RIO NEGRO",
+    "country_iso": "AR"
+  },
+  {
+    "iso_code": "AR-S",
+    "code": "82",
+    "name": "SANTA FE",
+    "country_iso": "AR"
+  },
+  {
+    "iso_code": "AR-T",
+    "code": "90",
+    "name": "TUCUMAN",
+    "country_iso": "AR"
+  },
+  {
+    "iso_code": "AR-U",
+    "code": "26",
+    "name": "CHUBUT",
+    "country_iso": "AR"
+  },
+  {
+    "iso_code": "AR-V",
+    "code": "94",
+    "name": "TIERRA DEL FUEGO",
+    "country_iso": "AR"
+  },
+  {
+    "iso_code": "AR-W",
+    "code": "18",
+    "name": "CORRIENTES",
+    "country_iso": "AR"
+  },
+  {
+    "iso_code": "AR-X",
+    "code": "14",
+    "name": "CORDOBA",
+    "country_iso": "AR"
+  },
+  {
+    "iso_code": "AR-Y",
+    "code": "38",
+    "name": "JUJUY",
+    "country_iso": "AR"
+  },
+  {
+    "iso_code": "AR-Z",
+    "code": "78",
+    "name": "SANTA CRUZ",
+    "country_iso": "AR"
+  }
+]

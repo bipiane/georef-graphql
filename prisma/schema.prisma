@@ -1,0 +1,58 @@
+// https://github.com/prisma/prisma2/tree/master/docs
+datasource db {
+  provider = "mysql"
+  url      = env("MYSQL_URL")
+}
+
+generator photonjs {
+  provider = "photonjs"
+}
+
+generator nexus_prisma {
+  provider = "nexus-prisma"
+}
+
+model Country {
+  id            Int         @id
+  iso_code      String      @unique
+  name          String
+  active        Boolean
+  provincies    Province[]
+
+  @@map("country")
+}
+
+model Province {
+  id            Int             @id
+  iso_code      String          @unique
+  code          String          @unique
+  country       Country         @map("country_id")
+  name          String
+  active        Boolean
+  cities        City[]
+  departments   Department[]
+
+  @@map("province")
+}
+
+model City {
+  id            Int             @id
+  code          String          @unique
+  name          String
+  province      Province        @map("province_id")
+  lat           Float?
+  lon           Float?
+  active        Boolean
+
+  @@map("city")
+}
+
+model Department {
+  id            Int             @id
+  code          String          @unique
+  name          String
+  province      Province        @map("province_id")
+  active        Boolean
+
+  @@map("department")
+}
