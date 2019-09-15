@@ -14,8 +14,17 @@ interface ProvinceData {
 
 // @ts-ignore
 const paisesJSON: CountryData[] = require('./paises.json');
-// @ts-ignore
-const provinciasJSON: ProvinceData[] = require('./provincias.json');
+let provinciasJSON: ProvinceData[] = [];
+
+// Cargamos seeds de provincias
+const dirProvincias = __dirname + '/provincias/';
+require('fs').readdirSync(dirProvincias).forEach((filename: string) => {
+    if (filename.match(/\.json$/) !== null) {
+        const fullPath = dirProvincias + filename;
+        const jsonFile: ProvinceData[] = require(fullPath);
+        provinciasJSON = provinciasJSON.concat(jsonFile);
+    }
+});
 
 const photon = new Photon();
 
@@ -47,7 +56,7 @@ async function seed() {
 
         const formData = {
             iso_code: provData.iso_code,
-            code: provData.code,
+            code: provData.code ? provData.code : provData.iso_code,
             name: provData.name,
             active: true,
             country: {

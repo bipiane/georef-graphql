@@ -1,0 +1,82 @@
+[
+  {
+    "iso_code": "CL-AI",
+    "name": "Aysén",
+    "country_iso": "CL"
+  },
+  {
+    "iso_code": "CL-AN",
+    "name": "Antifagasta",
+    "country_iso": "CL"
+  },
+  {
+    "iso_code": "CL-AP",
+    "name": "Arica y Parinacota",
+    "country_iso": "CL"
+  },
+  {
+    "iso_code": "CL-AR",
+    "name": "La Araucanía",
+    "country_iso": "CL"
+  },
+  {
+    "iso_code": "CL-AT",
+    "name": "Atacama",
+    "country_iso": "CL"
+  },
+  {
+    "iso_code": "CL-BI",
+    "name": "Biobío",
+    "country_iso": "CL"
+  },
+  {
+    "iso_code": "CL-CO",
+    "name": "Coquimbo",
+    "country_iso": "CL"
+  },
+  {
+    "iso_code": "CL-LI",
+    "name": "O'Higgins",
+    "country_iso": "CL"
+  },
+  {
+    "iso_code": "CL-LL",
+    "name": "Los Lagos",
+    "country_iso": "CL"
+  },
+  {
+    "iso_code": "CL-LR",
+    "name": "Los Ríos",
+    "country_iso": "CL"
+  },
+  {
+    "iso_code": "CL-MA",
+    "name": "Magallanes",
+    "country_iso": "CL"
+  },
+  {
+    "iso_code": "CL-ML",
+    "name": "Maule",
+    "country_iso": "CL"
+  },
+  {
+    "iso_code": "CL-NB",
+    "name": "Ñuble",
+    "country_iso": "CL"
+  },
+  {
+    "iso_code": "CL-RM",
+    "name": "Región Metropolitana de Santiago",
+    "country_iso": "CL"
+  },
+  {
+    "iso_code": "CL-TA",
+    "name": "Tarapacá",
+    "country_iso": "CL"
+  },
+  {
+    "iso_code": "CL-VS",
+    "name": "Valparaíso",
+    "country_iso": "CL"
+  }
+]

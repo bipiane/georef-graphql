@@ -1,0 +1,137 @@
+[
+  {
+    "iso_code": "BR-AC",
+    "name": "Acre",
+    "country_iso": "BR"
+  },
+  {
+    "iso_code": "BR-AL",
+    "name": "Alagoas",
+    "country_iso": "BR"
+  },
+  {
+    "iso_code": "BR-AM",
+    "name": "Amazonas",
+    "country_iso": "BR"
+  },
+  {
+    "iso_code": "BR-AP",
+    "name": "Amapá",
+    "country_iso": "BR"
+  },
+  {
+    "iso_code": "BR-BA",
+    "name": "Bahia",
+    "country_iso": "BR"
+  },
+  {
+    "iso_code": "BR-CE",
+    "name": "Ceará",
+    "country_iso": "BR"
+  },
+  {
+    "iso_code": "BR-DF",
+    "name": "Distrito Federal",
+    "country_iso": "BR"
+  },
+  {
+    "iso_code": "BR-ES",
+    "name": "Espírito Santo",
+    "country_iso": "BR"
+  },
+  {
+    "iso_code": "BR-GO",
+    "name": "Goiás",
+    "country_iso": "BR"
+  },
+  {
+    "iso_code": "BR-MA",
+    "name": "Maranhão",
+    "country_iso": "BR"
+  },
+  {
+    "iso_code": "BR-MG",
+    "name": "Minas Gerais",
+    "country_iso": "BR"
+  },
+  {
+    "iso_code": "BR-MS",
+    "name": "Mato Grosso do Sul",
+    "country_iso": "BR"
+  },
+  {
+    "iso_code": "BR-MT",
+    "name": "Mato Grosso",
+    "country_iso": "BR"
+  },
+  {
+    "iso_code": "BR-PA",
+    "name": "Pará",
+    "country_iso": "BR"
+  },
+  {
+    "iso_code": "BR-PB",
+    "name": "Paraíba",
+    "country_iso": "BR"
+  },
+  {
+    "iso_code": "BR-PE",
+    "name": "Pernambuco",
+    "country_iso": "BR"
+  },
+  {
+    "iso_code": "BR-PI",
+    "name": "Piauí",
+    "country_iso": "BR"
+  },
+  {
+    "iso_code": "BR-PR",
+    "name": "Paraná",
+    "country_iso": "BR"
+  },
+  {
+    "iso_code": "BR-RJ",
+    "name": "Río de Janeiro",
+    "country_iso": "BR"
+  },
+  {
+    "iso_code": "BR-RN",
+    "name": "Rio Grande do Norte",
+    "country_iso": "BR"
+  },
+  {
+    "iso_code": "BR-RO",
+    "name": "Rondônia",
+    "country_iso": "BR"
+  },
+  {
+    "iso_code": "BR-RR",
+    "name": "Roraima",
+    "country_iso": "BR"
+  },
+  {
+    "iso_code": "BR-RS",
+    "name": "Rio Grande do Sul",
+    "country_iso": "BR"
+  },
+  {
+    "iso_code": "BR-SC",
+    "name": "Santa Catarina",
+    "country_iso": "BR"
+  },
+  {
+    "iso_code": "BR-SE",
+    "name": "Sergipe",
+    "country_iso": "BR"
+  },
+  {
+    "iso_code": "BR-SP",
+    "name": "São Paulo",
+    "country_iso": "BR"
+  },
+  {
+    "iso_code": "BR-TO",
+    "name": "Tocantins",
+    "country_iso": "BR"
+  }
+]

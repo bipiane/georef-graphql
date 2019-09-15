@@ -1,0 +1,92 @@
+[
+  {
+    "iso_code": "UY-AR",
+    "name": "Artigas",
+    "country_iso": "UY"
+  },
+  {
+    "iso_code": "UY-CA",
+    "name": "Canelones",
+    "country_iso": "UY"
+  },
+  {
+    "iso_code": "UY-CL",
+    "name": "Cerro Largo",
+    "country_iso": "UY"
+  },
+  {
+    "iso_code": "UY-CO",
+    "name": "Colonia",
+    "country_iso": "UY"
+  },
+  {
+    "iso_code": "UY-DU",
+    "name": "Durazno",
+    "country_iso": "UY"
+  },
+  {
+    "iso_code": "UY-FS",
+    "name": "Flores",
+    "country_iso": "UY"
+  },
+  {
+    "iso_code": "UY-FD",
+    "name": "Florida",
+    "country_iso": "UY"
+  },
+  {
+    "iso_code": "UY-LA",
+    "name": "Lavalleja",
+    "country_iso": "UY"
+  },
+  {
+    "iso_code": "UY-MA",
+    "name": "Maldonado",
+    "country_iso": "UY"
+  },
+  {
+    "iso_code": "UY-MO",
+    "name": "Montevideo",
+    "country_iso": "UY"
+  },
+  {
+    "iso_code": "UY-PA",
+    "name": "Paysandú",
+    "country_iso": "UY"
+  },
+  {
+    "iso_code": "UY-RN",
+    "name": "Río Negro",
+    "country_iso": "UY"
+  },
+  {
+    "iso_code": "UY-RV",
+    "name": "Rivera",
+    "country_iso": "UY"
+  },
+  {
+    "iso_code": "UY-SA",
+    "name": "Salto",
+    "country_iso": "UY"
+  },
+  {
+    "iso_code": "UY-SJ",
+    "name": "San José",
+    "country_iso": "UY"
+  },
+  {
+    "iso_code": "UY-SO",
+    "name": "Soriano",
+    "country_iso": "UY"
+  },
+  {
+    "iso_code": "UY-TA",
+    "name": "Tacuarembó",
+    "country_iso": "UY"
+  },
+  {
+    "iso_code": "UY-TT",
+    "name": "Treinta y Tres",
+    "country_iso": "UY"
+  }
+]
