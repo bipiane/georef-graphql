@@ -49,3 +49,35 @@ georef-graphql es un proyecto que implementa una API GraphQL de los datos import
   # Edit .graphqlconfig.yml and run
   $ graphql playground  
 ```
+
+### Query examples
+```graphql
+query($paisTexto: String, $provinciaTexto: String) {
+  paises(
+    where: {
+      OR: [{ 
+            iso_code: { contains: $paisTexto }, 
+            name: { contains: $paisTexto } 
+      }]
+      active: { equals: true }
+    }
+  ) {
+    name
+    provincias(where: { name: { contains: $provinciaTexto } }) {
+      name
+      id
+    }
+  }
+
+  provincias(where: { name: { contains: $provinciaTexto } }) {
+    name
+  }
+}
+```
+#### Variables
+```
+{
+    "paisTexto": "AR",
+    "provinciaTexto": "rio"
+}
+```
